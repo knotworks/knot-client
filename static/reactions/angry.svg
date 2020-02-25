@@ -1,0 +1,15 @@
+<svg width="339px" height="339px" viewBox="0 0 339 339" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44 (41411) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <circle id="Oval" fill="#FF0000" cx="169.5" cy="169.5" r="169.5"></circle>
+            <circle id="Oval-2" fill="#960101" cx="229.5" cy="157.5" r="20.5"></circle>
+            <circle id="Oval-2" fill="#960101" cx="109.5" cy="157.5" r="20.5"></circle>
+            <path d="M127,265 C136.868473,251.192881 156.061333,245 169.868452,245 C183.67557,245 202.86843,251.192881 212.736903,265" id="Oval-3" stroke="#960101" stroke-width="15" stroke-linecap="round"></path>
+            <path d="M80.5,95.5 C89.7364334,95.3829938 98.9031001,97.8829938 108,103 C117.0969,108.117006 123.930233,114.617006 128.5,122.5" id="Line" stroke="#960101" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M205,95.0039235 C214.236433,94.8869173 223.4031,97.3869173 232.5,102.503924 C241.5969,107.62093 248.430233,114.12093 253,122.003924" id="Line" stroke="#960101" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" transform="translate(229.000000, 108.501962) scale(-1, 1) translate(-229.000000, -108.501962) "></path>
+        </g>
+    </g>
+</svg>

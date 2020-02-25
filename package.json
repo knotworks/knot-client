@@ -1,0 +1,45 @@
+{
+  "name": "knot",
+  "version": "1.0.0",
+  "description": "A sample client for Knot.",
+  "author": "Collin Henderson <collin@syropia.net>",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
+  },
+  "dependencies": {
+    "@nuxtjs/auth": "^4.8.5",
+    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "cloudinary-vue": "^1.0.0",
+    "date-fns": "^2.9.0",
+    "lazysizes": "^5.2.0",
+    "lodash": "^4.17.15",
+    "markdown-it": "^10.0.0",
+    "nuxt": "^2.0.0",
+    "object-to-formdata": "^3.0.5",
+    "store": "^2.0.12",
+    "vue-flickity": "^1.2.1",
+    "vue-warehouse": "^2.0.0",
+    "vuex-persistedstate": "^2.7.1"
+  },
+  "devDependencies": {
+    "@nuxtjs/dotenv": "^1.4.0",
+    "@nuxtjs/eslint-config": "^1.0.1",
+    "@nuxtjs/eslint-module": "^1.0.0",
+    "@nuxtjs/tailwindcss": "^1.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-nuxt": ">=0.4.2",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-vue": "^6.0.0",
+    "node-sass": "^4.13.1",
+    "prettier": "^1.19.1",
+    "sass-loader": "^8.0.2"
+  }
+}

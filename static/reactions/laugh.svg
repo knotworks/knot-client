@@ -1,0 +1,13 @@
+<svg width="339px" height="339px" viewBox="0 0 339 339" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44 (41411) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <circle id="Oval" fill="#FFF357" cx="169.5" cy="169.5" r="169.5"></circle>
+            <path d="M111,218 C111,250.5848 137.4152,277 170,277 C202.5848,277 229,250.5848 229,218" id="Oval-3" stroke="#7C6016" stroke-width="10" fill="#7C6016"></path>
+            <path d="M77,100 C87.6666667,110.666667 107,122 135,134 C107.666667,148 88.3333333,160 77,170" id="Line" stroke="#7C6016" stroke-width="15" stroke-linecap="round"></path>
+            <path d="M202,100 C212.666667,110.666667 232,122 260,134 C232.666667,148 213.333333,160 202,170" id="Line" stroke="#7C6016" stroke-width="15" stroke-linecap="round" transform="translate(231.000000, 135.000000) scale(-1, 1) translate(-231.000000, -135.000000) "></path>
+        </g>
+    </g>
+</svg>
