@@ -4,7 +4,6 @@
 
 <script>
 import { formatDistanceToNow } from 'date-fns'
-// import { utcToZonedTime } from 'date-fns-tz'
 export default {
   name: 'LiveDate',
   props: {
@@ -15,7 +14,7 @@ export default {
   },
   data() {
     return {
-      liveDate: this.getDateDistance(),
+      liveDate: '',
       interval: null
     }
   },
@@ -25,6 +24,8 @@ export default {
     }
   },
   created() {
+    this.liveDate = this.getDateDistance()
+
     if (this.interval) {
       clearInterval(this.interval)
     }

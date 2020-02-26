@@ -1,26 +1,28 @@
 <template>
-  <client-only v-if="media.length > 1">
-    <flickity class="post-media" :options="flickityOptions">
-      <div
-        v-for="item in media"
-        :key="item.id"
-        class="relative w-full h-0 media-wrapper"
-        :style="{ paddingBottom: shortestRatio }"
-      >
-        <CldImage
-          :public-id="item.path"
-          :responsive="responsiveSetting(item)"
-          dpr="auto"
-          quality="auto"
-          fetch-format="auto"
-          crop="scale"
-          placeholder="color"
-          class="absolute top-0 h-full"
-          lazy
-        />
-      </div>
-    </flickity>
-  </client-only>
+  <div v-if="media.length > 1">
+    <client-only>
+      <flickity class="post-media" :options="flickityOptions">
+        <div
+          v-for="item in media"
+          :key="item.id"
+          class="relative w-full h-0 media-wrapper"
+          :style="{ paddingBottom: shortestRatio }"
+        >
+          <CldImage
+            :public-id="item.path"
+            :responsive="responsiveSetting(item)"
+            dpr="auto"
+            quality="auto"
+            fetch-format="auto"
+            crop="scale"
+            placeholder="color"
+            class="absolute top-0 h-full"
+            lazy
+          />
+        </div>
+      </flickity>
+    </client-only>
+  </div>
   <div
     v-else
     class="relative w-full h-0 bg-gray-200"
