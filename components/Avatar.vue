@@ -1,14 +1,20 @@
 <template>
-  <div class="relative overflow-hidden bg-gray-200">
-    <CldImage
-      :public-id="user.profile_image"
-      :alt="user.first_name"
-      :width="size"
-      :height="size"
-      crop="lfill"
-      class="avatar"
-      responsive="width"
-    />
+  <div
+    class="relative overflow-hidden bg-gray-200"
+    :style="{ width: `${size}px`, height: `${size}px` }"
+  >
+    <CldImage :public-id="user.profile_image" class="avatar">
+      <!-- eslint-disable -->
+      <CldTransformation
+        :width="size"
+        :height="size"
+        crop="lfill"
+        dpr="auto"
+        fetchFormat="auto"
+        quality="100"
+      />
+      <!-- eslint-enable -->
+    </CldImage>
   </div>
 </template>
 <script>

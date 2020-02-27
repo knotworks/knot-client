@@ -16,8 +16,9 @@
         <button
           type="submit"
           class="w-full px-3 py-3 text-white bg-red-600 rounded-sm shadow-md"
+          :disabled="isPosting"
         >
-          Post
+          {{ isPosting ? 'Posting...' : 'Post' }}
         </button>
       </div>
     </form>
@@ -40,13 +41,16 @@ export default {
       post: {
         body: '',
         media: []
-      }
+      },
+      isPosting: false
     }
   },
   methods: {
     ...mapActions('posts', ['newPost']),
     async doNewPost() {
+      this.isPosting = true
       await this.newPost(objectToFormData(this.post))
+      this.isPosting = false
       this.$router.push('/')
     },
     goBack() {

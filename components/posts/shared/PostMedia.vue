@@ -5,20 +5,23 @@
         <div
           v-for="item in media"
           :key="item.id"
-          class="relative w-full h-0 media-wrapper"
-          :style="{ paddingBottom: shortestRatio }"
+          class="relative w-full h-0 bg-gray-100"
+          :style="{ paddingBottom: baseRatio }"
         >
-          <CldImage
-            :public-id="item.path"
-            :responsive="responsiveSetting(item)"
-            dpr="auto"
-            quality="auto"
-            fetch-format="auto"
-            crop="scale"
-            placeholder="color"
-            class="absolute top-0 h-full"
-            lazy
-          />
+          <div
+            class="absolute top-0 left-0 flex items-center justify-center w-full h-full"
+          >
+            <CldImage :public-id="item.path" responsive="width" lazy>
+              <!-- eslint-disable -->
+              <CldTransformation
+                dpr="auto"
+                fetchFormat="auto"
+                crop="scale"
+                quality="100"
+              />
+              <!-- eslint-enable -->
+            </CldImage>
+          </div>
         </div>
       </flickity>
     </client-only>
@@ -30,15 +33,19 @@
   >
     <CldImage
       :public-id="media[0].path"
-      dpr="auto"
-      quality="auto"
-      fetch-format="auto"
-      crop="scale"
       responsive="width"
-      placeholder="color"
       class="absolute top-0 left-0 w-full h-full"
       lazy
-    />
+    >
+      <!-- eslint-disable -->
+      <CldTransformation
+        dpr="auto"
+        fetchFormat="auto"
+        crop="scale"
+        quality="100"
+      />
+      <!-- eslint-enable -->
+    </CldImage>
   </div>
 </template>
 
@@ -60,9 +67,9 @@ export default {
     }
   },
   computed: {
-    shortestRatio() {
+    baseRatio() {
       const media = [...this.media].sort((a, b) => {
-        return a.height - b.height
+        return b.height - a.height
       })[0]
 
       return this.intrinsicRatio(media)
@@ -80,23 +87,6 @@ export default {
 </script>
 
 <style lang="scss">
-.post-media {
-  .flickity-slider {
-    display: flex;
-    align-items: center;
-  }
-}
-
-.media-wrapper {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-
-  .cld-image > img {
-    height: 100%;
-  }
-}
-
 .flickity-page-dots {
   position: relative;
   bottom: 0;
