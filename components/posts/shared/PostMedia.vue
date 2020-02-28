@@ -11,7 +11,12 @@
           <div
             class="absolute top-0 left-0 flex items-center justify-center w-full h-full"
           >
-            <CldImage :public-id="item.path" responsive="width" lazy>
+            <CldImage
+              v-if="item.type === 'image'"
+              :public-id="item.path"
+              responsive="width"
+              lazy
+            >
               <!-- eslint-disable -->
               <CldTransformation
                 dpr="auto"
@@ -21,6 +26,13 @@
               />
               <!-- eslint-enable -->
             </CldImage>
+            <CldVideo
+              v-else
+              :public-id="media[0].path"
+              class="w-full"
+              lazy
+              controls
+            ></CldVideo>
           </div>
         </div>
       </flickity>
@@ -32,6 +44,7 @@
     :style="{ paddingBottom: intrinsicRatio(media[0]) }"
   >
     <CldImage
+      v-if="media[0].type === 'image'"
       :public-id="media[0].path"
       responsive="width"
       class="absolute top-0 left-0 w-full h-full"
@@ -46,6 +59,13 @@
       />
       <!-- eslint-enable -->
     </CldImage>
+    <CldVideo
+      v-else
+      :public-id="media[0].path"
+      class="absolute top-0 left-0 w-full h-full"
+      lazy
+      controls
+    ></CldVideo>
   </div>
 </template>
 

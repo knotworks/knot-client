@@ -1,20 +1,38 @@
 <template>
-  <div class="flex flex-wrap px-4 py-3">
+  <div class="flex flex-wrap px-4 py-3 overflow-hidden">
+    <video
+      ref="video"
+      controls
+      autoplay
+      muted
+      class="absolute w-16 h-16"
+      style="top:-9999px;left:-9999px;"
+    >
+      <source type="video/mp4" />
+    </video>
+    <canvas
+      ref="canvas"
+      class="absolute invisible w-16 h-16"
+      style="top:-9999px;left:-9999px;"
+    ></canvas>
     <div
       v-for="(media, i) in files"
       :key="i"
       class="relative flex items-center justify-center w-16 h-16 mr-4 text-4xl text-gray-700 bg-gray-300 border border-gray-400 rounded-sm cursor-pointer"
     >
-      <img src="~/assets/images/icons/add-dark.svg" class="h-4" />
+      <img
+        v-if="!media.loading"
+        src="~/assets/images/icons/add-dark.svg"
+        class="h-4"
+      />
       <img
         v-if="media.preview"
         :src="media.preview"
         class="absolute top-0 left-0 object-cover w-full h-full"
       />
       <input
-        ref="file"
         type="file"
-        accept="image/*"
+        accept="image/*,video/mp4"
         class="absolute top-0 left-0 w-full h-full opacity-0"
         @change="setFile(i, $event)"
       />
@@ -37,28 +55,69 @@ export default {
       files: [
         {
           file: null,
-          preview: ''
+          preview: '',
+          loading: false
         }
       ]
     }
   },
+  computed: {
+    hasVideo() {
+      return this.files.some(
+        (media) => media.file && this.fileIsVideo(media.file)
+      )
+    }
+  },
   methods: {
+    fileIsVideo(file) {
+      return file.type === 'video/mp4'
+    },
     setFile(i, e) {
       if (e.target.files.length) {
         const wasPopulated = !!this.files[i].preview
-        this.files[i].file = e.target.files[0]
-        const reader = new FileReader()
-        reader.onload = (ev) => {
-          this.files[i].preview = ev.target.result
+        const file = e.target.files[0]
+
+        if (this.fileIsVideo(file)) {
+          if (this.hasVideo && !wasPopulated) {
+            e.target.value = ''
+            alert('You may only upload 1 video per post.')
+            return false
+          } else {
+            this.files[i].file = file
+            this.files[i].loading = true
+            const { canvas, video } = this.$refs
+            const ctx = canvas.getContext('2d')
+            video.src = URL.createObjectURL(file)
+            video.addEventListener('loadedmetadata', () => {
+              video.currentTime = 2
+              canvas.width = video.videoWidth
+              canvas.height = video.videoHeight
+            })
+            video.addEventListener('timeupdate', () => {
+              ctx.clearRect(0, 0, canvas.width, canvas.height)
+              ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+              this.files[i].preview = canvas.toDataURL()
+              this.files[i].loading = false
+            })
+          }
+        } else {
+          this.files[i].file = file
+          const reader = new FileReader()
+          reader.onload = (ev) => {
+            this.files[i].preview = ev.target.result
+          }
+          reader.readAsDataURL(e.target.files[0])
         }
-        reader.readAsDataURL(e.target.files[0])
         if (!wasPopulated && this.files.length < 5) {
-          this.files.push({ file: null, preview: '' })
+          this.files.push({ file: null, preview: '', loading: false })
         }
         this.$emit('change', this.files)
       }
     },
     removeFile(i) {
+      if (this.fileIsVideo(this.files[i].file)) {
+        URL.revokeObjectURL(this.$refs.video.src)
+      }
       this.files.splice(i, 1)
       this.$emit('change', this.files)
     }
