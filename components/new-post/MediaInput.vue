@@ -32,7 +32,7 @@
       />
       <input
         type="file"
-        accept="image/*,video/mp4"
+        accept="image/*, video/mp4"
         class="absolute top-0 left-0 w-full h-full opacity-0"
         @change="setFile(i, $event)"
       />
@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import loadImage from 'blueimp-load-image'
 export default {
   data() {
     return {
@@ -101,12 +102,22 @@ export default {
             })
           }
         } else {
-          this.files[i].file = file
-          const reader = new FileReader()
-          reader.onload = (ev) => {
-            this.files[i].preview = ev.target.result
-          }
-          reader.readAsDataURL(e.target.files[0])
+          loadImage(
+            file,
+            (canvas) => {
+              this.files[i].preview = canvas.toDataURL()
+              canvas.toBlob((blob) => {
+                this.files[i].file = blob
+              }, 'image/jpeg')
+            },
+            {
+              canvas: true,
+              contain: true,
+              maxWidth: 2400,
+              maxHeight: 3200,
+              orientation: true
+            }
+          )
         }
         if (!wasPopulated && this.files.length < 5) {
           this.files.push({ file: null, preview: '', loading: false })
