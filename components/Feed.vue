@@ -17,15 +17,6 @@ export default {
         return []
       }
     }
-  },
-  methods: {
-    getPostType(post) {
-      if (post.hasOwnProperty('postable_type')) {
-        return post.postable_type.split('\\').pop()
-      } else {
-        return null
-      }
-    }
   }
 }
 </script>

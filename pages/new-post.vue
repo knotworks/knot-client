@@ -1,5 +1,5 @@
 <template>
-  <div class="w-screen h-screen">
+  <div class="relative w-screen h-screen">
     <Navbar>
       <button slot="left-buttons" @click="goBack">Close</button>
       <span slot="title" class="text-white">New Post</span>
@@ -14,14 +14,42 @@
       <MediaInput @change="setPostMedia" />
       <div class="p-4">
         <button
+          class="w-full px-3 py-3 text-gray-700 bg-gray-400 rounded-sm"
+          type="button"
+          @click="isTaggingFriends = !isTaggingFriends"
+        >
+          {{ friendsButtonLabel }}
+        </button>
+        <button
+          class="w-full px-3 py-3 mt-4 text-gray-700 truncate bg-gray-400 rounded-sm"
+          type="button"
+          @click="isAddingLocation = !isAddingLocation"
+        >
+          {{ locationButtonLabel }}
+        </button>
+        <button
           type="submit"
-          class="w-full px-3 py-3 text-white bg-red-600 rounded-sm shadow-md"
+          class="w-full px-3 py-3 mt-4 text-white bg-red-600 rounded-sm shadow-md"
           :disabled="isPosting"
         >
           {{ isPosting ? 'Posting...' : 'Post' }}
         </button>
       </div>
     </form>
+    <transition name="slide-up">
+      <AddFriends
+        v-show="isTaggingFriends"
+        @close="isTaggingFriends = false"
+        @change="setTaggedFriends"
+      />
+    </transition>
+    <transition name="slide-up">
+      <AddLocation
+        v-show="isAddingLocation"
+        @change="setPostLocation"
+        @close="isAddingLocation = false"
+      />
+    </transition>
   </div>
 </template>
 
@@ -30,38 +58,86 @@ import { mapActions } from 'vuex'
 import { objectToFormData } from 'object-to-formdata'
 import Navbar from '~/components/Navbar.vue'
 import MediaInput from '~/components/new-post/MediaInput.vue'
+import AddFriends from '~/components/new-post/AddFriends.vue'
+import AddLocation from '~/components/new-post/AddLocation.vue'
 export default {
   layout: 'minimal',
+  middleware: 'auth',
   components: {
     Navbar,
-    MediaInput
+    MediaInput,
+    AddFriends,
+    AddLocation
+  },
+  async fetch({ store }) {
+    await store.dispatch('user/fetchFriendships')
   },
   data() {
     return {
       post: {
         body: '',
-        media: []
+        media: [],
+        accompaniments: [],
+        location: {}
       },
-      isPosting: false
+      isPosting: false,
+      isTaggingFriends: false,
+      isAddingLocation: false
     }
+  },
+  computed: {
+    friendsButtonLabel() {
+      const { accompaniments } = this.post
+      if (accompaniments.length === 1) {
+        return `With ${accompaniments[0].first_name}`
+      } else if (accompaniments.length > 1) {
+        return `With ${accompaniments.length} friends`
+      } else {
+        return "I'm with..."
+      }
+    },
+    locationButtonLabel() {
+      return this.post.location.name ? this.post.location.name : "I'm at..."
+    }
+  },
+  mounted() {
+    window.objectToFormData = objectToFormData
   },
   methods: {
     ...mapActions('posts', ['newPost']),
     async doNewPost() {
       this.isPosting = true
-      await this.newPost(objectToFormData(this.post))
+      await this.newPost(objectToFormData(this.post, { indices: true }))
       this.isPosting = false
       this.$router.push('/')
     },
     goBack() {
-      window.history.back()
+      this.$router.go(-1)
     },
     setPostMedia(media) {
       this.post.media = media
+        .filter(Boolean)
         .filter((item) => {
           return !!item.file
         })
         .map((item) => item.file)
+    },
+    setTaggedFriends(friends) {
+      this.isTaggingFriends = false
+      this.post.accompaniments = friends.map(
+        ({ id, first_name: firstName }) => {
+          return { id, first_name: firstName }
+        }
+      )
+    },
+    setPostLocation(place) {
+      this.isAddingLocation = false
+      this.post.location = {
+        lat: +parseFloat(place.location.lat).toFixed(6),
+        long: +parseFloat(place.location.lng).toFixed(6),
+        name: place.name,
+        city: place.location.city
+      }
     }
   }
 }

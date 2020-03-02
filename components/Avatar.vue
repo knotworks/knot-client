@@ -1,9 +1,13 @@
 <template>
   <div
-    class="relative overflow-hidden bg-gray-200"
+    class="relative flex items-center justify-center overflow-hidden bg-gray-200"
     :style="{ width: `${size}px`, height: `${size}px` }"
   >
-    <CldImage :public-id="user.profile_image" class="avatar">
+    <CldImage
+      v-if="user.profile_image"
+      :public-id="user.profile_image"
+      class="avatar"
+    >
       <!-- eslint-disable -->
       <CldTransformation
         :width="size"
@@ -15,6 +19,13 @@
       />
       <!-- eslint-enable -->
     </CldImage>
+    <span
+      v-else
+      class="h-full font-bold text-gray-500"
+      :style="`line-height:${size}px;`"
+    >
+      {{ nameFirstLetter }}
+    </span>
   </div>
 </template>
 <script>
@@ -31,7 +42,7 @@ export default {
     }
   },
   computed: {
-    initials() {
+    nameFirstLetter() {
       return this.user.first_name.charAt(0).toUpperCase()
     }
   }

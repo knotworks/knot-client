@@ -15,6 +15,9 @@ export const getters = {
       city: state.currentLocation.city
     }
   },
+  hasLocationSet: (state) => {
+    return !!state.currentLocation.lat
+  },
   nearby: (state) => state.nearby
 }
 
@@ -28,21 +31,31 @@ export const mutations = {
 }
 
 export const actions = {
-  async fetchCurrentLocation({ commit }, { latitude, longitude }) {
+  async fetchCurrentLocation({ commit }, { lat, long }) {
     const location = await this.$client
       .withoutAuth()
       .post('https://opencagedata.butts.workers.dev', {
-        lat: latitude,
-        long: longitude
+        lat,
+        long
       })
 
     const { components } = location.results[0]
     const city = components.suburb ? components.suburb : components.city
 
     commit('setCurrentLocation', {
-      lat: latitude,
-      long: longitude,
+      lat,
+      long,
       city
     })
+  },
+  async fetchNearby({ commit }, { lat, long }) {
+    const nearby = await this.$client
+      .withoutAuth()
+      .post('https://foursquareplaces.butts.workers.dev', {
+        lat,
+        long
+      })
+
+    commit('setNearby', nearby.response.venues)
   }
 }

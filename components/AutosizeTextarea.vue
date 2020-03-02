@@ -1,6 +1,7 @@
 <template>
   <textarea
     :style="`min-height:${minHeight}px;max-height:${maxHeight}px;`"
+    :value="value"
     @input="resize"
   ></textarea>
 </template>
@@ -8,6 +9,10 @@
 <script>
 export default {
   props: {
+    value: {
+      type: String,
+      default: ''
+    },
     minHeight: {
       type: Number,
       default: 0

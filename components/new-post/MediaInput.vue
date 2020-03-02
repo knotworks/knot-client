@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap px-4 py-3 overflow-hidden">
+  <div class="px-4 pt-3 overflow-hidden">
     <video
       ref="video"
       controls
@@ -15,36 +15,44 @@
       class="absolute invisible w-16 h-16"
       style="top:-9999px;left:-9999px;"
     ></canvas>
-    <div
-      v-for="(media, i) in files"
-      :key="i"
-      class="relative flex items-center justify-center w-16 h-16 mr-4 text-4xl text-gray-700 bg-gray-300 border border-gray-400 rounded-sm cursor-pointer"
+    <transition-group
+      name="list"
+      tag="div"
+      class="relative flex flex-wrap w-full"
     >
-      <img
-        v-if="!media.loading"
-        src="~/assets/images/icons/add-dark.svg"
-        class="h-4"
-      />
-      <img
-        v-if="media.preview"
-        :src="media.preview"
-        class="absolute top-0 left-0 object-cover w-full h-full"
-      />
-      <input
-        type="file"
-        accept="image/*, video/mp4"
-        class="absolute top-0 left-0 w-full h-full opacity-0"
-        @change="setFile(i, $event)"
-      />
-      <button
-        v-show="media.file"
-        class="absolute top-0 right-0 w-6 h-6 -mt-2 -mr-3 text-sm text-white bg-red-500 rounded-full focus-none"
-        type="button"
-        @click="removeFile(i)"
+      <div
+        v-for="(media, i) in files"
+        :key="media.uuid"
+        class="relative flex items-center justify-center w-16 h-16 mb-4 mr-4 text-4xl text-gray-700 bg-gray-300 border border-gray-400 rounded-sm cursor-pointer media-input-container"
       >
-        <span class="inline-block w-full h-full font-bold">&times;</span>
-      </button>
-    </div>
+        <img
+          v-if="!media.loading"
+          src="~/assets/images/icons/add-dark.svg"
+          class="h-4"
+        />
+        <transition name="fade">
+          <img
+            v-if="media.preview"
+            :src="media.preview"
+            class="absolute top-0 left-0 object-cover w-full h-full"
+          />
+        </transition>
+        <input
+          type="file"
+          accept="image/*, video/mp4"
+          class="absolute top-0 left-0 w-full h-full opacity-0"
+          @change="setFile(i, $event)"
+        />
+        <button
+          v-show="media.file"
+          class="absolute top-0 right-0 w-6 h-6 -mt-2 -mr-3 text-sm text-white bg-red-500 rounded-full focus-none"
+          type="button"
+          @click="removeFile(i)"
+        >
+          <span class="inline-block w-full h-full font-bold">&times;</span>
+        </button>
+      </div>
+    </transition-group>
   </div>
 </template>
 
@@ -57,7 +65,8 @@ export default {
         {
           file: null,
           preview: '',
-          loading: false
+          loading: false,
+          uuid: this.generateTimestamp()
         }
       ]
     }
@@ -99,15 +108,19 @@ export default {
               ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
               this.files[i].preview = canvas.toDataURL()
               this.files[i].loading = false
+              this.$emit('change', this.files)
             })
           }
         } else {
+          this.files[i].loading = true
           loadImage(
             file,
             (canvas) => {
               this.files[i].preview = canvas.toDataURL()
               canvas.toBlob((blob) => {
                 this.files[i].file = blob
+                this.files[i].loading = false
+                this.$emit('change', this.files)
               }, 'image/jpeg')
             },
             {
@@ -120,9 +133,13 @@ export default {
           )
         }
         if (!wasPopulated && this.files.length < 5) {
-          this.files.push({ file: null, preview: '', loading: false })
+          this.files.push({
+            file: null,
+            preview: '',
+            loading: false,
+            uuid: this.generateTimestamp()
+          })
         }
-        this.$emit('change', this.files)
       }
     },
     removeFile(i) {
@@ -131,9 +148,16 @@ export default {
       }
       this.files.splice(i, 1)
       this.$emit('change', this.files)
+    },
+    generateTimestamp() {
+      return parseInt((new Date().getTime() / 1000).toFixed(0), 10)
     }
   }
 }
 </script>
 
-<style></style>
+<style>
+.media-input-container {
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+</style>

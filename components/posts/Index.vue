@@ -2,8 +2,8 @@
   <div class="mb-8 overflow-hidden text-gray-800 bg-white rounded-lg shadow-sm">
     <PostHeader :post="post" />
     <PostMedia v-if="post.media.length" :media="post.media" />
-    <div class="border-t border-gray-300">
-      <PostBody v-if="post.body" :post="post" />
+    <div v-if="post.body" class="border-t border-gray-300">
+      <PostBody :post="post" />
     </div>
     <Reactions v-if="post.reactions.length" :post="post" />
     <CommentList v-show="post.comments.length" :comments="post.comments" />

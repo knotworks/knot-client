@@ -1,5 +1,6 @@
 <template>
   <div class="fixed top-0 left-0 w-screen h-screen bg-gray-200 layout-default">
+    <PhotoSwipe />
     <Navbar>
       <img
         slot="title"
@@ -17,14 +18,17 @@
 import { mapActions } from 'vuex'
 import Navbar from '~/components/Navbar'
 import BottomBar from '~/components/BottomBar'
+import PhotoSwipe from '~/components/posts/shared/PhotoSwipe.vue'
 export default {
   components: {
     Navbar,
-    BottomBar
+    BottomBar,
+    PhotoSwipe
   },
   mounted() {
     navigator.geolocation.getCurrentPosition((position) => {
-      this.fetchCurrentLocation(position.coords)
+      const { latitude: lat, longitude: long } = position.coords
+      this.fetchCurrentLocation({ lat, long })
     })
   },
   methods: {

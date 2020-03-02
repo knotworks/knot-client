@@ -11,7 +11,11 @@
         class="relative mb-2 mr-2 leading-none post-reaction"
       >
         <nuxt-link to="/" class="flex-no-shrink">
-          <Avatar :user="reaction.user" :size="25" class="rounded-sm"></Avatar>
+          <Avatar
+            :user="reaction.user"
+            :size="25"
+            class="rounded-full"
+          ></Avatar>
         </nuxt-link>
         <img
           :src="reactionIconPath(reaction)"

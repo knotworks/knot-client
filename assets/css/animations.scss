@@ -16,6 +16,15 @@
   transform: translate3d(0, 100%, 0);
 }
 
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.list-leave-active {
+  position: absolute;
+}
+
 @keyframes spin {
   from {
     transform: rotate(0deg);

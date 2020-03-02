@@ -6,9 +6,9 @@
       class="flex items-start px-5 py-4 border-t border-grey-light"
     >
       <nuxt-link to="/" class="mr-2 flex-no-shrink">
-        <Avatar :user="comment.user" :size="30" class="rounded-sm" />
+        <Avatar :user="comment.user" :size="30" class="rounded-full" />
       </nuxt-link>
-      <div style="position:relative;top:-6px;">
+      <div class="-mt-1">
         <div class="mb-1 text-sm leading-normal text-gray-900">
           <strong>{{ comment.user.first_name }}: </strong> {{ comment.body }}
         </div>

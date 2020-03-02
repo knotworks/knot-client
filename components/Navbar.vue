@@ -29,7 +29,6 @@ export default {
   padding-top: constant(safe-area-inset-top);
   padding-top: env(safe-area-inset-top);
 
-  z-index: 99;
   .left-buttons {
     position: absolute;
     top: 15px;

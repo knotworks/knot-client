@@ -35,7 +35,9 @@ export default {
   },
 
   pwa: {
-    theme_color: '#e53e3e'
+    manifest: {
+      theme_color: '#e53e3e'
+    }
   },
 
   /*
@@ -53,7 +55,9 @@ export default {
   plugins: [
     { src: '~/plugins/cloudinary.js', ssr: true },
     { src: '~/plugins/flickity.js', ssr: false },
-    { src: '~/plugins/lazysizes.js', ssr: false }
+    { src: '~/plugins/lazysizes.js', ssr: false },
+    { src: '~/plugins/eventBus.js', ssr: true }
+    // { src: '~/plugins/localStorage.js', ssr: false }
   ],
   /*
    ** Nuxt.js dev-modules
@@ -70,6 +74,7 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
+    '@nuxtjs/svg',
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/auth',

@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     ...mapActions('posts', ['addComment']),
-    doAddComment() {
+    async doAddComment() {
       this.postingComment = true
       this.comment.id = this.postId
 
@@ -71,10 +71,10 @@ export default {
         location: this.locationPostData
       }
 
-      this.addComment(commentData).then((res) => {
-        this.postingComment = false
-        this.comment.body = ''
-      })
+      await this.addComment(commentData)
+
+      this.postingComment = false
+      this.comment.body = ''
     }
   }
 }

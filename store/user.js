@@ -1,6 +1,14 @@
+export const state = () => ({
+  friendships: []
+})
+
+export const getters = {
+  friendships: (state) => state.friendships
+}
+
 export const mutations = {
-  setUser(state, user) {
-    state.user = user
+  setFriendships(state, friendships) {
+    state.friendships = friendships
   }
 }
 
@@ -12,5 +20,9 @@ export const actions = {
     return this.$auth.loginWith('local', {
       data: credentials
     })
+  },
+  async fetchFriendships({ commit }) {
+    const friendships = await this.$client.get('/api/friendships')
+    commit('setFriendships', friendships)
   }
 }
