@@ -79,11 +79,6 @@ export default {
       this.open(imageData)
     })
   },
-  beforeDestroy() {
-    if (this.photoswipe && this.photoswipe.hasOwnProperty('destroy')) {
-      this.photoswipe.destroy()
-    }
-  },
   methods: {
     open(item) {
       const options = {

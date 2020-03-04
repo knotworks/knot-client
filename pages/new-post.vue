@@ -89,7 +89,7 @@ export default {
     friendsButtonLabel() {
       const { accompaniments } = this.post
       if (accompaniments.length === 1) {
-        return `With ${accompaniments[0].first_name}`
+        return `With ${accompaniments[0].firstName}`
       } else if (accompaniments.length > 1) {
         return `With ${accompaniments.length} friends`
       } else {
@@ -100,14 +100,19 @@ export default {
       return this.post.location.name ? this.post.location.name : "I'm at..."
     }
   },
-  mounted() {
-    window.objectToFormData = objectToFormData
-  },
   methods: {
     ...mapActions('posts', ['newPost']),
     async doNewPost() {
       this.isPosting = true
-      await this.newPost(objectToFormData(this.post, { indices: true }))
+      await this.newPost(
+        objectToFormData(
+          {
+            ...this.post,
+            accompaniments: this.post.accompaniments.map((a) => a.id)
+          },
+          { indices: true }
+        )
+      )
       this.isPosting = false
       this.$router.push('/')
     },
@@ -124,11 +129,9 @@ export default {
     },
     setTaggedFriends(friends) {
       this.isTaggingFriends = false
-      this.post.accompaniments = friends.map(
-        ({ id, first_name: firstName }) => {
-          return { id, first_name: firstName }
-        }
-      )
+      this.post.accompaniments = friends.map((friend) => {
+        return { id: friend.id, firstName: friend.first_name }
+      })
     },
     setPostLocation(place) {
       this.isAddingLocation = false
