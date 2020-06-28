@@ -75,11 +75,11 @@ export default {
   data() {
     return {
       user: {
-        first_name: 'Collin',
-        last_name: 'Henderson',
-        email: 'collin@syropia.net',
-        password: 'password123',
-        password_confirmation: 'password123',
+        first_name: '',
+        last_name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
       },
       loading: false,
       error: null,

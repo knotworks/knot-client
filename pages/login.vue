@@ -57,8 +57,8 @@ export default {
   data() {
     return {
       credentials: {
-        email: 'collin@syropia.net',
-        password: 'password123',
+        email: '',
+        password: '',
       },
       loading: false,
       error: null,
@@ -71,10 +71,6 @@ export default {
       this.loading = true
       try {
         await this.login(this.credentials)
-
-        // this.$nextTick(() => {
-        //   this.$router.push('/')
-        // })
       } catch (e) {
         if (e.response.data.error === 'Unauthorized') {
           this.error = 'Incorrect email or password.'
