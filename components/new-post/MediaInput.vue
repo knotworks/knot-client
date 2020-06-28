@@ -40,7 +40,7 @@
         </transition>
         <input
           type="file"
-          accept="image/*, video/mp4"
+          accept="image/*, video/mp4, video/quicktime"
           class="absolute top-0 left-0 w-full h-full opacity-0"
           aria-label="Add file"
           @change="setFile(i, $event)"
@@ -83,7 +83,7 @@ export default {
   },
   methods: {
     fileIsVideo(file) {
-      return file.type === 'video/mp4'
+      return file.type.startsWith('video')
     },
     setFile(i, e) {
       if (e.target.files.length) {
