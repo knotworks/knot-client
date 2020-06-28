@@ -20,8 +20,8 @@ export default {
   props: {
     postId: {
       type: Number,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -31,8 +31,8 @@ export default {
         frown: '/reactions/frown.svg',
         surprise: '/reactions/surprise.svg',
         laugh: '/reactions/laugh.svg',
-        angry: '/reactions/angry.svg'
-      }
+        angry: '/reactions/angry.svg',
+      },
     }
   },
   methods: {
@@ -41,10 +41,10 @@ export default {
       this.$emit('hide')
       this.addReaction({
         id: this.postId,
-        reaction: { type: reaction }
+        reaction: { type: reaction },
       })
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -65,12 +65,6 @@ export default {
   .reaction {
     &:first-child {
       margin-left: 0;
-    }
-    img {
-      transition: transform 250ms ease;
-      &:hover {
-        transform: scale(1.2);
-      }
     }
   }
 }

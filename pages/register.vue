@@ -1,55 +1,77 @@
 <template>
-  <div>
+  <div class="flex flex-col items-center w-full px-4 mt-10">
+    <KnotLogo class="inline-block w-auto h-12 mt-2 fill-current text-primary" />
     <form
-      class="flex flex-col items-center w-full max-w-sm px-4"
-      @submit.prevent="register(user)"
+      class="flex flex-col items-center w-full mt-10"
+      @submit.prevent="registerAndLogin(user)"
     >
+      <div
+        v-if="error"
+        class="flex items-start w-full mb-4 text-sm text-red-600"
+      >
+        <ExclamationCircleIcon class="w-5 h-5 mt-px" />
+        <span class="ml-2">{{ error }}</span>
+      </div>
+
       <input
         v-model="user.first_name"
-        class="input"
+        class="w-full h-12 px-3 mb-4 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none focus:border-primary"
         type="text"
         placeholder="First Name"
       />
       <input
         v-model="user.last_name"
-        class="input"
+        class="w-full h-12 px-3 mb-4 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none focus:border-primary"
         type="text"
         placeholder="Last Name"
       />
       <input
         v-model="user.email"
-        class="input"
+        class="w-full h-12 px-3 mb-4 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none focus:border-primary"
         type="email"
         placeholder="Your Email"
       />
       <input
         v-model="user.password"
-        class="input"
+        class="w-full h-12 px-3 mb-4 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none focus:border-primary"
         type="password"
         placeholder="Enter a password"
       />
       <input
         v-model="user.password_confirmation"
-        class="input"
+        class="w-full h-12 px-3 mb-4 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none focus:border-primary"
         type="password"
         placeholder="Confirm your password"
       />
       <button
-        class="block w-full h-12 mt-6 font-bold tracking-widest text-red-600 uppercase bg-white rounded shadow-md cursor-pointer"
+        class="block w-full py-3 mt-2 font-bold tracking-widest text-white uppercase bg-white bg-red-600 rounded shadow-sm cursor-pointer focus:outline-none focus:shadow-outline-red"
         type="submit"
+        :disabled="loading"
       >
         Sign Up
       </button>
     </form>
+    <nuxt-link
+      to="/login"
+      class="block w-full mt-4 font-medium text-center text-red-600"
+    >
+      Have an account? Sign In
+    </nuxt-link>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import KnotLogo from '~/assets/images/logo.svg?inline'
+import ExclamationCircleIcon from '~/assets/images/icons/exclamation-circle.svg?inline'
 export default {
   middleware: 'auth',
   auth: 'guest',
   layout: 'auth',
+  components: {
+    KnotLogo,
+    ExclamationCircleIcon,
+  },
   data() {
     return {
       user: {
@@ -57,25 +79,32 @@ export default {
         last_name: 'Henderson',
         email: 'collin@syropia.net',
         password: 'password123',
-        password_confirmation: 'password123'
-      }
+        password_confirmation: 'password123',
+      },
+      loading: false,
+      error: null,
     }
   },
   methods: {
     ...mapActions('user', ['register', 'login']),
     async registerAndLogin() {
-      await this.register(this.user)
-      const { email, password } = this.user
-      await this.login({ email, password })
-    }
-  }
+      this.error = null
+      this.loading = true
+      try {
+        const { email, password } = this.user
+
+        await this.register(this.user)
+        await this.login({ email, password })
+
+        this.$nextTick(() => {
+          this.$router.push('/')
+        })
+      } catch (e) {
+        this.error = Object.entries(e.errors)[0][1][0]
+      } finally {
+        this.loading = false
+      }
+    },
+  },
 }
 </script>
-
-<style lang="scss" scoped>
-.input {
-  @apply w-full rounded mb-4 h-12 px-3 border border-red-700 text-gray-800;
-
-  box-shadow: 0 1px 0 0 rgba(#fff, 0.2);
-}
-</style>

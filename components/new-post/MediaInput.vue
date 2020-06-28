@@ -6,15 +6,15 @@
       autoplay
       muted
       class="absolute w-16 h-16"
-      style="top:-9999px;left:-9999px;"
+      style="top: -9999px; left: -9999px;"
     >
       <source type="video/mp4" />
     </video>
     <canvas
       ref="canvas"
       class="absolute invisible w-16 h-16"
-      style="top:-9999px;left:-9999px;"
-    ></canvas>
+      style="top: -9999px; left: -9999px;"
+    />
     <transition-group
       name="list"
       tag="div"
@@ -23,7 +23,8 @@
       <div
         v-for="(media, i) in files"
         :key="media.uuid"
-        class="relative flex items-center justify-center w-16 h-16 mb-4 mr-4 text-4xl text-gray-700 bg-gray-300 border border-gray-400 rounded-sm cursor-pointer media-input-container"
+        class="relative flex items-center justify-center w-16 h-16 mb-4 mr-4 text-4xl text-gray-700 rounded-sm shadow-sm cursor-pointer bg-gray-50 media-input-container"
+        :class="{ 'border border-gray-300': !media.preview }"
       >
         <img
           v-if="!media.loading"
@@ -34,19 +35,21 @@
           <img
             v-if="media.preview"
             :src="media.preview"
-            class="absolute top-0 left-0 object-cover w-full h-full"
+            class="absolute top-0 left-0 object-cover w-full h-full rounded-sm"
           />
         </transition>
         <input
           type="file"
           accept="image/*, video/mp4"
           class="absolute top-0 left-0 w-full h-full opacity-0"
+          aria-label="Add file"
           @change="setFile(i, $event)"
         />
         <button
           v-show="media.file"
           class="absolute top-0 right-0 w-6 h-6 -mt-2 -mr-3 text-sm text-white bg-red-500 rounded-full focus-none"
           type="button"
+          aria-label="Close"
           @click="removeFile(i)"
         >
           <span class="inline-block w-full h-full font-bold">&times;</span>
@@ -66,9 +69,9 @@ export default {
           file: null,
           preview: '',
           loading: false,
-          uuid: this.generateTimestamp()
-        }
-      ]
+          uuid: this.generateTimestamp(),
+        },
+      ],
     }
   },
   computed: {
@@ -76,7 +79,7 @@ export default {
       return this.files.some(
         (media) => media.file && this.fileIsVideo(media.file)
       )
-    }
+    },
   },
   methods: {
     fileIsVideo(file) {
@@ -128,7 +131,7 @@ export default {
               contain: true,
               maxWidth: 2400,
               maxHeight: 3200,
-              orientation: true
+              orientation: true,
             }
           )
         }
@@ -137,7 +140,7 @@ export default {
             file: null,
             preview: '',
             loading: false,
-            uuid: this.generateTimestamp()
+            uuid: this.generateTimestamp(),
           })
         }
       }
@@ -151,8 +154,8 @@ export default {
     },
     generateTimestamp() {
       return parseInt((new Date().getTime() / 1000).toFixed(0), 10)
-    }
-  }
+    },
+  },
 }
 </script>
 

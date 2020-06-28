@@ -1,4 +1,4 @@
-<template>
+{<template>
   <div
     class="relative flex items-center justify-center overflow-hidden bg-gray-200"
     :style="{ width: `${size}px`, height: `${size}px` }"
@@ -15,7 +15,6 @@
         crop="lfill"
         dpr="auto"
         fetchFormat="auto"
-        quality="100"
       />
       <!-- eslint-enable -->
     </CldImage>
@@ -34,17 +33,17 @@ export default {
   props: {
     user: {
       type: Object,
-      required: true
+      required: true,
     },
     size: {
       type: Number,
-      default: 35
-    }
+      default: 35,
+    },
   },
   computed: {
     nameFirstLetter() {
       return this.user.first_name.charAt(0).toUpperCase()
-    }
-  }
+    },
+  },
 }
 </script>

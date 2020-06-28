@@ -6,17 +6,27 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Feed from '~/components/Feed'
+
 export default {
   middleware: 'auth',
-  components: {
-    Feed
-  },
   async fetch({ store }) {
-    await store.dispatch('posts/fetchTimeline')
+    if (!store.getters['posts/timeline'].data.length) {
+      await store.dispatch('posts/fetchTimeline')
+    }
   },
   computed: {
-    ...mapGetters('posts', ['timeline'])
-  }
+    ...mapGetters('posts', ['timeline']),
+  },
+  async mounted() {
+    if (this.timeline.data.length) {
+      try {
+        await this.$store.dispatch('posts/fetchTimeline')
+      } catch (e) {
+        console.log('Oop')
+      }
+    }
+
+    await this.$store.dispatch('user/fetchFriendships')
+  },
 }
 </script>

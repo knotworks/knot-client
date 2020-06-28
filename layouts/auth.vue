@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-center w-screen h-screen bg-red-600">
+  <div class="flex justify-center w-screen h-screen bg-white">
     <nuxt />
   </div>
 </template>

@@ -2,12 +2,12 @@ export const state = () => ({
   timeline: {
     current_page: 1,
     last_page: 1,
-    data: []
-  }
+    data: [],
+  },
 })
 
 export const getters = {
-  timeline: (state) => state.timeline
+  timeline: (state) => state.timeline,
 }
 
 export const mutations = {
@@ -31,7 +31,7 @@ export const mutations = {
         return post
       }
     })
-  }
+  },
 }
 
 export const actions = {
@@ -49,7 +49,7 @@ export const actions = {
     )
     commit('addReaction', {
       id,
-      reactions
+      reactions,
     })
   },
   async addComment({ commit }, commentData) {
@@ -59,7 +59,7 @@ export const actions = {
     )
     commit('addComment', {
       id: commentData.id,
-      comment
+      comment,
     })
-  }
+  },
 }

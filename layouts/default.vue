@@ -1,13 +1,10 @@
 <template>
-  <div class="fixed top-0 left-0 w-screen h-screen bg-gray-200 layout-default">
+  <div
+    class="absolute top-0 left-0 w-screen h-screen bg-gray-100 layout-default"
+  >
     <PhotoSwipe />
     <Navbar>
-      <img
-        slot="title"
-        src="~assets/images/logo.svg"
-        class="h-8 cursor-pointer"
-        @click="reload"
-      />
+      <KnotLogo slot="title" class="h-8 cursor-pointer" @click="reload" />
     </Navbar>
     <nuxt />
     <BottomBar />
@@ -16,14 +13,11 @@
 
 <script>
 import { mapActions } from 'vuex'
-import Navbar from '~/components/Navbar'
-import BottomBar from '~/components/BottomBar'
-import PhotoSwipe from '~/components/posts/shared/PhotoSwipe.vue'
+import KnotLogo from '~/assets/images/logo.svg?inline'
+
 export default {
   components: {
-    Navbar,
-    BottomBar,
-    PhotoSwipe
+    KnotLogo,
   },
   mounted() {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -35,8 +29,8 @@ export default {
     ...mapActions('location', ['fetchCurrentLocation']),
     reload() {
       window.location.reload(true)
-    }
-  }
+    },
+  },
 }
 </script>
 

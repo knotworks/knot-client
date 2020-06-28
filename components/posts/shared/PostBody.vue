@@ -8,8 +8,11 @@
         class="px-3 py-2 mb-2 bg-gray-100 border border-gray-300 rounded-sm"
       >
         <a :href="link.url" target="_blank" class="text-gray-700 no-underline">
-          <LinkPreview v-slot="{ title, description, image }" :url="link.url">
-            <div class="flex">
+          <LinkPreview
+            v-slot="{ title, description, image, isLoading, hasError }"
+            :url="link.url"
+          >
+            <div v-if="!isLoading && !hasError" class="flex">
               <img
                 v-if="image"
                 :src="image"
@@ -20,11 +23,15 @@
                 <h3 class="text-sm truncate">{{ title }}</h3>
                 <p
                   v-if="description"
-                  class="mt-1 text-xs truncate text-grey-dark"
+                  class="mt-1 text-xs text-gray-400 truncate"
                 >
                   {{ description }}
                 </p>
               </div>
+            </div>
+            <div v-if="isLoading" class="text-gray-400">Loading...</div>
+            <div v-if="!isLoading && hasError" class="text-gray-400">
+              Could not fetch link details.
             </div>
           </LinkPreview>
         </a>
@@ -34,16 +41,12 @@
 </template>
 <script>
 import MarkdownIt from 'markdown-it'
-import LinkPreview from '~/components/posts/shared/LinkPreview'
 export default {
-  components: {
-    LinkPreview
-  },
   props: {
     post: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     postTextWithMeta() {
@@ -81,19 +84,19 @@ export default {
       } else {
         return null
       }
-    }
+    },
   },
   created() {
     this.md = new MarkdownIt({
       linkify: true,
-      typographer: true
+      typographer: true,
     })
     const defaultRender =
       this.md.renderer.rules.link_open ||
-      function(tokens, idx, options, env, self) {
+      function (tokens, idx, options, env, self) {
         return self.renderToken(tokens, idx, options)
       }
-    this.md.renderer.rules.link_open = function(
+    this.md.renderer.rules.link_open = function (
       tokens,
       idx,
       options,
@@ -104,6 +107,6 @@ export default {
       tokens[idx].attrPush(['class', 'text-blue-500'])
       return defaultRender(tokens, idx, options, env, self)
     }
-  }
+  },
 }
 </script>

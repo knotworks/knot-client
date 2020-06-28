@@ -36,26 +36,18 @@
 </template>
 
 <script>
-import Avatar from '~/components/Avatar'
-import LiveDate from '~/components/LiveDate'
-import AddReaction from '~/components/posts/shared/AddReaction'
 export default {
-  components: {
-    Avatar,
-    LiveDate,
-    AddReaction
-  },
   props: {
     post: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      showReactions: false
+      showReactions: false,
     }
-  }
+  },
 }
 </script>
 

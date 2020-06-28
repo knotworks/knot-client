@@ -12,9 +12,11 @@
         <div class="mb-1 text-sm leading-normal text-gray-900">
           <strong>{{ comment.user.first_name }}: </strong> {{ comment.body }}
         </div>
-        <div class="text-xs text-gray-600">
+        <div class="text-xs text-gray-500">
           <LiveDate :date="comment.created_at" />
-          <span v-if="comment.location"> from {{ comment.location.city }}</span>
+          <span v-if="hasLocation(comment)">
+            from {{ comment.location.city }}
+          </span>
         </div>
       </div>
     </li>
@@ -22,29 +24,20 @@
 </template>
 
 <script>
-import Avatar from '~/components/Avatar'
-import LiveDate from '~/components/LiveDate'
 export default {
   name: 'CommentsList',
-  components: {
-    Avatar,
-    LiveDate
-  },
   props: {
     comments: {
       type: Array,
       default() {
         return []
-      }
-    }
+      },
+    },
   },
-  computed: {
-    hasLocation() {
-      return (
-        this.comment.hasOwnProperty('location') &&
-        this.comment.location.hasOwnProperty('city')
-      )
-    }
-  }
+  methods: {
+    hasLocation(comment) {
+      return 'location' in comment && 'city' in comment.location
+    },
+  },
 }
 </script>

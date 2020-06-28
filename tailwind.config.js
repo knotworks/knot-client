@@ -7,13 +7,26 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
+  purge: {
+    enabled: process.env.NODE_ENV === 'production',
+    content: [
+      'components/**/*.vue',
+      'layouts/**/*.vue',
+      'pages/**/*.vue',
+      'plugins/**/*.js',
+      'nuxt.config.js',
+    ],
+  },
   theme: {
     extend: {
+      colors: {
+        primary: defaultTheme.colors.red[500],
+      },
       fontFamily: {
-        sans: ['Inter UI var', 'Inter UI', ...defaultTheme.fontFamily.sans]
-      }
-    }
+        sans: ['Inter UI var', 'Inter UI', ...defaultTheme.fontFamily.sans],
+      },
+    },
   },
   variants: {},
-  plugins: []
+  plugins: [require('@tailwindcss/ui')],
 }

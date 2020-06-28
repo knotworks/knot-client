@@ -1,13 +1,15 @@
 <template>
-  <div class="absolute top-0 left-0 w-screen h-screen bg-white">
+  <div class="absolute top-0 left-0 z-30 w-screen bg-white panel">
     <Navbar>
-      <button slot="left-buttons" @click="$emit('close')">Close</button>
+      <button slot="left-buttons" @click="$emit('close')">
+        Close
+      </button>
       <span slot="title" class="text-white">People</span>
       <button slot="right-buttons" @click="$emit('change', selectedFriends)">
         Done
       </button>
     </Navbar>
-    <ul>
+    <ul class="overflow-y-auto">
       <li
         v-for="friend in friendships.friends"
         :key="friend.id"
@@ -35,15 +37,15 @@ export default {
   components: {
     Navbar,
     Avatar,
-    CheckIcon
+    CheckIcon,
   },
   data() {
     return {
-      selectedFriends: []
+      selectedFriends: [],
     }
   },
   computed: {
-    ...mapGetters('user', ['friendships'])
+    ...mapGetters('user', ['friendships']),
   },
   methods: {
     toggleFriend(friend) {
@@ -56,9 +58,17 @@ export default {
     },
     friendIsSelected(friend) {
       return !!this.selectedFriends.find((f) => f.id === friend.id)
-    }
-  }
+    },
+  },
 }
 </script>
 
-<style></style>
+<style scoped>
+.panel {
+  display: grid;
+  grid-template-rows: 44px 1fr;
+  grid-template-rows: calc(44px + constant(safe-area-inset-top)) 1fr;
+  grid-template-rows: calc(44px + env(safe-area-inset-top)) 1fr;
+  height: 100vh;
+}
+</style>

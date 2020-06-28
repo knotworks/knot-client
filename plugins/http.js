@@ -1,12 +1,5 @@
 export default ({ $auth, $axios }, inject) => {
-  const client = {
-    auth: true,
-    withoutAuth() {
-      this.auth = false
-
-      return this
-    }
-  }
+  const client = {}
 
   const verbs = ['get', 'post', 'put', 'patch', 'delete']
 
@@ -15,24 +8,23 @@ export default ({ $auth, $axios }, inject) => {
       $axios.setToken(false)
 
       return new Promise((resolve, reject) => {
-        const requestHeaders = client.auth
-          ? {
-              ...headers,
-              Authorization: $auth.getToken('local')
-            }
-          : headers
+        const requestHeaders =
+          !url.startsWith('http') && $auth.getToken('local')
+            ? {
+                ...headers,
+                Authorization: $auth.getToken('local'),
+              }
+            : headers
         $axios({
           method: verb,
           url,
           data,
-          headers: requestHeaders
+          headers: requestHeaders,
         })
           .then((res) => {
-            client.auth = true
             resolve(res.data)
           })
           .catch((error) => {
-            client.auth = true
             reject(error.response.data)
           })
       })

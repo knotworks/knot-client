@@ -11,11 +11,7 @@
         class="relative mb-2 mr-2 leading-none post-reaction"
       >
         <nuxt-link to="/" class="flex-no-shrink">
-          <Avatar
-            :user="reaction.user"
-            :size="25"
-            class="rounded-full"
-          ></Avatar>
+          <Avatar :user="reaction.user" :size="25" class="rounded-full" />
         </nuxt-link>
         <img
           :src="reactionIconPath(reaction)"
@@ -29,16 +25,12 @@
 </template>
 
 <script>
-import Avatar from '~/components/Avatar'
 export default {
-  components: {
-    Avatar
-  },
   props: {
     post: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     reactionIconPath(reaction) {
@@ -48,12 +40,12 @@ export default {
         frown: '/reactions/frown.svg',
         surprise: '/reactions/surprise.svg',
         laugh: '/reactions/laugh.svg',
-        angry: '/reactions/angry.svg'
+        angry: '/reactions/angry.svg',
       }
 
       return reactions[reaction.type]
-    }
-  }
+    },
+  },
 }
 </script>
 

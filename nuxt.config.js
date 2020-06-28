@@ -2,6 +2,8 @@ require('dotenv').config()
 
 export default {
   mode: 'universal',
+  components: true,
+
   /*
    ** Headers of the page
    */
@@ -12,32 +14,49 @@ export default {
       {
         name: 'viewport',
         content:
-          'viewport-fit=cover, width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no, minimal-ui'
+          'viewport-fit=cover, width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no, minimal-ui',
       },
       {
         name: 'apple-mobile-web-app-status-bar-style',
-        content: 'black-translucent'
+        content: 'black-translucent',
       },
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
-      }
+        content: process.env.npm_package_description || '',
+      },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'apple-touch-startup-image', href: '/launch.png' },
       {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossorigin: true,
+      },
+      {
+        rel: 'preload',
+        as: 'style',
+        href:
+          'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap',
+      },
+      {
         rel: 'stylesheet',
-        href: 'https://rsms.me/inter/inter-ui.css'
-      }
-    ]
+        href:
+          'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap',
+        media: 'print',
+        onload: 'this.media="all"',
+      },
+    ],
   },
 
+  /*
+   ** PWA Config
+   */
   pwa: {
     manifest: {
-      theme_color: '#e53e3e'
-    }
+      theme_color: '#e53e3e',
+    },
   },
 
   /*
@@ -49,6 +68,14 @@ export default {
    ** Global CSS
    */
   css: ['@/assets/css/custom-utils.scss', '@/assets/css/animations.scss'],
+
+  /*
+   ** Runtime Configs
+   */
+  publicRuntimeConfig: {
+    apiURL: process.env.API_URL || 'https://knot.test',
+  },
+
   /*
    ** Plugins to load before mounting the App
    */
@@ -56,20 +83,20 @@ export default {
     { src: '~/plugins/cloudinary.js', ssr: true },
     { src: '~/plugins/flickity.js', ssr: false },
     { src: '~/plugins/lazysizes.js', ssr: false },
-    { src: '~/plugins/eventBus.js', ssr: true }
-    // { src: '~/plugins/localStorage.js', ssr: false }
+    { src: '~/plugins/eventBus.js', ssr: true },
+    { src: '~/plugins/localStorage.js', ssr: false },
   ],
+
   /*
    ** Nuxt.js dev-modules
    */
   buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
-    // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
-    // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@nuxt/components',
   ],
+
   /*
    ** Nuxt.js modules
    */
@@ -84,11 +111,12 @@ export default {
         plugins: ['store/plugins/expire', 'store/plugins/defaults'],
         storages: [
           'store/storages/localStorage',
-          'store/storages/cookieStorage'
-        ]
-      }
-    ]
+          'store/storages/cookieStorage',
+        ],
+      },
+    ],
   ],
+
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
@@ -97,8 +125,8 @@ export default {
     baseURL: process.env.API_URL,
     headers: {
       'X-Requested-With': 'XMLHttpRequest',
-      'Content-Type': 'application/json'
-    }
+      'Content-Type': 'application/json',
+    },
   },
 
   auth: {
@@ -108,26 +136,28 @@ export default {
           login: {
             url: '/api/auth/login',
             method: 'post',
-            propertyName: false
+            propertyName: false,
           },
           user: {
             url: '/api/auth/user',
             method: 'get',
-            propertyName: false
+            propertyName: false,
           },
           logout: {
             url: '/api/auth/logout',
             method: 'post',
-            propertyName: false
-          }
-        }
-      }
+            propertyName: false,
+          },
+        },
+      },
     },
     redirect: {
-      home: '/'
+      home: '/',
+      logout: '/login',
     },
-    plugins: [{ src: '~/plugins/http.js', ssr: true }]
+    plugins: [{ src: '~/plugins/http.js', ssr: true }],
   },
+
   /*
    ** Build configuration
    */
@@ -135,6 +165,19 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
-  }
+    extend(config, ctx) {
+      if (ctx.isDev && ctx.isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/,
+        })
+      }
+    },
+  },
+  // server: {
+  //   port: 1337,
+  //   host: '0.0.0.0'
+  // }
 }

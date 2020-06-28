@@ -1,7 +1,9 @@
 <template>
   <div class="relative w-screen h-screen">
     <Navbar>
-      <button slot="left-buttons" @click="goBack">Close</button>
+      <button slot="left-buttons" @click="goBack">
+        Close
+      </button>
       <span slot="title" class="text-white">New Post</span>
     </Navbar>
     <form @submit.prevent="doNewPost">
@@ -10,18 +12,18 @@
         rows="5"
         class="w-full p-4 resize-none focus-none"
         placeholder="Write a caption..."
-      ></textarea>
+      />
       <MediaInput @change="setPostMedia" />
       <div class="p-4">
         <button
-          class="w-full px-3 py-3 text-gray-700 bg-gray-400 rounded-sm"
+          class="w-full px-3 py-3 text-gray-700 bg-gray-300 rounded-sm"
           type="button"
           @click="isTaggingFriends = !isTaggingFriends"
         >
           {{ friendsButtonLabel }}
         </button>
         <button
-          class="w-full px-3 py-3 mt-4 text-gray-700 truncate bg-gray-400 rounded-sm"
+          class="w-full px-3 py-3 mt-4 text-gray-700 truncate bg-gray-300 rounded-sm"
           type="button"
           @click="isAddingLocation = !isAddingLocation"
         >
@@ -56,19 +58,10 @@
 <script>
 import { mapActions } from 'vuex'
 import { objectToFormData } from 'object-to-formdata'
-import Navbar from '~/components/Navbar.vue'
-import MediaInput from '~/components/new-post/MediaInput.vue'
-import AddFriends from '~/components/new-post/AddFriends.vue'
-import AddLocation from '~/components/new-post/AddLocation.vue'
+
 export default {
   layout: 'minimal',
   middleware: 'auth',
-  components: {
-    Navbar,
-    MediaInput,
-    AddFriends,
-    AddLocation
-  },
   async fetch({ store }) {
     await store.dispatch('user/fetchFriendships')
   },
@@ -78,11 +71,11 @@ export default {
         body: '',
         media: [],
         accompaniments: [],
-        location: {}
+        location: {},
       },
       isPosting: false,
       isTaggingFriends: false,
-      isAddingLocation: false
+      isAddingLocation: false,
     }
   },
   computed: {
@@ -98,7 +91,7 @@ export default {
     },
     locationButtonLabel() {
       return this.post.location.name ? this.post.location.name : "I'm at..."
-    }
+    },
   },
   methods: {
     ...mapActions('posts', ['newPost']),
@@ -108,7 +101,7 @@ export default {
         objectToFormData(
           {
             ...this.post,
-            accompaniments: this.post.accompaniments.map((a) => a.id)
+            accompaniments: this.post.accompaniments.map((a) => a.id),
           },
           { indices: true }
         )
@@ -139,9 +132,9 @@ export default {
         lat: +parseFloat(place.location.lat).toFixed(6),
         long: +parseFloat(place.location.lng).toFixed(6),
         name: place.name,
-        city: place.location.city
+        city: place.location.city,
       }
-    }
-  }
+    },
+  },
 }
 </script>

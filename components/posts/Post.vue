@@ -12,26 +12,12 @@
 </template>
 
 <script>
-import PostHeader from '~/components/posts/shared/PostHeader'
-import PostMedia from '~/components/posts/shared/PostMedia'
-import PostBody from '~/components/posts/shared/PostBody'
-import Reactions from '~/components/posts/shared/Reactions'
-import CommentList from '~/components/posts/shared/CommentList'
-import CommentForm from '~/components/posts/shared/CommentForm'
 export default {
-  components: {
-    PostHeader,
-    PostMedia,
-    PostBody,
-    Reactions,
-    CommentList,
-    CommentForm
-  },
   props: {
     post: {
       type: Object,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>

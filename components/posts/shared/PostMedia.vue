@@ -18,7 +18,11 @@
                   class="w-full h-auto"
                   @click="openPhoto(item, $event)"
                 >
-                  <CldImage :public-id="item.path" responsive="width" lazy>
+                  <CldImage
+                    :public-id="item.path"
+                    responsive="width"
+                    loading="lazy"
+                  >
                     <!-- eslint-disable -->
                     <CldTransformation
                       dpr="auto"
@@ -35,9 +39,9 @@
                   width="500"
                   crop="scale"
                   class="w-full"
-                  lazy
+                  loading="lazy"
                   controls
-                ></CldVideo>
+                />
               </transition>
             </div>
           </div>
@@ -59,7 +63,7 @@
             :public-id="media[0].path"
             responsive="width"
             class="absolute top-0 left-0 w-full h-full"
-            lazy
+            loading="lazy"
           >
             <!-- eslint-disable -->
             <CldTransformation
@@ -77,7 +81,7 @@
           class="absolute top-0 left-0 w-full h-full"
           width="500"
           crop="scale"
-          lazy
+          loading="lazy"
           controls
         />
       </transition>
@@ -91,16 +95,16 @@ export default {
   props: {
     media: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       flickityOptions: {
         initialIndex: 0,
         prevNextButtons: false,
-        adaptiveHeight: false
-      }
+        adaptiveHeight: false,
+      },
     }
   },
   computed: {
@@ -110,7 +114,7 @@ export default {
       })[0]
 
       return this.intrinsicRatio(media)
-    }
+    },
   },
   created() {
     this.cloudinaryCore = new cloudinary.Cloudinary({ cloud_name: 'knot' })
@@ -128,7 +132,7 @@ export default {
           width: maxDimensions,
           height: maxDimensions,
           crop: 'fit',
-          fetch_format: 'auto'
+          fetch_format: 'auto',
         })
       } else {
         return null
@@ -144,15 +148,18 @@ export default {
         thumb: {
           x: targetRect.left,
           y: targetRect.top,
-          w: targetRect.width
-        }
+          w: targetRect.width,
+        },
       })
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style lang="scss">
+.flickity-viewport {
+  @apply bg-gray-100;
+}
 .flickity-page-dots {
   position: relative;
   bottom: 0;
@@ -160,11 +167,12 @@ export default {
 
   .dot {
     background-color: transparent;
-    border: 2px solid theme('colors.gray.500');
+    border: 2px solid theme('colors.gray.400');
     opacity: 0.75;
+    margin: 0 6px;
 
     &.is-selected {
-      background-color: theme('colors.gray.500');
+      background-color: theme('colors.gray.400');
     }
   }
 }
