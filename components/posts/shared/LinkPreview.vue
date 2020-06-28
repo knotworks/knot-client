@@ -35,7 +35,7 @@ export default {
       try {
         const expiration = new Date().getTime() + 5 * 24 * 60 * 60 * 1000
         this.res = await this.$client.post(
-          'https://linkpreview.butts.workers.dev',
+          'https://linkpreview.syropia.workers.dev',
           { url: this.url }
         )
 

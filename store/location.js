@@ -33,7 +33,7 @@ export const mutations = {
 export const actions = {
   async fetchCurrentLocation({ commit }, { lat, long }) {
     const location = await this.$client.post(
-      'https://opencagedata.butts.workers.dev',
+      'https://opencagedata.syropia.workers.dev',
       {
         lat,
         long,
@@ -51,7 +51,7 @@ export const actions = {
   },
   async fetchNearby({ commit }, { lat, long }) {
     const nearby = await this.$client.post(
-      'https://foursquareplaces.butts.workers.dev',
+      'https://foursquareplaces.syropia.workers.dev',
       {
         lat,
         long,
