@@ -57,8 +57,8 @@ export default {
   data() {
     return {
       credentials: {
-        email: 'collin@syropia.net',
-        password: 'password123',
+        email: '',
+        password: '',
       },
       loading: false,
       error: null,

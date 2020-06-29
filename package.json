@@ -32,7 +32,8 @@
     "store": "^2.0.12",
     "vue-flickity": "^1.2.1",
     "vue-warehouse": "^2.0.0",
-    "vuex-persistedstate": "^3.0.1"
+    "vuex-persistedstate": "^3.0.1",
+    "vue": "^2.6.11"
   },
   "devDependencies": {
     "@nuxtjs/dotenv": "^1.4.0",
