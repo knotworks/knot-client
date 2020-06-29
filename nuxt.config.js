@@ -25,6 +25,10 @@ export default {
         name: 'description',
         content: process.env.npm_package_description || '',
       },
+      {
+        name: 'format-detection',
+        content: 'telephone=no',
+      },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -73,7 +77,7 @@ export default {
    ** Runtime Configs
    */
   publicRuntimeConfig: {
-    apiURL: process.env.API_URL || 'https://knot.test',
+    apiURL: process.env.API_URL || 'http://knot.test',
   },
 
   /*

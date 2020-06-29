@@ -1,15 +1,5 @@
 <template>
   <div class="px-4 pt-3 overflow-hidden">
-    <video
-      ref="video"
-      controls
-      autoplay
-      muted
-      class="absolute w-16 h-16"
-      style="top: -9999px; left: -9999px;"
-    >
-      <source type="video/mp4" />
-    </video>
     <canvas
       ref="canvas"
       class="absolute invisible w-16 h-16"
@@ -40,19 +30,21 @@
         </transition>
         <input
           type="file"
-          accept="image/*, video/mp4, video/quicktime"
+          accept="image/*, video/*"
           class="absolute top-0 left-0 w-full h-full opacity-0"
           aria-label="Add file"
           @change="setFile(i, $event)"
         />
         <button
           v-show="media.file"
-          class="absolute top-0 right-0 w-6 h-6 -mt-2 -mr-3 text-sm text-white bg-red-500 rounded-full focus-none"
+          class="absolute top-0 right-0 inline-flex items-center justify-center w-6 h-6 -mt-2 -mr-3 text-sm text-white bg-red-500 rounded-full focus-none"
           type="button"
           aria-label="Close"
           @click="removeFile(i)"
         >
-          <span class="inline-block w-full h-full font-bold">&times;</span>
+          <CloseIcon
+            class="flex-shrink-0 block w-6 h-6 text-white fill-current"
+          />
         </button>
       </div>
     </transition-group>
@@ -61,7 +53,11 @@
 
 <script>
 import loadImage from 'blueimp-load-image'
+import CloseIcon from '~/assets/images/icons/close.svg?inline'
 export default {
+  components: {
+    CloseIcon,
+  },
   data() {
     return {
       files: [
@@ -83,7 +79,7 @@ export default {
   },
   methods: {
     fileIsVideo(file) {
-      return file.type.startsWith('video')
+      return file.type.match('video')
     },
     setFile(i, e) {
       if (e.target.files.length) {
@@ -97,22 +93,8 @@ export default {
             return false
           } else {
             this.files[i].file = file
-            this.files[i].loading = true
-            const { canvas, video } = this.$refs
-            const ctx = canvas.getContext('2d')
-            video.src = URL.createObjectURL(file)
-            video.addEventListener('loadedmetadata', () => {
-              video.currentTime = 2
-              canvas.width = video.videoWidth
-              canvas.height = video.videoHeight
-            })
-            video.addEventListener('timeupdate', () => {
-              ctx.clearRect(0, 0, canvas.width, canvas.height)
-              ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
-              this.files[i].preview = canvas.toDataURL()
-              this.files[i].loading = false
-              this.$emit('change', this.files)
-            })
+            this.files[i].preview = '/video-preview.svg'
+            this.$emit('change', this.files)
           }
         } else {
           this.files[i].loading = true

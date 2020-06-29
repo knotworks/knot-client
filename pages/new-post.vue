@@ -114,11 +114,11 @@ export default {
     },
     setPostMedia(media) {
       this.post.media = media
-        .filter(Boolean)
         .filter((item) => {
           return !!item.file
         })
         .map((item) => item.file)
+        .filter(Boolean)
     },
     setTaggedFriends(friends) {
       this.isTaggingFriends = false

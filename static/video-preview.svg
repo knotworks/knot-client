@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128px" height="128px" viewBox="0 0 128 128" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <rect id="Rectangle" stroke="#D2D6DC" fill="#F9FAFB" x="0.5" y="0.5" width="127" height="127"></rect>
+            <g id="iOS-Videocam" transform="translate(31.000000, 45.000000)" fill="#374151" fill-rule="nonzero">
+                <path d="M62.4489164,5 C61.9380805,5 61.4427245,5.13609756 61.0092879,5.40829268 L47.619195,13.664878 C47.2321981,13.9068293 47,14.315122 47,14.7536585 L47,26.2463415 C47,26.684878 47.2321981,27.0931707 47.619195,27.335122 L61.0092879,35.5917073 C61.4427245,35.8487805 61.9380805,36 62.4489164,36 L65.6687307,36 C66.4117647,36 67,35.4253659 67,34.7146341 L67,6.28536585 C67,5.57463415 66.3962848,5 65.6687307,5 L62.4489164,5 Z" id="Path"></path>
+                <path d="M36.2909435,39 L7.73906249,39 C3.48633495,39 0,35.465625 0,31.1695313 L0,7.83046875 C0,3.51914062 3.48633495,0 7.72403518,0 L36.2759162,0 C40.5286438,0 44,3.534375 44,7.83046875 L44,31.1542969 C44.0149787,35.465625 40.5436711,39 36.2909435,39 L36.2909435,39 Z" id="Path"></path>
+            </g>
+        </g>
+    </g>
+</svg>

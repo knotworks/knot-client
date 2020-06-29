@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center w-full px-4 mt-10">
+  <div class="flex flex-col items-center w-full px-4 mt-16">
     <KnotLogo class="inline-block w-auto h-12 mt-2 fill-current text-primary" />
     <form
       class="flex flex-col items-center w-full mt-10"
