@@ -15,36 +15,36 @@
 
       <input
         v-model="user.first_name"
-        class="w-full h-12 px-3 mb-4 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none focus:border-primary"
+        class="w-full h-12 px-3 mb-4 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary"
         type="text"
         placeholder="First Name"
       />
       <input
         v-model="user.last_name"
-        class="w-full h-12 px-3 mb-4 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none focus:border-primary"
+        class="w-full h-12 px-3 mb-4 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary"
         type="text"
         placeholder="Last Name"
       />
       <input
         v-model="user.email"
-        class="w-full h-12 px-3 mb-4 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none focus:border-primary"
+        class="w-full h-12 px-3 mb-4 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary"
         type="email"
         placeholder="Your Email"
       />
       <input
         v-model="user.password"
-        class="w-full h-12 px-3 mb-4 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none focus:border-primary"
+        class="w-full h-12 px-3 mb-4 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary"
         type="password"
         placeholder="Enter a password"
       />
       <input
         v-model="user.password_confirmation"
-        class="w-full h-12 px-3 mb-4 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none focus:border-primary"
+        class="w-full h-12 px-3 mb-4 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary"
         type="password"
         placeholder="Confirm your password"
       />
       <button
-        class="block w-full py-3 mt-2 font-bold tracking-widest text-white uppercase bg-white bg-red-600 rounded shadow-sm cursor-pointer focus:outline-none focus:shadow-outline-red"
+        class="block w-full py-3 mt-2 font-bold tracking-widest text-white uppercase bg-red-600 rounded shadow-sm cursor-pointer focus:outline-none focus:shadow-outline-red"
         type="submit"
         :disabled="loading"
       >

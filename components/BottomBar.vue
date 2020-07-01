@@ -2,7 +2,7 @@
   <div class="px-2 bg-gray-100 border-t border-gray-200 bottom-bar">
     <NuxtLink
       to="/"
-      class="inline-flex items-center justify-center block w-8 w-full h-8 text-gray-400 cursor-pointer"
+      class="inline-flex items-center justify-center w-full h-8 text-gray-400 cursor-pointer"
       active-class="text-red-500"
       aria-label="Timeline"
       exact
@@ -11,7 +11,7 @@
     </NuxtLink>
     <NuxtLink
       to="/notifications"
-      class="inline-flex items-center justify-center block w-8 w-full h-8 text-gray-400 cursor-pointer"
+      class="inline-flex items-center justify-center w-full h-8 text-gray-400 cursor-pointer"
       active-class="text-red-500"
       aria-label="Notifications"
       exact
@@ -21,7 +21,7 @@
     <div class="flex justify-center w-full">
       <NuxtLink
         to="/new-post"
-        class="inline-flex items-center justify-center block w-8 h-8 bg-red-600 rounded-full cursor-pointer btn-add-post"
+        class="inline-flex items-center justify-center w-8 h-8 bg-red-600 rounded-full cursor-pointer btn-add-post"
         aria-label="Add Post"
         exact
       >
@@ -30,7 +30,7 @@
     </div>
     <NuxtLink
       to="/profile"
-      class="inline-flex items-center justify-center block w-8 w-full h-8 text-gray-400 cursor-pointer"
+      class="inline-flex items-center justify-center w-full h-8 text-gray-400 cursor-pointer"
       active-class="text-red-500"
       aria-label="Profile"
       exact
@@ -39,7 +39,7 @@
     </NuxtLink>
     <NuxtLink
       to="/friends"
-      class="inline-flex items-center justify-center block w-8 w-full h-8 text-gray-400 cursor-pointer"
+      class="inline-flex items-center justify-center w-full h-8 text-gray-400 cursor-pointer"
       active-class="text-red-500"
       aria-label="Friends"
       exact

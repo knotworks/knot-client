@@ -15,13 +15,13 @@
 
       <input
         v-model="credentials.email"
-        class="w-full h-12 px-3 mb-4 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none focus:border-primary"
+        class="w-full h-12 px-3 mb-4 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary"
         type="email"
         placeholder="Your Email"
       />
       <input
         v-model="credentials.password"
-        class="w-full h-12 px-3 mb-4 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none focus:border-primary"
+        class="w-full h-12 px-3 mb-4 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary"
         type="password"
         placeholder="Enter a password"
       />
