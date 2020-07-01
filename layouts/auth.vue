@@ -3,3 +3,13 @@
     <nuxt />
   </div>
 </template>
+
+<script>
+export default {
+  created() {
+    if (this.$auth.user) {
+      this.$router.push('/')
+    }
+  },
+}
+</script>
