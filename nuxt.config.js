@@ -61,6 +61,12 @@ export default {
     manifest: {
       theme_color: '#e53e3e',
     },
+    meta: {
+      appleStatusBarStyle: 'black-translucent',
+      viewport:
+        'viewport-fit=cover, width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no, minimal-ui',
+      mobileAppIOS: true,
+    },
   },
 
   /*
@@ -99,6 +105,7 @@ export default {
     '@nuxtjs/dotenv',
     '@nuxtjs/tailwindcss',
     '@nuxt/components',
+    '@nuxtjs/pwa',
   ],
 
   /*
@@ -107,7 +114,6 @@ export default {
   modules: [
     '@nuxtjs/svg',
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
     '@nuxtjs/auth',
     [
       'vue-warehouse/nuxt',
