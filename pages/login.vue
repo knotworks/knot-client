@@ -77,6 +77,7 @@ export default {
           this.error =
             'Something went wrong and we could not log you in. Please try again.'
         }
+        this.credentials.password = ''
       } finally {
         this.loading = false
       }

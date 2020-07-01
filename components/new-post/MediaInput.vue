@@ -30,7 +30,7 @@
         </transition>
         <input
           type="file"
-          accept="image/*, video/*"
+          accept="image/jpg, image/jpeg, image/png, video/mp4, video/quicktime"
           class="absolute top-0 left-0 w-full h-full opacity-0"
           aria-label="Add file"
           @change="setFile(i, $event)"

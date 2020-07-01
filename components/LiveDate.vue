@@ -24,21 +24,16 @@ export default {
       clearInterval(this.interval)
     }
 
-    // this.interval = setInterval(() => {
-    //   this.liveDate = this.getDateDistance()
-    // }, 1000 * 60)
+    this.interval = setInterval(() => {
+      this.liveDate = this.getDateDistance()
+    }, 1000 * 60)
   },
   beforeDestroy() {
     clearInterval(this.interval)
   },
   methods: {
     getDateDistance() {
-      let normalizedDate = this.date.replace(' ', 'T')
-
-      if (!normalizedDate.endsWith('+00:00')) {
-        normalizedDate = `${normalizedDate}+00:00`
-      }
-      return formatDistanceToNow(new Date(normalizedDate), {
+      return formatDistanceToNow(new Date(this.date), {
         addSuffix: true,
       })
     },
