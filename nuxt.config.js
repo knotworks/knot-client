@@ -62,10 +62,12 @@ export default {
       theme_color: '#e53e3e',
     },
     meta: {
+      name: 'Knot',
       appleStatusBarStyle: 'black-translucent',
       viewport:
         'viewport-fit=cover, width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no, minimal-ui',
       mobileAppIOS: true,
+      theme_color: '#e53e3e',
     },
   },
 
@@ -140,6 +142,7 @@ export default {
   },
 
   auth: {
+    watchLoggedIn: false,
     strategies: {
       local: {
         endpoints: {
@@ -162,8 +165,15 @@ export default {
       },
     },
     redirect: {
-      home: '/',
+      login: false,
+      home: false,
       logout: '/login',
+      callback: false,
+    },
+    cookie: {
+      options: {
+        expires: 365,
+      },
     },
     plugins: [{ src: '~/plugins/http.js', ssr: true }],
   },

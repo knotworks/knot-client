@@ -47,8 +47,6 @@ import { mapActions } from 'vuex'
 import KnotLogo from '~/assets/images/logo.svg?inline'
 import ExclamationCircleIcon from '~/assets/images/icons/exclamation-circle.svg?inline'
 export default {
-  middleware: 'auth',
-  auth: 'guest',
   layout: 'auth',
   components: {
     KnotLogo,
@@ -71,6 +69,7 @@ export default {
       this.loading = true
       try {
         await this.login(this.credentials)
+        this.$router.push('/')
       } catch (e) {
         if (e.response.data.error === 'Unauthorized') {
           this.error = 'Incorrect email or password.'

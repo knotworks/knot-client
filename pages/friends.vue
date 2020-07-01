@@ -116,7 +116,6 @@ import CheckIcon from '~/assets/images/icons/check.svg?inline'
 import CloseIcon from '~/assets/images/icons/close.svg?inline'
 
 export default {
-  middleware: 'auth',
   components: {
     AddIcon,
     CheckIcon,

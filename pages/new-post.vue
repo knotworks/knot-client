@@ -61,7 +61,6 @@ import { objectToFormData } from 'object-to-formdata'
 
 export default {
   layout: 'minimal',
-  middleware: 'auth',
   async fetch({ store }) {
     await store.dispatch('user/fetchFriendships')
   },

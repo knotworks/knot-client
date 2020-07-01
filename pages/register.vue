@@ -65,8 +65,6 @@ import { mapActions } from 'vuex'
 import KnotLogo from '~/assets/images/logo.svg?inline'
 import ExclamationCircleIcon from '~/assets/images/icons/exclamation-circle.svg?inline'
 export default {
-  middleware: 'auth',
-  auth: 'guest',
   layout: 'auth',
   components: {
     KnotLogo,
@@ -95,10 +93,7 @@ export default {
 
         await this.register(this.user)
         await this.login({ email, password })
-
-        this.$nextTick(() => {
-          this.$router.push('/')
-        })
+        this.$router.push('/')
       } catch (e) {
         this.error = Object.entries(e.errors)[0][1][0]
       } finally {

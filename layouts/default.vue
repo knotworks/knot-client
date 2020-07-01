@@ -16,6 +16,7 @@ import { mapActions } from 'vuex'
 import KnotLogo from '~/assets/images/logo.svg?inline'
 
 export default {
+  middleware: 'authenticated',
   components: {
     KnotLogo,
   },

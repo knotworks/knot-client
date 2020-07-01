@@ -6,10 +6,6 @@
 
 <script>
 export default {
-  created() {
-    if (this.$auth.user) {
-      this.$router.push('/')
-    }
-  },
+  middleware: 'guest',
 }
 </script>

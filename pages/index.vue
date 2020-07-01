@@ -8,7 +8,6 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  middleware: 'auth',
   async fetch({ store }) {
     if (!store.getters['posts/timeline'].data.length) {
       await store.dispatch('posts/fetchTimeline')
