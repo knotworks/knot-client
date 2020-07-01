@@ -59,6 +59,7 @@ export default {
    */
   pwa: {
     manifest: {
+      name: 'Knot',
       theme_color: '#e53e3e',
     },
     meta: {
