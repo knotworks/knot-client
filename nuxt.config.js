@@ -64,6 +64,7 @@ export default {
     },
     meta: {
       name: 'Knot',
+      short_name: 'Knot',
       appleStatusBarStyle: 'black-translucent',
       viewport:
         'viewport-fit=cover, width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no, minimal-ui',
@@ -168,7 +169,7 @@ export default {
     redirect: {
       login: false,
       home: false,
-      logout: '/login',
+      logout: false,
       callback: false,
     },
     cookie: {

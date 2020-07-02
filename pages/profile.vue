@@ -18,7 +18,6 @@
 export default {
   methods: {
     async logout() {
-      localStorage.removeItem('vuex')
       await this.$auth.logout()
       this.$router.push('/login')
     },

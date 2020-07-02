@@ -1,13 +1,19 @@
 <template>
   <div
-    class="absolute top-0 left-0 w-screen h-screen bg-gray-100 layout-default"
+    class="absolute top-0 left-0 z-10 w-screen h-screen bg-gray-100 layout-default"
   >
     <PhotoSwipe />
+    <transition name="slide-up">
+      <NewPost
+        v-show="newPostModalShowing"
+        @close="newPostModalShowing = false"
+      />
+    </transition>
     <Navbar>
       <KnotLogo slot="title" class="h-8 cursor-pointer" @click="reload" />
     </Navbar>
     <nuxt />
-    <BottomBar />
+    <BottomBar @newPost="newPostModalShowing = true" />
   </div>
 </template>
 
@@ -19,6 +25,11 @@ export default {
   middleware: 'authenticated',
   components: {
     KnotLogo,
+  },
+  data() {
+    return {
+      newPostModalShowing: false,
+    }
   },
   mounted() {
     navigator.geolocation.getCurrentPosition((position) => {

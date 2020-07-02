@@ -32,17 +32,18 @@
     "object-to-formdata": "^3.0.6",
     "photoswipe": "^4.1.3",
     "store": "^2.0.12",
+    "vue": "^2.6.11",
     "vue-flickity": "^1.2.1",
     "vue-warehouse": "^2.0.0",
-    "vuex-persistedstate": "^3.0.1",
-    "vue": "^2.6.11"
+    "vuex-persist": "^2.2.0",
+    "vuex-persistedstate": "^3.0.1"
   },
   "devDependencies": {
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/eslint-config": "^3.0.0",
     "@nuxtjs/eslint-module": "^2.0.0",
-    "@nuxtjs/tailwindcss": "^2.0.0",
     "@nuxtjs/pwa": "^3.0.0-0",
+    "@nuxtjs/tailwindcss": "^2.0.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^7.3.0",
     "eslint-config-prettier": "^6.11.0",

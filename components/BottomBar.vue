@@ -19,14 +19,13 @@
       <NotificationsIcon class="w-8 h-8 fill-current" />
     </NuxtLink>
     <div class="flex justify-center w-full">
-      <NuxtLink
-        to="/new-post"
+      <button
         class="inline-flex items-center justify-center w-8 h-8 bg-red-600 rounded-full cursor-pointer btn-add-post"
         aria-label="Add Post"
-        exact
+        @click="$emit('newPost')"
       >
         <AddIcon class="w-6 h-6 text-white fill-current" />
-      </NuxtLink>
+      </button>
     </div>
     <NuxtLink
       to="/profile"

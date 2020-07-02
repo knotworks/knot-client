@@ -17,6 +17,10 @@ export default {
     ...mapGetters('posts', ['timeline']),
   },
   async mounted() {
+    this.$bus.$on('POST_CREATED', async () => {
+      await this.$store.dispatch('posts/fetchTimeline')
+    })
+
     if (this.timeline.data.length) {
       try {
         await this.$store.dispatch('posts/fetchTimeline')

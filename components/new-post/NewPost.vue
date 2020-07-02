@@ -1,7 +1,7 @@
 <template>
-  <div class="relative w-screen h-screen">
+  <div class="absolute top-0 left-0 z-30 w-screen h-screen bg-gray-100">
     <Navbar>
-      <button slot="left-buttons" @click="goBack">
+      <button slot="left-buttons" @click="$emit('close')">
         Close
       </button>
       <span slot="title" class="text-white">New Post</span>
@@ -60,10 +60,6 @@ import { mapActions } from 'vuex'
 import { objectToFormData } from 'object-to-formdata'
 
 export default {
-  layout: 'minimal',
-  async fetch({ store }) {
-    await store.dispatch('user/fetchFriendships')
-  },
   data() {
     return {
       post: {
@@ -106,10 +102,8 @@ export default {
         )
       )
       this.isPosting = false
-      this.$router.push('/')
-    },
-    goBack() {
-      this.$router.go(-1)
+      this.$emit('close')
+      this.$bus.$emit('POST_CREATED')
     },
     setPostMedia(media) {
       this.post.media = media
