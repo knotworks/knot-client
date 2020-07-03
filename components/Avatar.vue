@@ -10,11 +10,12 @@
     >
       <!-- eslint-disable -->
       <CldTransformation
-        :width="size"
-        :height="size"
+        :width="size * 2"
+        :height="size * 2"
         crop="lfill"
         dpr="auto"
         fetchFormat="auto"
+        responsive="width"
       />
       <!-- eslint-enable -->
     </CldImage>
