@@ -7,6 +7,15 @@
       <span slot="title" class="text-white">Nearby</span>
     </Navbar>
     <ul class="overflow-y-auto">
+      <li>
+        <input
+          v-model="query"
+          type="text"
+          class="w-full px-4 py-2 border-b border-gray-300 outline-none appearance-none"
+          placeholder="Search for a location..."
+          @input="searchLocation"
+        />
+      </li>
       <li
         v-for="place in nearby"
         :key="place.id"
@@ -30,6 +39,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import Navbar from '~/components/Navbar.vue'
+import debounce from 'lodash/debounce'
 export default {
   components: {
     Navbar,
@@ -37,19 +47,33 @@ export default {
   data() {
     return {
       isLoading: false,
+      query: '',
     }
   },
   computed: {
     ...mapGetters('location', ['currentLocation', 'nearby', 'hasLocationSet']),
   },
+  created() {
+    this.searchLocation = debounce(async () => {
+      const { lat, long } = this.currentLocation
+      await this.fetchNearby({ lat, long, query: this.query })
+      this.isLoading = false
+    }, 500)
+  },
   async mounted() {
     this.isLoading = true
     if (!this.hasLocationSet) {
-      navigator.geolocation.getCurrentPosition(async (position) => {
-        const { latitude: lat, longitude: long } = position.coords
-        await this.fetchNearby({ lat, long })
-        this.isLoading = false
-      })
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const { latitude: lat, longitude: long } = position.coords
+          await this.fetchNearby({ lat, long })
+          this.isLoading = false
+        },
+        null,
+        {
+          enableHighAccuracy: true,
+        }
+      )
     } else {
       const { lat, long } = this.currentLocation
       await this.fetchNearby({ lat, long })
@@ -58,6 +82,7 @@ export default {
   },
   methods: {
     ...mapActions('location', ['fetchCurrentLocation', 'fetchNearby']),
+    searchLocation: () => {},
   },
 }
 </script>

@@ -49,12 +49,13 @@ export const actions = {
       city,
     })
   },
-  async fetchNearby({ commit }, { lat, long }) {
+  async fetchNearby({ commit }, { lat, long, query = '' }) {
     const nearby = await this.$client.post(
       'https://foursquareplaces.syropia.workers.dev',
       {
         lat,
         long,
+        query,
       }
     )
 

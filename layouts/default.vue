@@ -32,10 +32,16 @@ export default {
     }
   },
   mounted() {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const { latitude: lat, longitude: long } = position.coords
-      this.fetchCurrentLocation({ lat, long })
-    })
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude: lat, longitude: long } = position.coords
+        this.fetchCurrentLocation({ lat, long })
+      },
+      null,
+      {
+        enableHighAccuracy: true,
+      }
+    )
   },
   methods: {
     ...mapActions('location', ['fetchCurrentLocation']),
