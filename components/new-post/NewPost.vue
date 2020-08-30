@@ -1,9 +1,7 @@
 <template>
   <div class="absolute top-0 left-0 z-30 w-screen h-screen bg-gray-100">
     <Navbar>
-      <button slot="left-buttons" @click="$emit('close')">
-        Close
-      </button>
+      <button slot="left-buttons" @click="$emit('close')">Close</button>
       <span slot="title" class="text-white">New Post</span>
     </Navbar>
     <form @submit.prevent="doNewPost">

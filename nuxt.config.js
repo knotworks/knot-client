@@ -95,7 +95,6 @@ export default {
    */
   plugins: [
     { src: '~/plugins/cloudinary.js', ssr: true },
-    { src: '~/plugins/flickity.js', ssr: false },
     { src: '~/plugins/lazysizes.js', ssr: false },
     { src: '~/plugins/eventBus.js', ssr: true },
     { src: '~/plugins/localStorage.js', ssr: false },

@@ -3,7 +3,7 @@
     <canvas
       ref="canvas"
       class="absolute invisible w-16 h-16"
-      style="top: -9999px; left: -9999px;"
+      style="top: -9999px; left: -9999px"
     />
     <transition-group
       name="list"

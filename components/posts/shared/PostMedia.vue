@@ -2,11 +2,11 @@
   <div>
     <div v-if="media.length > 1">
       <client-only>
-        <flickity class="post-media" :options="flickityOptions">
+        <Carousel>
           <div
             v-for="item in media"
             :key="item.id"
-            class="relative w-full h-0 bg-gray-100"
+            class="relative w-full h-0 min-w-full bg-gray-100"
             :style="{ paddingBottom: baseRatio }"
           >
             <div
@@ -45,7 +45,7 @@
               </transition>
             </div>
           </div>
-        </flickity>
+        </Carousel>
       </client-only>
     </div>
     <div
@@ -98,15 +98,6 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      flickityOptions: {
-        initialIndex: 0,
-        prevNextButtons: false,
-        adaptiveHeight: false,
-      },
-    }
-  },
   computed: {
     baseRatio() {
       const media = [...this.media].sort((a, b) => {
@@ -155,25 +146,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss">
-.flickity-viewport {
-  @apply bg-gray-100;
-}
-.flickity-page-dots {
-  position: relative;
-  bottom: 0;
-  margin: 10px 0;
-
-  .dot {
-    background-color: transparent;
-    border: 2px solid theme('colors.gray.400');
-    opacity: 0.75;
-    margin: 0 6px;
-
-    &.is-selected {
-      background-color: theme('colors.gray.400');
-    }
-  }
-}
-</style>

@@ -1,9 +1,7 @@
 <template>
   <div class="absolute top-0 left-0 z-30 w-screen bg-white panel">
     <Navbar>
-      <button slot="left-buttons" @click="$emit('close')">
-        Close
-      </button>
+      <button slot="left-buttons" @click="$emit('close')">Close</button>
       <span slot="title" class="text-white">People</span>
       <button slot="right-buttons" @click="$emit('change', selectedFriends)">
         Done

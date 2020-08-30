@@ -50,7 +50,7 @@ export default {
   },
   computed: {
     postTextWithMeta() {
-      let text = this.post.body
+      let text = this.post.body || ''
       const people = this.post.accompaniments
       if (this.post.location || people.length) {
         text += ' **—**'
@@ -73,7 +73,7 @@ export default {
     },
     body() {
       if (this.md) {
-        return this.md.render(this.postTextWithMeta)
+        return this.md.render(this.postTextWithMeta.trim())
       } else {
         return ''
       }
@@ -105,6 +105,7 @@ export default {
     ) {
       tokens[idx].attrPush(['target', '_blank'])
       tokens[idx].attrPush(['class', 'text-blue-500'])
+
       return defaultRender(tokens, idx, options, env, self)
     }
   },

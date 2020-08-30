@@ -21,6 +21,7 @@ module.exports = {
     'vue/max-attributes-per-line': 'off',
     'vue/html-self-closing': 'off',
     'vue/no-v-html': 'off',
+    'vue/singleline-html-element-content-newline': 'off',
     'prettier/prettier': ['error', { semi: false }],
   },
 }

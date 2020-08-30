@@ -1,49 +1,45 @@
 <template>
   <div class="absolute top-0 left-0 z-30 w-screen bg-white panel">
     <Navbar>
-      <button slot="left-buttons" @click="$emit('close')">
-        Close
-      </button>
+      <button slot="left-buttons" @click="$emit('close')">Close</button>
       <span slot="title" class="text-white">Nearby</span>
     </Navbar>
-    <ul class="overflow-y-auto">
-      <li>
+    <div class="overflow-y-auto scrolling-touch">
+      <div class="border-b border-gray-300">
         <input
           v-model="query"
           type="text"
-          class="w-full px-4 py-2 border-b border-gray-300 outline-none appearance-none"
+          class="w-full px-4 py-2 outline-none appearance-none"
           placeholder="Search for a location..."
           @input="searchLocation"
         />
-      </li>
-      <li
-        v-for="place in nearby"
-        :key="place.id"
-        class="px-4 py-2 border-b border-gray-300 cursor-pointer"
-        @click="$emit('change', place)"
-      >
-        <h3 class="text-base text-gray-800">
-          {{ place.name }}
-        </h3>
-        <small v-if="place.categories.length" class="text-gray-500">
-          {{ place.categories[0].name }}
-        </small>
-        <small v-if="place.location.address" class="text-gray-500">
-          at {{ place.location.address }}
-        </small>
-      </li>
-    </ul>
+      </div>
+      <ul>
+        <li
+          v-for="place in nearby"
+          :key="place.id"
+          class="px-4 py-2 border-b border-gray-300 cursor-pointer"
+          @click="$emit('change', place)"
+        >
+          <h3 class="text-base text-gray-800">
+            {{ place.name }}
+          </h3>
+          <small v-if="place.categories.length" class="text-gray-500">
+            {{ place.categories[0].name }}
+          </small>
+          <small v-if="place.location.address" class="text-gray-500">
+            at {{ place.location.address }}
+          </small>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import Navbar from '~/components/Navbar.vue'
 import debounce from 'lodash/debounce'
 export default {
-  components: {
-    Navbar,
-  },
   data() {
     return {
       isLoading: false,
