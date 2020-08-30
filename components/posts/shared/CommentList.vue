@@ -5,9 +5,9 @@
       :key="comment.id"
       class="flex items-start px-5 py-4 border-t border-grey-light"
     >
-      <nuxt-link to="/" class="mr-2 flex-no-shrink">
+      <NuxtLink :to="`/profile/${comment.user.id}`" class="flex-shrink-0 mr-2">
         <Avatar :user="comment.user" :size="30" class="rounded-full" />
-      </nuxt-link>
+      </NuxtLink>
       <div class="-mt-1">
         <div class="mb-1 text-sm leading-normal text-gray-900">
           <strong>{{ comment.user.first_name }}: </strong> {{ comment.body }}

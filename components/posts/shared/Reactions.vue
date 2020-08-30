@@ -10,15 +10,16 @@
         :key="reaction.id"
         class="relative mb-2 mr-2 leading-none post-reaction"
       >
-        <nuxt-link to="/" class="flex-no-shrink">
+        <NuxtLink :to="`/profile/${reaction.user.id}`" class="flex-shrink-0">
           <Avatar :user="reaction.user" :size="25" class="rounded-full" />
-        </nuxt-link>
-        <img
-          :src="reactionIconPath(reaction)"
-          width="18"
-          height="18"
-          class="absolute w-4 h-4 post-reaction-icon"
-        />
+
+          <img
+            :src="reactionIconPath(reaction)"
+            width="18"
+            height="18"
+            class="absolute w-4 h-4 post-reaction-icon"
+          />
+        </NuxtLink>
       </li>
     </transition-group>
   </div>

@@ -39,9 +39,8 @@ export const actions = {
         long,
       }
     )
-
     const { components } = location.results[0]
-    const city = components.suburb ? components.suburb : components.city
+    const city = components.city || components.town || components.suburb
 
     commit('setCurrentLocation', {
       lat,

@@ -1,6 +1,8 @@
 <template>
   <div class="flex px-4 py-3 bg-white">
-    <Avatar :user="post.user" class="mr-4 rounded-full" />
+    <NuxtLink :to="`/profile/${post.user.id}`">
+      <Avatar :user="post.user" class="mr-4 rounded-full" />
+    </NuxtLink>
     <div class="flex flex-col">
       <h1 class="text-sm font-semibold leading-none text-gray-900">
         {{ post.user.first_name }}

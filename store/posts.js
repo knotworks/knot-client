@@ -4,15 +4,44 @@ export const state = () => ({
     last_page: 1,
     data: [],
   },
+  currentProfile: {
+    user: {},
+    posts: {
+      current_page: 1,
+      last_page: 1,
+      data: [],
+    },
+  },
 })
 
 export const getters = {
   timeline: (state) => state.timeline,
+  currentProfile: (state) => state.currentProfile,
 }
 
 export const mutations = {
   setTimeline(state, posts) {
-    state.timeline = posts
+    if (posts.current_page === 1) {
+      state.timeline = posts
+    } else {
+      state.timeline = {
+        ...posts,
+        data: [...state.timeline.data, ...posts.data],
+      }
+    }
+  },
+  setCurrentProfile(state, profile) {
+    if (profile.posts.current_page === 1) {
+      state.currentProfile = profile
+    } else {
+      state.currentProfile = {
+        user: profile.user,
+        posts: {
+          ...profile.posts,
+          data: [...state.currentProfile.posts.data, ...profile.posts.data],
+        },
+      }
+    }
   },
   addReaction(state, { id, reactions }) {
     state.timeline.data = state.timeline.data.map((post) => {
@@ -22,6 +51,16 @@ export const mutations = {
         return post
       }
     })
+
+    state.currentProfile.posts.data = state.currentProfile.posts.data.map(
+      (post) => {
+        if (post.id === id) {
+          return { ...post, reactions }
+        } else {
+          return post
+        }
+      }
+    )
   },
   addComment(state, { id, comment }) {
     state.timeline.data = state.timeline.data.map((post) => {
@@ -31,6 +70,16 @@ export const mutations = {
         return post
       }
     })
+
+    state.currentProfile.posts.data = state.currentProfile.posts.data.map(
+      (post) => {
+        if (post.id === id) {
+          return { ...post, comments: [...post.comments, comment] }
+        } else {
+          return post
+        }
+      }
+    )
   },
 }
 
@@ -38,6 +87,10 @@ export const actions = {
   async fetchTimeline({ commit }, page = 1) {
     const posts = await this.$client.get(`/api/timeline?page=${page}`)
     commit('setTimeline', posts)
+  },
+  async fetchProfile({ commit }, { id, page = 1 }) {
+    const res = await this.$client.get(`/api/profile/${id}?page=${page}`)
+    commit('setCurrentProfile', res)
   },
   async newPost(__, post) {
     await this.$client.post('/api/posts', post)
