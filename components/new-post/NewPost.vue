@@ -101,6 +101,12 @@ export default {
       )
       this.isPosting = false
       this.$emit('close')
+      this.post = {
+        body: '',
+        media: [],
+        accompaniments: [],
+        location: {},
+      }
       this.$bus.$emit('POST_CREATED')
     },
     setPostMedia(media) {
