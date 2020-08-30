@@ -57,7 +57,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-import { objectToFormData } from 'object-to-formdata'
+import { serialize } from 'object-to-formdata'
 
 export default {
   data() {
@@ -93,7 +93,7 @@ export default {
     async doNewPost() {
       this.isPosting = true
       await this.newPost(
-        objectToFormData(
+        serialize(
           {
             ...this.post,
             accompaniments: this.post.accompaniments.map((a) => a.id),
