@@ -5,13 +5,16 @@
       <span slot="title" class="text-white">Nearby</span>
     </Navbar>
     <div class="overflow-y-auto scrolling-touch">
-      <div class="border-b border-gray-300">
+      <div class="relative flex items-center border-b border-gray-300">
         <input
           v-model="query"
           type="text"
-          class="w-full px-4 py-2 outline-none appearance-none"
+          class="w-full py-3 pl-10 pr-4 outline-none appearance-none"
           placeholder="Search for a location..."
           @input="searchLocation"
+        />
+        <SearchIcon
+          class="absolute left-0 w-5 h-5 ml-4 text-gray-400 pointer-events-none"
         />
       </div>
       <ul>
@@ -39,7 +42,11 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import debounce from 'lodash/debounce'
+import SearchIcon from '~/assets/images/icons/search.svg?inline'
 export default {
+  components: {
+    SearchIcon,
+  },
   data() {
     return {
       isLoading: false,

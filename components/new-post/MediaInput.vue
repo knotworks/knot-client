@@ -77,6 +77,18 @@ export default {
       )
     },
   },
+  mounted() {
+    this.$bus.$on('POST_CREATED', () => {
+      this.files = [
+        {
+          file: null,
+          preview: '',
+          loading: false,
+          uuid: this.generateTimestamp(),
+        },
+      ]
+    })
+  },
   methods: {
     fileIsVideo(file) {
       return file.type.match('video')
