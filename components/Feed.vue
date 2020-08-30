@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full max-w-xl px-3 py-4 feed">
+  <div class="w-full max-w-xl px-3 py-4 mx-auto">
     <Post v-for="post in posts" :key="post.id" :post="post" />
   </div>
 </template>

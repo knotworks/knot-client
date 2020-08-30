@@ -52,7 +52,7 @@ export default {
     postTextWithMeta() {
       let text = this.post.body || ''
       const people = this.post.accompaniments
-      if (this.post.location || people.length) {
+      if (this.post.body && (this.post.location || people.length)) {
         text += ' **—**'
       }
       if (people.length) {
@@ -79,7 +79,7 @@ export default {
       }
     },
     links() {
-      if (this.md) {
+      if (this.md && this.post.body) {
         return this.md.linkify.match(this.post.body)
       } else {
         return null
