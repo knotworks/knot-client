@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     hasLocation(comment) {
-      return 'location' in comment && 'city' in comment.location
+      return !!comment.location?.city?.trim()
     },
   },
 }
