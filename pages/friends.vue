@@ -113,11 +113,16 @@ export default {
     CheckIcon,
     CloseIcon,
   },
+  async fetch() {
+    await this.fetchFriendships()
+  },
   computed: {
     ...mapGetters('user', ['friendships']),
   },
-  async mounted() {
-    await this.fetchFriendships()
+  activated() {
+    if (this.$fetchState.timestamp <= Date.now() - 30000) {
+      this.$fetch()
+    }
   },
   methods: {
     ...mapActions('user', [

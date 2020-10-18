@@ -90,7 +90,6 @@
 </template>
 
 <script>
-import cloudinary from 'cloudinary-core'
 export default {
   props: {
     media: {
@@ -107,9 +106,6 @@ export default {
       return this.intrinsicRatio(media)
     },
   },
-  created() {
-    this.cloudinaryCore = new cloudinary.Cloudinary({ cloud_name: 'knot' })
-  },
   methods: {
     intrinsicRatio(media) {
       return `${(media.height / media.width) * 100}%`
@@ -118,16 +114,12 @@ export default {
       return media.width >= media.height ? 'width' : 'height'
     },
     getImageUrl(image, maxDimensions = 1500) {
-      if (this.cloudinaryCore) {
-        return this.cloudinaryCore.url(image.path, {
-          width: maxDimensions,
-          height: maxDimensions,
-          crop: 'fit',
-          fetch_format: 'auto',
-        })
-      } else {
-        return null
-      }
+      return this.$cloudinary.image.url(image.path, {
+        width: maxDimensions,
+        height: maxDimensions,
+        crop: 'fit',
+        fetch_format: 'auto',
+      })
     },
     openPhoto(image, e) {
       const targetRect = e.currentTarget.getBoundingClientRect()

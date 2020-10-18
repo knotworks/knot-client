@@ -11,20 +11,20 @@
       class="relative flex flex-wrap w-full"
     >
       <div
-        v-for="(media, i) in files"
-        :key="media.uuid"
+        v-for="(file, i) in files"
+        :key="file.uuid"
         class="relative flex items-center justify-center w-16 h-16 mb-4 mr-4 text-4xl text-gray-700 rounded-sm shadow-sm cursor-pointer bg-gray-50 media-input-container"
-        :class="{ 'border border-gray-300': !media.preview }"
+        :class="{ 'border border-gray-300': !file.preview }"
       >
         <img
-          v-if="!media.loading"
+          v-if="!file.loading"
           src="~/assets/images/icons/add-dark.svg"
           class="h-4"
         />
         <transition name="fade">
           <img
-            v-if="media.preview"
-            :src="media.preview"
+            v-if="file.data"
+            :src="fileIsVideo(file) ? '/video-preview.svg' : file.data"
             class="absolute top-0 left-0 object-cover w-full h-full rounded-sm"
           />
         </transition>
@@ -36,7 +36,7 @@
           @change="setFile(i, $event)"
         />
         <button
-          v-show="media.file"
+          v-show="file.data"
           class="absolute top-0 right-0 inline-flex items-center justify-center w-6 h-6 -mt-2 -mr-3 text-sm text-white bg-red-500 rounded-full focus-none"
           type="button"
           aria-label="Close"
@@ -62,8 +62,8 @@ export default {
     return {
       files: [
         {
-          file: null,
-          preview: '',
+          data: null,
+          type: null,
           loading: false,
           uuid: this.generateTimestamp(),
         },
@@ -72,17 +72,15 @@ export default {
   },
   computed: {
     hasVideo() {
-      return this.files.some(
-        (media) => media.file && this.fileIsVideo(media.file)
-      )
+      return this.files.some((file) => this.fileIsVideo(file))
     },
   },
   mounted() {
     this.$bus.$on('POST_CREATED', () => {
       this.files = [
         {
-          file: null,
-          preview: '',
+          data: null,
+          type: null,
           loading: false,
           uuid: this.generateTimestamp(),
         },
@@ -91,11 +89,11 @@ export default {
   },
   methods: {
     fileIsVideo(file) {
-      return file.type.match('video')
+      return file.type?.match('video')
     },
-    setFile(i, e) {
+    async setFile(i, e) {
       if (e.target.files.length) {
-        const wasPopulated = !!this.files[i].preview
+        const wasPopulated = !!this.files[i].data
         const file = e.target.files[0]
 
         if (this.fileIsVideo(file)) {
@@ -104,21 +102,20 @@ export default {
             alert('You may only upload 1 video per post.')
             return false
           } else {
-            this.files[i].file = file
-            this.files[i].preview = '/video-preview.svg'
+            this.files[i].loading = true
+            this.files[i].type = file.type
+            this.files[i].data = await this.fileToDataUrl(file)
             this.$emit('change', this.files)
           }
         } else {
           this.files[i].loading = true
+          this.files[i].type = file.type
           loadImage(
             file,
             (canvas) => {
-              this.files[i].preview = canvas.toDataURL()
-              canvas.toBlob((blob) => {
-                this.files[i].file = blob
-                this.files[i].loading = false
-                this.$emit('change', this.files)
-              }, 'image/jpeg')
+              this.files[i].data = canvas.toDataURL()
+              this.files[i].loading = false
+              this.$emit('change', this.files)
             },
             {
               canvas: true,
@@ -131,8 +128,8 @@ export default {
         }
         if (!wasPopulated && this.files.length < 5) {
           this.files.push({
-            file: null,
-            preview: '',
+            data: null,
+            type: null,
             loading: false,
             uuid: this.generateTimestamp(),
           })
@@ -140,14 +137,23 @@ export default {
       }
     },
     removeFile(i) {
-      if (this.fileIsVideo(this.files[i].file)) {
+      if (this.fileIsVideo(this.files[i])) {
         URL.revokeObjectURL(this.$refs.video.src)
       }
+
       this.files.splice(i, 1)
       this.$emit('change', this.files)
     },
     generateTimestamp() {
       return parseInt((new Date().getTime() / 1000).toFixed(0), 10)
+    },
+    fileToDataUrl(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = () => resolve(reader.result)
+        reader.onerror = (error) => reject(error)
+      })
     },
   },
 }

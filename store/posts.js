@@ -85,18 +85,18 @@ export const mutations = {
 
 export const actions = {
   async fetchTimeline({ commit }, page = 1) {
-    const posts = await this.$client.get(`/api/timeline?page=${page}`)
+    const posts = await this.$axios.$get(`/api/timeline?page=${page}`)
     commit('setTimeline', posts)
   },
   async fetchProfile({ commit }, { id, page = 1 }) {
-    const res = await this.$client.get(`/api/profile/${id}?page=${page}`)
+    const res = await this.$axios.$get(`/api/profile/${id}?page=${page}`)
     commit('setCurrentProfile', res)
   },
   async newPost(__, post) {
-    await this.$client.post('/api/posts', post)
+    await this.$axios.$post('/api/posts', post)
   },
   async addReaction({ commit }, { id, reaction }) {
-    const { reactions } = await this.$client.post(
+    const { reactions } = await this.$axios.$post(
       `/api/posts/${id}/reactions`,
       reaction
     )
@@ -106,7 +106,7 @@ export const actions = {
     })
   },
   async addComment({ commit }, commentData) {
-    const comment = await this.$client.post(
+    const comment = await this.$axios.$post(
       `/api/posts/${commentData.id}/comments`,
       commentData
     )

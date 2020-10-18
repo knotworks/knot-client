@@ -19,31 +19,31 @@ export const mutations = {
 
 export const actions = {
   register(__, userData) {
-    return this.$client.post('/api/auth/register', userData)
+    return this.$axios.$post('/register', userData)
   },
-  login(__, credentials) {
-    return this.$auth.loginWith('local', {
+  async login(__, credentials) {
+    await this.$auth.loginWith('sanctum', {
       data: credentials,
     })
   },
   async fetchFriendships({ commit }) {
-    const friendships = await this.$client.get('/api/friendships')
+    const friendships = await this.$axios.$get('/api/friendships')
     commit('setFriendships', friendships)
   },
   async requestFriendship({ commit }, userId) {
-    const friendships = await this.$client.post(
+    const friendships = await this.$axios.$post(
       `/api/friendships/add/${userId}`
     )
     commit('setFriendships', friendships)
   },
   async acceptFriendship({ commit }, senderId) {
-    const friendships = await this.$client.post(
+    const friendships = await this.$axios.$post(
       `/api/friendships/accept/${senderId}`
     )
     commit('setFriendships', friendships)
   },
   async denyFriendship({ commit }, senderId) {
-    const friendships = await this.$client.post(
+    const friendships = await this.$axios.$post(
       `/api/friendships/deny/${senderId}`
     )
     commit('setFriendships', friendships)

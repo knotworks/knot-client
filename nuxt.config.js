@@ -1,9 +1,10 @@
+import path from 'path'
+import fs from 'fs'
+import redirectSSL from 'redirect-ssl'
+
 require('dotenv').config()
 
 export default {
-  mode: 'universal',
-  components: true,
-
   /*
    ** Headers of the page
    */
@@ -78,6 +79,9 @@ export default {
    */
   loading: false,
 
+  // Auto import components (https://go.nuxtjs.dev/config-components)
+  components: true,
+
   /*
    ** Global CSS
    */
@@ -87,7 +91,7 @@ export default {
    ** Runtime Configs
    */
   publicRuntimeConfig: {
-    apiURL: process.env.API_URL || 'http://knot.test',
+    baseURL: process.env.BASE_URL || 'https://knot.test',
   },
 
   /*
@@ -107,8 +111,6 @@ export default {
     '@nuxtjs/eslint-module',
     '@nuxtjs/dotenv',
     '@nuxtjs/tailwindcss',
-    '@nuxt/components',
-    '@nuxtjs/pwa',
   ],
 
   /*
@@ -117,7 +119,9 @@ export default {
   modules: [
     '@nuxtjs/svg',
     '@nuxtjs/axios',
-    '@nuxtjs/auth',
+    '@nuxtjs/auth-next',
+    '@nuxtjs/pwa',
+    '@nuxtjs/cloudinary',
     [
       'vue-warehouse/nuxt',
       {
@@ -135,48 +139,36 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: process.env.API_URL,
+    baseURL: process.env.BASE_URL,
     headers: {
       'X-Requested-With': 'XMLHttpRequest',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
     },
+    credentials: true,
   },
 
   auth: {
-    watchLoggedIn: false,
+    watchLoggedIn: true,
     strategies: {
-      local: {
-        endpoints: {
-          login: {
-            url: '/api/auth/login',
-            method: 'post',
-            propertyName: false,
-          },
-          user: {
-            url: '/api/auth/user',
-            method: 'get',
-            propertyName: false,
-          },
-          logout: {
-            url: '/api/auth/logout',
-            method: 'post',
-            propertyName: false,
-          },
-        },
+      sanctum: {
+        provider: 'laravel/sanctum',
+        url: process.env.BASE_URL,
       },
     },
     redirect: {
-      login: false,
-      home: false,
-      logout: false,
-      callback: false,
+      login: '/login',
+      home: '/',
+      logout: '/login',
     },
-    cookie: {
-      options: {
-        expires: 365,
-      },
-    },
-    plugins: [{ src: '~/plugins/http.js', ssr: true }],
+  },
+
+  cloudinary: {
+    cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+    apiKey: process.env.CLOUDINARY_API_KEY,
+    apiSecret: process.env.CLOUDINARY_API_SECRET,
+    useComponent: true,
+    secure: true,
   },
 
   /*
@@ -197,8 +189,19 @@ export default {
       }
     },
   },
-  // server: {
-  //   port: 1337,
-  //   host: '0.0.0.0'
-  // }
+
+  server: {
+    port: 3000,
+    host: '127.0.0.1',
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, 'app.knot.test-key.pem')),
+      cert: fs.readFileSync(path.resolve(__dirname, 'app.knot.test.pem')),
+    },
+  },
+
+  serverMiddleware: [
+    redirectSSL.create({
+      enabled: true,
+    }),
+  ],
 }

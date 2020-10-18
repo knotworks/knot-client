@@ -88,3 +88,8 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# Certs and keys
+*.pem
+*.crt
+*.key

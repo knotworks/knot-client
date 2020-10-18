@@ -28,6 +28,7 @@
       </button>
     </div>
     <NuxtLink
+      v-if="$auth.user"
       :to="`/profile/${$auth.user.id}`"
       class="inline-flex items-center justify-center w-full h-8 text-gray-400 cursor-pointer"
       active-class="text-red-500"

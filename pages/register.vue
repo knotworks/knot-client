@@ -73,11 +73,11 @@ export default {
   data() {
     return {
       user: {
-        first_name: '',
-        last_name: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
+        first_name: 'Collin',
+        last_name: 'Henderson',
+        email: 'collin@knot.test',
+        password: 'password',
+        password_confirmation: 'password',
       },
       loading: false,
       error: null,

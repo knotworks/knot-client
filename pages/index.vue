@@ -5,31 +5,28 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
+import { mapActions, mapGetters } from 'vuex'
 export default {
-  async fetch({ store }) {
-    if (!store.getters['posts/timeline'].data.length) {
-      await store.dispatch('posts/fetchTimeline')
-    }
+  async fetch() {
+    await this.fetchTimeline()
+    await this.fetchFriendships()
   },
   computed: {
     ...mapGetters('posts', ['timeline']),
   },
+  activated() {
+    if (this.$fetchState.timestamp <= Date.now() - 30000) {
+      this.$fetch()
+    }
+  },
   async mounted() {
     this.$bus.$on('POST_CREATED', async () => {
-      await this.$store.dispatch('posts/fetchTimeline')
+      await this.fetchTimeline()
     })
-
-    if (this.timeline.data.length) {
-      try {
-        await this.$store.dispatch('posts/fetchTimeline')
-      } catch (e) {
-        console.log('Oop')
-      }
-    }
-
-    await this.$store.dispatch('user/fetchFriendships')
   },
+  methods: mapActions({
+    fetchTimeline: 'posts/fetchTimeline',
+    fetchFriendships: 'user/fetchFriendships',
+  }),
 }
 </script>

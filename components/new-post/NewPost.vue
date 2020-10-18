@@ -1,7 +1,7 @@
 <template>
   <div class="absolute top-0 left-0 z-30 w-screen h-screen bg-gray-100">
     <Navbar>
-      <button slot="left-buttons" @click="$emit('close')">Close</button>
+      <button slot="left-buttons" @click="closePanel">Close</button>
       <span slot="title" class="text-white">New Post</span>
     </Navbar>
     <form @submit.prevent="doNewPost">
@@ -90,32 +90,55 @@ export default {
     ...mapActions('posts', ['newPost']),
     async doNewPost() {
       this.isPosting = true
+      let uploads = []
+      try {
+        uploads = await this.uploadMedia()
+      } catch (e) {
+        alert('Could not upload')
+      }
+
       await this.newPost(
         serialize(
           {
             ...this.post,
+            media: uploads.map((asset) => {
+              return {
+                path: asset.public_id,
+                type: asset.resource_type,
+                width: asset.width,
+                height: asset.height,
+              }
+            }),
             accompaniments: this.post.accompaniments.map((a) => a.id),
           },
           { indices: true }
         )
       )
       this.isPosting = false
-      this.$emit('close')
-      this.post = {
-        body: '',
-        media: [],
-        accompaniments: [],
-        location: {},
-      }
+      this.closePanel()
       this.$bus.$emit('POST_CREATED')
+    },
+    async uploadMedia() {
+      const media = []
+      for (const file of this.post.media) {
+        try {
+          let options = {
+            upload_preset: file.type?.match('video') ? 'yhxw7jd8' : 'a31jfkph',
+          }
+
+          const asset = await this.$cloudinary.upload(file.data, options)
+          media.push(asset)
+        } catch (e) {
+          throw new Error(e)
+        }
+      }
+
+      return media
     },
     setPostMedia(media) {
       this.post.media = media
-        .filter((item) => {
-          return !!item.file
-        })
-        .map((item) => item.file)
-        .filter(Boolean)
+        .filter((file) => !!file.data)
+        .map(({ data, type }) => ({ data, type }))
     },
     setTaggedFriends(friends) {
       this.isTaggingFriends = false
@@ -130,6 +153,18 @@ export default {
         long: +parseFloat(place.location.lng).toFixed(6),
         name: place.name,
         city: place.location.city,
+      }
+    },
+    closePanel() {
+      this.$emit('close')
+      setTimeout(this.resetPost, 350)
+    },
+    resetPost() {
+      this.post = {
+        body: '',
+        media: [],
+        accompaniments: [],
+        location: {},
       }
     },
   },

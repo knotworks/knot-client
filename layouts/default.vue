@@ -12,7 +12,7 @@
     <Navbar>
       <KnotLogo slot="title" class="h-8 cursor-pointer" @click="reload" />
     </Navbar>
-    <nuxt />
+    <Nuxt keep-alive :keep-alive-props="{ max: 7 }" />
     <BottomBar @newPost="newPostModalShowing = true" />
   </div>
 </template>
@@ -22,7 +22,7 @@ import { mapActions } from 'vuex'
 import KnotLogo from '~/assets/images/logo.svg?inline'
 
 export default {
-  middleware: 'authenticated',
+  middleware: 'auth',
   components: {
     KnotLogo,
   },
