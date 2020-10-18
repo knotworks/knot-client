@@ -148,9 +148,7 @@ export default {
   },
 
   auth: {
-    watchLoggedIn: true,
     strategies: {
-      local: false,
       sanctum: {
         provider: 'laravel/sanctum',
         url: process.env.BASE_URL,
@@ -158,8 +156,9 @@ export default {
     },
     redirect: {
       login: '/login',
-      home: '/',
       logout: '/login',
+      callback: false,
+      home: false,
     },
   },
 

@@ -47,6 +47,8 @@ import { mapActions } from 'vuex'
 import KnotLogo from '~/assets/images/logo.svg?inline'
 import ExclamationCircleIcon from '~/assets/images/icons/exclamation-circle.svg?inline'
 export default {
+  middleware: 'auth',
+  auth: 'guest',
   layout: 'auth',
   components: {
     KnotLogo,
