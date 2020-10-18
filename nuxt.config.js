@@ -150,6 +150,7 @@ export default {
   auth: {
     watchLoggedIn: true,
     strategies: {
+      local: false,
       sanctum: {
         provider: 'laravel/sanctum',
         url: process.env.BASE_URL,
