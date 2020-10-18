@@ -5587,11 +5587,6 @@ is-glob@^4.0.0, is-glob@^4.0.1, is-glob@~4.0.1:
   dependencies:
     is-extglob "^2.1.1"
 
-is-https@^2.0.0:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/is-https/-/is-https-2.0.2.tgz#7009d303c72580f15897d5c063d6b6bc1f838fef"
-  integrity sha512-UfUCKVQH/6PQRCh5Qk9vNu4feLZiFmV/gr8DjbtJD0IrCRIDTA6E+d/AVFGPulI5tqK5W45fYbn1Nir1O99rFw==
-
 is-nan@^1.2.1:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/is-nan/-/is-nan-1.3.0.tgz#85d1f5482f7051c2019f5673ccebdb06f3b0db03"
@@ -8393,13 +8388,6 @@ redent@^1.0.0:
   dependencies:
     indent-string "^2.1.0"
     strip-indent "^1.0.1"
-
-redirect-ssl@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/redirect-ssl/-/redirect-ssl-2.0.0.tgz#0d70f0adeab2de6f01f4adc4da4f55775a29b6cf"
-  integrity sha512-+6hV0ltd6rnBZmHaKtct7siAm1hvwf0F2nTDQHXOkJyt78d6X4Smiyuni/TsXnNsBrpuOQ6vRSvFC+/4VvMylA==
-  dependencies:
-    is-https "^2.0.0"
 
 reduce-css-calc@^2.1.6:
   version "2.1.7"
