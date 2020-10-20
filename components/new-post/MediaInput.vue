@@ -137,10 +137,6 @@ export default {
       }
     },
     removeFile(i) {
-      if (this.fileIsVideo(this.files[i])) {
-        URL.revokeObjectURL(this.$refs.video.src)
-      }
-
       this.files.splice(i, 1)
       this.$emit('change', this.files)
     },

@@ -11,39 +11,24 @@
       </div>
 
       <input
-        v-model="credentials.email"
+        v-model="email"
         class="w-full h-12 px-3 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary"
         type="email"
         placeholder="Your Email"
       />
-      <input
-        v-model="credentials.password"
-        class="w-full h-12 px-3 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary"
-        type="password"
-        placeholder="Enter a password"
-      />
-      <div class="flex w-full">
-        <nuxt-link
-          :to="`/forgot-password?email=${credentials.email}`"
-          class="ml-auto font-medium text-red-600"
-        >
-          I forgot my password
-        </nuxt-link>
-      </div>
-
       <button
         class="block w-full py-3 font-bold tracking-widest text-white uppercase bg-red-600 rounded shadow-sm cursor-pointer focus:outline-none focus:shadow-outline-red"
         type="submit"
         :disabled="loading"
       >
-        Sign In
+        Reset Password
       </button>
     </form>
     <nuxt-link
-      to="/register"
+      to="/login"
       class="block w-full mt-4 font-medium text-center text-red-600"
     >
-      No account? Sign Up
+      Remember your password? Sign in
     </nuxt-link>
   </div>
 </template>
@@ -62,10 +47,7 @@ export default {
   },
   data() {
     return {
-      credentials: {
-        email: '',
-        password: '',
-      },
+      email: this.$route.query.email || '',
       loading: false,
       error: null,
     }
@@ -79,7 +61,7 @@ export default {
         await this.login(this.credentials)
         this.$router.push('/')
       } catch (e) {
-        if (e.response.data.error === 'Invalid Credentials') {
+        if (e.response.data.error === 'Unauthorized') {
           this.error = 'Incorrect email or password.'
         } else {
           this.error =

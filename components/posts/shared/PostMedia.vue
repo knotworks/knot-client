@@ -70,7 +70,7 @@
               dpr="auto"
               fetchFormat="auto"
               crop="scale"
-              quality="90"
+              quality="100"
             />
             <!-- eslint-enable -->
           </CldImage>

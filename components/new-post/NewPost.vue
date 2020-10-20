@@ -94,7 +94,8 @@ export default {
       try {
         uploads = await this.uploadMedia()
       } catch (e) {
-        alert('Could not upload')
+        alert(e)
+        this.isPosting = false
       }
 
       await this.newPost(
@@ -120,17 +121,29 @@ export default {
     },
     async uploadMedia() {
       const media = []
-      for (const file of this.post.media) {
-        try {
-          let options = {
-            upload_preset: file.type?.match('video') ? 'yhxw7jd8' : 'a31jfkph',
+      const options = {
+        timestamp: Date.now(),
+        upload_preset: this.$config.cloudinaryUploadPreset,
+      }
+      const signature = await this.$axios.$post(
+        '/api/generate-cloudinary-signature',
+        options
+      )
+      if (signature) {
+        for (const file of this.post.media) {
+          try {
+            const asset = await this.$cloudinary.upload(file.data, {
+              ...options,
+              api_key: this.$config.cloudinaryApiKey,
+              signature,
+            })
+            media.push(asset)
+          } catch (e) {
+            throw new Error(e)
           }
-
-          const asset = await this.$cloudinary.upload(file.data, options)
-          media.push(asset)
-        } catch (e) {
-          throw new Error(e)
         }
+      } else {
+        Promise.reject('Unable to generate signature for upload.')
       }
 
       return media
