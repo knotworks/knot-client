@@ -92,7 +92,7 @@ export default {
   publicRuntimeConfig: {
     baseURL: process.env.BASE_URL || 'https://knot.test',
     cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
-    env: process.env.ENV || 'production',
+    appEnv: process.env.APP_ENV || 'production',
   },
 
   /*

@@ -62,7 +62,7 @@ export default {
     async uploadAvatar() {
       const options = {
         timestamp: Date.now(),
-        folder: `${this.$config.env}/avatars` || 'production/avatars',
+        folder: `${this.$config.appEnv}/avatars`,
       }
       const signature = await this.$axios.$post(
         '/api/generate-cloudinary-signature',
@@ -78,11 +78,13 @@ export default {
           })
 
           await this.updateAvatar(asset.public_id)
-          this.isLoading = false
         } catch (e) {
           throw new Error(e)
+        } finally {
+          this.isLoading = false
         }
       } else {
+        this.isLoading = false
         Promise.reject('Unable to generate signature for upload.')
       }
     },

@@ -123,7 +123,7 @@ export default {
       const media = []
       const options = {
         timestamp: Date.now(),
-        folder: `${this.$config.env}/media` || 'production/media',
+        folder: `${this.$config.appEnv}/media`,
       }
       const signature = await this.$axios.$post(
         '/api/generate-cloudinary-signature',
