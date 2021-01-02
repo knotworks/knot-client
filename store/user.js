@@ -56,7 +56,7 @@ export const actions = {
       avatar: avatarPath,
     })
 
-    updateCurrentUser(user, { rootGetters, commit })
+    updateCurrentUser(user, { rootGetters, commit, $auth: this.$auth })
   },
   async updateProfile({ rootGetters, commit }, profile) {
     const user = await this.$axios.$put('/api/profile/update', profile)
