@@ -20,17 +20,12 @@
                 >
                   <CldImage
                     :public-id="item.path"
-                    responsive="width"
+                    responsive
+                    fetch-format="auto"
+                    quality="auto"
                     loading="lazy"
                   >
-                    <!-- eslint-disable -->
-                    <CldTransformation
-                      dpr="auto"
-                      fetchFormat="auto"
-                      crop="scale"
-                      quality="90"
-                    />
-                    <!-- eslint-enable -->
+                    <CldPlaceholder />
                   </CldImage>
                 </div>
                 <CldVideo
@@ -65,14 +60,12 @@
             class="absolute top-0 left-0 w-full h-full"
             loading="lazy"
           >
-            <!-- eslint-disable -->
             <CldTransformation
               dpr="auto"
-              fetchFormat="auto"
+              fetch-format="auto"
               crop="scale"
               quality="100"
             />
-            <!-- eslint-enable -->
           </CldImage>
         </div>
         <CldVideo

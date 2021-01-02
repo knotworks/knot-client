@@ -3,16 +3,12 @@
     class="relative flex items-center justify-center overflow-hidden bg-gray-200"
     :style="{ width: `${size}px`, height: `${size}px` }"
   >
-    <CldImage
-      v-if="user.profile_image"
-      :public-id="user.profile_image"
-      class="avatar"
-    >
+    <CldImage v-if="user.avatar" :public-id="user.avatar" class="avatar">
       <!-- eslint-disable -->
       <CldTransformation
         :width="size * 2"
         :height="size * 2"
-        crop="lfill"
+        crop="thumb"
         dpr="auto"
         fetchFormat="auto"
         responsive="width"
@@ -22,7 +18,7 @@
     <span
       v-else
       class="h-full font-bold text-gray-500"
-      :style="`line-height:${size}px;`"
+      :style="`font-size:${size / 2.1875}px;line-height:${size}px;`"
     >
       {{ nameFirstLetter }}
     </span>

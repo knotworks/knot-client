@@ -25,6 +25,12 @@
 <script>
 import EmblaCarousel from 'embla-carousel'
 export default {
+  props: {
+    loop: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       carousel: null,
@@ -32,7 +38,9 @@ export default {
     }
   },
   mounted() {
-    this.carousel = EmblaCarousel(this.$refs.carousel)
+    this.carousel = EmblaCarousel(this.$refs.carousel, {
+      loop: this.loop,
+    })
     this.carousel.on('select', this.setCurrentSlide)
   },
   beforeDestroy() {

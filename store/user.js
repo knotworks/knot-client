@@ -48,4 +48,33 @@ export const actions = {
     )
     commit('setFriendships', friendships)
   },
+  async requestPasswordReset(__, email) {
+    await this.$axios.$post('/forgot-password', email)
+  },
+  async updateAvatar({ rootGetters, commit }, avatarPath) {
+    const user = await this.$axios.$put('/api/profile/avatar', {
+      avatar: avatarPath,
+    })
+
+    updateCurrentUser(user, { rootGetters, commit })
+  },
+  async updateProfile({ rootGetters, commit }, profile) {
+    const user = await this.$axios.$put('/api/profile/update', profile)
+    updateCurrentUser(user, { rootGetters, commit, $auth: this.$auth })
+  },
+}
+
+const updateCurrentUser = (userData, { rootGetters, commit, $auth }) => {
+  $auth.setUser(userData)
+  if (rootGetters['posts/currentProfile'].user.id === $auth.user.id) {
+    // Update current profile
+    commit(
+      'posts/setCurrentProfile',
+      {
+        ...rootGetters['posts/currentProfile'],
+        user: userData,
+      },
+      { root: true }
+    )
+  }
 }

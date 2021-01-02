@@ -141,7 +141,7 @@ export default {
       this.$emit('change', this.files)
     },
     generateTimestamp() {
-      return parseInt((new Date().getTime() / 1000).toFixed(0), 10)
+      return parseInt((Date.now() / 1000).toFixed(0), 10)
     },
     fileToDataUrl(file) {
       return new Promise((resolve, reject) => {

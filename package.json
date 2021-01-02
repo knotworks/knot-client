@@ -18,14 +18,14 @@
   "dependencies": {
     "@nuxtjs/auth-next": "^5.0.0-1595976864.509d9d6",
     "@nuxtjs/axios": "5.12.1",
-    "@nuxtjs/cloudinary": "^1.0.0",
+    "@nuxtjs/cloudinary": "^1.0.1",
     "@nuxtjs/pwa": "^3.0.2",
-    "@tailwindcss/ui": "^0.6.2",
+    "@tailwindcss/forms": "^0.2.1",
     "blueimp-load-image": "^5.14.0",
     "core-js": "^3.6.5",
     "current-script-polyfill": "^1.0.0",
     "date-fns": "^2.9.0",
-    "embla-carousel": "^4.0.1",
+    "embla-carousel": "^4.1.2",
     "lazysizes": "^5.2.0",
     "lodash": "^4.17.20",
     "markdown-it": "^11.0.0",
@@ -42,7 +42,8 @@
     "@nuxtjs/eslint-config": "^3.1.0",
     "@nuxtjs/eslint-module": "^2.0.0",
     "@nuxtjs/svg": "^0.1.12",
-    "@nuxtjs/tailwindcss": "^3.0.2",
+    "@nuxtjs/tailwindcss": "^3.2.0",
+    "autoprefixer": "^9",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.8.1",
     "eslint-config-prettier": "^6.11.0",
@@ -51,7 +52,9 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-vue": "^6.0.0",
     "node-sass": "^4.13.1",
+    "postcss": "^7",
     "prettier": "^2.1.1",
-    "sass-loader": "^10.0.1"
+    "sass-loader": "^10.0.1",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   }
 }

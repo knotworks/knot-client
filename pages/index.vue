@@ -1,6 +1,6 @@
 <template>
   <div class="overflow-y-auto scrolling-touch">
-    <Feed :posts="timeline.data" />
+    <Feed :posts="timeline.data" @loadNextPage="loadNextPage" />
   </div>
 </template>
 
@@ -24,9 +24,17 @@ export default {
       await this.fetchTimeline()
     })
   },
-  methods: mapActions({
-    fetchTimeline: 'posts/fetchTimeline',
-    fetchFriendships: 'user/fetchFriendships',
-  }),
+  methods: {
+    ...mapActions({
+      fetchTimeline: 'posts/fetchTimeline',
+      fetchFriendships: 'user/fetchFriendships',
+    }),
+    loadNextPage() {
+      const { current_page: currentPage, last_page: lastPage } = this.timeline
+      if (currentPage < lastPage) {
+        this.fetchTimeline(currentPage + 1)
+      }
+    },
+  },
 }
 </script>

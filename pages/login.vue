@@ -1,6 +1,8 @@
 <template>
   <div class="flex flex-col items-center w-full px-4 mt-24">
-    <KnotLogo class="inline-block w-auto h-12 mt-2 fill-current text-primary" />
+    <KnotLogo
+      class="inline-block w-auto h-12 mt-2 fill-current text-primary-600"
+    />
     <form
       class="flex flex-col items-center w-full mt-10 space-y-4"
       @submit.prevent="doLogin()"
@@ -12,13 +14,13 @@
 
       <input
         v-model="credentials.email"
-        class="w-full h-12 px-3 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary"
+        class="w-full h-12 px-3 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary-600"
         type="email"
         placeholder="Your Email"
       />
       <input
         v-model="credentials.password"
-        class="w-full h-12 px-3 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary"
+        class="w-full h-12 px-3 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary-600"
         type="password"
         placeholder="Enter a password"
       />
