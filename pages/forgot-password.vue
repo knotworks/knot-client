@@ -1,12 +1,14 @@
 <template>
   <div class="flex flex-col items-center w-full px-4 mt-24">
-    <KnotLogo class="inline-block w-auto h-12 mt-2 fill-current text-primary" />
+    <KnotLogo
+      class="inline-block w-auto h-12 mt-2 fill-current text-primary-600"
+    />
     <form
       class="flex flex-col items-center w-full mt-10 space-y-4"
       @submit.prevent="doRequestPasswordReset()"
     >
       <div v-if="success" class="flex items-start w-full text-sm">
-        <CheckCircleIcon class="w-5 h-5 mt-px text-green-500" />
+        <CheckCircleIcon class="flex-shrink-0 w-5 h-5 mt-px text-green-500" />
         <span class="ml-2 text-gray-600">{{ success }}</span>
       </div>
 
@@ -14,7 +16,7 @@
         v-if="error"
         class="flex items-start w-full text-sm text-primary-600"
       >
-        <ExclamationCircleIcon class="w-5 h-5 mt-px" />
+        <ExclamationCircleIcon class="flex-shrink-0 w-5 h-5 mt-px" />
         <span class="ml-2">{{ error }}</span>
       </div>
 
