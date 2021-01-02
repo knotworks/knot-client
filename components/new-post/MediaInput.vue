@@ -113,7 +113,7 @@ export default {
           loadImage(
             file,
             (canvas) => {
-              this.files[i].data = canvas.toDataURL()
+              this.files[i].data = canvas.toDataURL('image/jpeg', 1.0)
               this.files[i].loading = false
               this.$emit('change', this.files)
             },

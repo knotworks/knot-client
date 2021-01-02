@@ -47,7 +47,7 @@ export default {
       loadImage(
         file,
         async (canvas) => {
-          this.avatarData = canvas.toDataURL()
+          this.avatarData = canvas.toDataURL('image/jpeg', 1.0)
           await this.uploadAvatar()
         },
         {
