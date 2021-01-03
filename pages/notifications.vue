@@ -21,7 +21,9 @@ export default {
     }),
   },
   activated() {
-    this.$fetch()
+    if (this.$fetchState.timestamp <= Date.now() - 5000) {
+      this.$fetch()
+    }
   },
   methods: {
     ...mapActions({

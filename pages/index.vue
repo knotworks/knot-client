@@ -15,7 +15,7 @@ export default {
     ...mapGetters('posts', ['timeline']),
   },
   activated() {
-    if (this.$fetchState.timestamp <= Date.now() - 30000) {
+    if (this.$fetchState.timestamp <= Date.now() - 5000) {
       this.$fetch()
     }
   },
