@@ -44,7 +44,17 @@
       aria-label="Friends"
       exact
     >
-      <FriendsIcon class="w-full h-full fill-current" />
+      <div class="relative w-full h-full">
+        <FriendsIcon class="w-full h-full fill-current" />
+        <transition name="fade">
+          <div
+            v-if="friendRequestCount"
+            class="absolute top-0 flex items-center justify-center w-4 h-4 font-semibold text-center text-white bg-red-600 rounded-full text-xxs right-4"
+          >
+            {{ friendRequestCount }}
+          </div>
+        </transition>
+      </div>
     </NuxtLink>
   </div>
 </template>
@@ -55,6 +65,7 @@ import TimelineIcon from '~/assets/images/icons/timeline.svg?inline'
 import NotificationsIcon from '~/assets/images/icons/notifications.svg?inline'
 import FriendsIcon from '~/assets/images/icons/friends.svg?inline'
 import ProfileIcon from '~/assets/images/icons/profile.svg?inline'
+import { mapGetters } from 'vuex'
 export default {
   components: {
     AddIcon,
@@ -62,6 +73,14 @@ export default {
     NotificationsIcon,
     FriendsIcon,
     ProfileIcon,
+  },
+  computed: {
+    ...mapGetters({
+      friendships: 'user/friendships',
+    }),
+    friendRequestCount() {
+      return this.friendships.requests.length
+    },
   },
 }
 </script>

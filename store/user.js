@@ -5,15 +5,41 @@ export const state = () => ({
     suggested: [],
     friends: [],
   },
+  notifications: {
+    current_page: 1,
+    last_page: 1,
+    data: [],
+  },
 })
 
 export const getters = {
   friendships: (state) => state.friendships,
+  notifications: (state) => {
+    return {
+      ...state.notifications,
+      data: [
+        ...state.notifications.data.filter(
+          (notification) =>
+            notification.type !== 'Knot\\Notifications\\AddedAsFriend'
+        ),
+      ],
+    }
+  },
 }
 
 export const mutations = {
   setFriendships(state, friendships) {
     state.friendships = friendships
+  },
+  setNotifications(state, notifications) {
+    if (notifications.current_page === 1) {
+      state.notifications = notifications
+    } else {
+      state.notifications = {
+        ...notifications,
+        data: [...state.notifications.data, ...notifications.data],
+      }
+    }
   },
 }
 
@@ -61,6 +87,13 @@ export const actions = {
   async updateProfile({ rootGetters, commit }, profile) {
     const user = await this.$axios.$put('/api/profile/update', profile)
     updateCurrentUser(user, { rootGetters, commit, $auth: this.$auth })
+  },
+  async fetchNotifications({ commit }, page = 1) {
+    const notifications = await this.$axios.$get(
+      `/api/notifications?page=${page}`
+    )
+
+    commit('setNotifications', notifications)
   },
 }
 

@@ -29,7 +29,7 @@
       <button
         class="block w-full py-3 font-bold tracking-widest text-white uppercase rounded shadow-sm cursor-pointer bg-primary-600 focus:outline-none focus:shadow-outline-red"
         type="submit"
-        :disabled="loading || !email.trim()"
+        :disabled="isLoading || !email.trim()"
       >
         Send Reset Instructions
       </button>
@@ -60,7 +60,7 @@ export default {
   data() {
     return {
       email: this.$route.query.email || '',
-      loading: false,
+      isLoading: false,
       success: null,
       error: null,
     }
@@ -70,7 +70,7 @@ export default {
     async doRequestPasswordReset() {
       this.success = null
       this.error = null
-      this.loading = true
+      this.isLoading = true
       try {
         await this.requestPasswordReset({ email: this.email })
         this.success =
@@ -84,7 +84,7 @@ export default {
             'Something went wrong and we could not process your password reset request. Please try again.'
         }
       } finally {
-        this.loading = false
+        this.isLoading = false
       }
     },
   },
