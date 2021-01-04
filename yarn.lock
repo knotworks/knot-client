@@ -1282,10 +1282,10 @@
     consola "^2.15.0"
     defu "^3.1.0"
 
-"@nuxtjs/cloudinary@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/cloudinary/-/cloudinary-1.0.1.tgz#fc74effbf5035159562913e623739b14eb0ee025"
-  integrity sha512-3h1+ziw4kYtB9KsP0G/aiGfHI3iFnYMEUysfMl1QzOCqe6mwtWavLhq8F9c52m/qSO4Ye4aQCk+nDA5aLMTZig==
+"@nuxtjs/cloudinary@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/cloudinary/-/cloudinary-1.0.2.tgz#24aec20f729790533402ee8a1af60a5c3a7f9fd6"
+  integrity sha512-22D7CCA9D10hW7PIeh/H1RZWti5ILqbyiZNZdLJkYwI1wueDMPgvhiCVPRCQURqzp/cnvL4K+B504t5A76vLLA==
   dependencies:
     cloudinary "^1.23.0"
     cloudinary-core "^2.11.3"
