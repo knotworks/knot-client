@@ -29,6 +29,15 @@
             title="Toggle fullscreen"
           />
           <button class="pswp__button pswp__button--zoom" title="Zoom in/out" />
+          <a
+            v-if="imgSrc"
+            download
+            :href="imgSrc"
+            target="_blank"
+            class="absolute z-50 inline-block w-6 h-6 right-3 top-3"
+          >
+            <DownloadIcon class="text-white" />
+          </a>
           <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
           <!-- element will get class pswp__preloader--active when preloader is running -->
           <div class="pswp__preloader">
@@ -67,9 +76,19 @@ import 'photoswipe/dist/default-skin/default-skin.css'
 import PhotoSwipe from 'photoswipe/dist/photoswipe'
 import PhotoSwipeDefaultUI from 'photoswipe/dist/photoswipe-ui-default'
 
+import DownloadIcon from '~/assets/images/icons/arrow-circle-down.svg?inline'
 export default {
+  components: {
+    DownloadIcon,
+  },
+  data() {
+    return {
+      imgSrc: null,
+    }
+  },
   mounted() {
     this.$bus.$on('OPEN_IMAGE', (imageData) => {
+      this.imgSrc = imageData.src
       this.open(imageData)
     })
   },
@@ -105,6 +124,7 @@ export default {
       this.photoswipe.init()
     },
     close() {
+      this.imgSrc = null
       this.photoswipe.close()
     },
   },
