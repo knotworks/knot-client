@@ -14,17 +14,17 @@
         v-for="(file, i) in files"
         :key="file.uuid"
         class="relative flex items-center justify-center w-16 h-16 mb-4 mr-4 text-4xl text-gray-700 rounded-sm shadow-sm cursor-pointer bg-gray-50 media-input-container"
-        :class="{ 'border border-gray-300': !file.preview }"
+        :class="{ 'border border-gray-300': !file.thumb }"
       >
         <img
-          v-if="!file.loading"
+          v-if="!file.loading && !file.thumb && !fileIsVideo(file)"
           src="~/assets/images/icons/add-dark.svg"
           class="h-4"
         />
         <transition name="fade">
           <img
             v-if="file.data"
-            :src="fileIsVideo(file) ? '/video-preview.svg' : file.data"
+            :src="fileIsVideo(file) ? '/video-preview.svg' : file.thumb"
             class="absolute top-0 left-0 object-cover w-full h-full rounded-sm"
           />
         </transition>
@@ -64,6 +64,7 @@ export default {
         {
           data: null,
           type: null,
+          thumb: null,
           loading: false,
           uuid: this.generateTimestamp(),
         },
@@ -81,6 +82,7 @@ export default {
         {
           data: null,
           type: null,
+          thumb: null,
           loading: false,
           uuid: this.generateTimestamp(),
         },
@@ -97,31 +99,39 @@ export default {
         const file = e.target.files[0]
 
         if (this.fileIsVideo(file)) {
+          this.files[i].loading = true
           if (this.hasVideo && !wasPopulated) {
             e.target.value = ''
             alert('You may only upload 1 video per post.')
+            this.files[i].loading = false
             return false
           } else {
-            this.files[i].loading = true
+            this.files[i].data = file
             this.files[i].type = file.type
-            this.files[i].data = await this.fileToDataUrl(file)
+            this.files[i].loading = false
             this.$emit('change', this.files)
           }
         } else {
+          const MAX_SIZE = 128
+
           this.files[i].loading = true
+          this.files[i].data = file
           this.files[i].type = file.type
           loadImage(
             file,
             (canvas) => {
-              this.files[i].data = canvas.toDataURL('image/jpeg', 1.0)
+              this.files[i].thumb = canvas.toDataURL('image/jpeg', 1.0)
               this.files[i].loading = false
               this.$emit('change', this.files)
             },
             {
               canvas: true,
-              contain: true,
-              maxWidth: 2400,
-              maxHeight: 3200,
+              cover: true,
+              crop: true,
+              minWidth: MAX_SIZE,
+              minHeight: MAX_SIZE,
+              maxWidth: MAX_SIZE,
+              maxHeight: MAX_SIZE,
               orientation: true,
             }
           )
@@ -130,6 +140,7 @@ export default {
           this.files.push({
             data: null,
             type: null,
+            thumb: null,
             loading: false,
             uuid: this.generateTimestamp(),
           })
