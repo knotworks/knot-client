@@ -50,6 +50,7 @@ export default {
       const options = {
         timestamp: Date.now(),
         folder: `${this.$config.appEnv}/avatars`,
+        upload_preset: 'avatars',
       }
       const signature = await this.$axios.$post(
         '/api/generate-cloudinary-signature',

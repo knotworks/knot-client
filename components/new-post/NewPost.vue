@@ -134,6 +134,9 @@ export default {
           try {
             const asset = await this.$cloudinary.upload(file.data, {
               ...options,
+              upload_preset: file.type?.match('video')
+                ? 'post-videos'
+                : 'post-images',
               api_key: this.$config.cloudinaryApiKey,
               signature,
             })
