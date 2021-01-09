@@ -10,7 +10,7 @@
         :height="size * 2"
         crop="thumb"
         dpr="auto"
-        fetchFormat="auto"
+        fetch-format="auto"
         responsive="width"
       />
       <!-- eslint-enable -->
