@@ -125,32 +125,29 @@ export default {
         timestamp: Date.now(),
         folder: `${this.$config.appEnv}/media`,
       }
-      for (const file of this.post.media) {
-        let signature = undefined
-        const uploadPreset = file.type?.match('video')
-          ? 'post-videos'
-          : 'post-images'
-        try {
-          signature = await this.$axios.$post(
-            '/api/generate-cloudinary-signature',
-            {
+      let signature = undefined
+
+      try {
+        signature = await this.$axios.$post(
+          '/api/generate-cloudinary-signature',
+          options
+        )
+      } catch {
+        Promise.reject('Unable to generate signature for upload.')
+      }
+
+      if (signature) {
+        for (const file of this.post.media) {
+          try {
+            const asset = await this.$cloudinary.upload(file.data, {
               ...options,
-              upload_preset: uploadPreset,
-            }
-          )
-        } catch {
-          Promise.reject('Unable to generate signature for upload.')
-        }
-        try {
-          const asset = await this.$cloudinary.upload(file.data, {
-            ...options,
-            upload_preset: uploadPreset,
-            api_key: this.$config.cloudinaryApiKey,
-            signature,
-          })
-          media.push(asset)
-        } catch (e) {
-          throw new Error(e)
+              api_key: this.$config.cloudinaryApiKey,
+              signature,
+            })
+            media.push(asset)
+          } catch (e) {
+            throw new Error(e)
+          }
         }
       }
 
