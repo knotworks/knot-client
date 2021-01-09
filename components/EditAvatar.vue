@@ -28,12 +28,11 @@
 </template>
 
 <script>
-import loadImage from 'blueimp-load-image'
 import { mapActions } from 'vuex'
 export default {
   data() {
     return {
-      avatarData: null,
+      avatar: null,
       isLoading: false,
     }
   },
@@ -41,23 +40,11 @@ export default {
     ...mapActions({
       updateAvatar: 'user/updateAvatar',
     }),
-    setAvatar(e) {
+    async setAvatar(e) {
       this.isLoading = true
-      const [file] = e.target.files
-      loadImage(
-        file,
-        async (canvas) => {
-          this.avatarData = canvas.toDataURL('image/jpeg', 1.0)
-          await this.uploadAvatar()
-        },
-        {
-          canvas: true,
-          contain: true,
-          maxWidth: 500,
-          maxHeight: 500,
-          orientation: true,
-        }
-      )
+      this.avatar = e.target.files[0]
+
+      await this.uploadAvatar()
     },
     async uploadAvatar() {
       const options = {
@@ -71,7 +58,7 @@ export default {
 
       if (signature) {
         try {
-          const asset = await this.$cloudinary.upload(this.avatarData, {
+          const asset = await this.$cloudinary.upload(this.avatar, {
             ...options,
             api_key: this.$config.cloudinaryApiKey,
             signature,
