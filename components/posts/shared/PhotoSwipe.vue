@@ -34,7 +34,7 @@
             download
             :href="imgSrc"
             target="_blank"
-            class="absolute z-50 inline-block w-6 h-6 right-3 top-3"
+            class="absolute z-50 inline-block w-6 h-6 right-4 top-8"
           >
             <DownloadIcon class="text-white" />
           </a>
