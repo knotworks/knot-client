@@ -156,6 +156,11 @@ export default {
         url: process.env.BASE_URL,
       },
     },
+    cookie: {
+      options: {
+        expires: 182, // 6 months
+      },
+    },
     redirect: {
       login: '/login',
       logout: '/login',

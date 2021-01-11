@@ -1,8 +1,10 @@
 <template>
   <div class="flex flex-col items-center w-full px-4 mt-24">
-    <KnotLogo
-      class="inline-block w-auto h-12 mt-2 fill-current text-primary-600"
-    />
+    <a href="/">
+      <KnotLogo
+        class="inline-block w-auto h-12 mt-2 fill-current text-primary-600"
+      />
+    </a>
     <form
       class="flex flex-col items-center w-full mt-10 space-y-4"
       @submit.prevent="doLogin()"
