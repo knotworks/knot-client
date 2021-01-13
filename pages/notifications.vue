@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="overflow-y-auto">
     <ul class="text-gray-700 border-b border-gray-300 divide-y divide-gray-300">
       <NotificationItem
         v-for="notification in notifications.data"
