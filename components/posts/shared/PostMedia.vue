@@ -30,11 +30,12 @@
                 </div>
                 <CldVideo
                   v-else
-                  :public-id="media[0].path"
+                  :public-id="item.path"
                   width="500"
                   crop="scale"
                   class="w-full"
                   loading="lazy"
+                  :poster="`https://res.cloudinary.com/${$config.cloudinaryCloudName}/video/upload/v1/${item.path}.jpeg`"
                   controls
                 />
               </transition>
@@ -75,6 +76,7 @@
           width="500"
           crop="scale"
           loading="lazy"
+          :poster="`http://res.cloudinary.com/${$config.cloudinaryCloudName}/video/upload/v1/${media[0].path}.jpeg`"
           controls
         />
       </transition>
@@ -91,6 +93,9 @@ export default {
     },
   },
   computed: {
+    cloudName() {
+      return this.$config.cloudinaryCloudName
+    },
     baseRatio() {
       const media = [...this.media].sort((a, b) => {
         return b.height - a.height
