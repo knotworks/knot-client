@@ -45,7 +45,9 @@ export default {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude: lat, longitude: long } = position.coords
-          this.fetchCurrentLocation({ lat, long })
+          if (!!lat && !!long) {
+            this.fetchCurrentLocation({ lat, long })
+          }
         },
         null,
         {
