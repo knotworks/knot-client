@@ -67,7 +67,7 @@ export default {
         CommentRepliedTo: {
           user: notification.data.comment?.user,
           icon: '📨',
-          action: 'replied to your comment:',
+          action: `also commented on ${notification.data.comment?.post?.user?.full_name}'s post:`,
           body: notification.data.comment?.body,
         },
       }[this.type]
