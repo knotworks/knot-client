@@ -23,6 +23,7 @@
     "@nuxtjs/pwa": "^3.0.2",
     "@tailwindcss/forms": "^0.2.1",
     "blueimp-load-image": "^5.14.0",
+    "cloudinary-vue": "^1.1.2",
     "core-js": "^3.6.5",
     "current-script-polyfill": "^1.0.0",
     "date-fns": "^2.9.0",
