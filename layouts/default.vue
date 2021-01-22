@@ -31,22 +31,30 @@ export default {
       newPostModalShowing: false,
     }
   },
+  watch: {
+    $route() {
+      this.fetchLocation()
+    },
+  },
   mounted() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude: lat, longitude: long } = position.coords
-        this.fetchCurrentLocation({ lat, long })
-      },
-      null,
-      {
-        enableHighAccuracy: true,
-      }
-    )
+    this.fetchLocation()
   },
   methods: {
     ...mapActions('location', ['fetchCurrentLocation']),
+    fetchLocation() {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude: lat, longitude: long } = position.coords
+          this.fetchCurrentLocation({ lat, long })
+        },
+        null,
+        {
+          enableHighAccuracy: true,
+        }
+      )
+    },
     reload() {
-      window.location.reload(true)
+      window.location.reload()
     },
   },
 }

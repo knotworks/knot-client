@@ -16,7 +16,7 @@ export const getters = {
     }
   },
   hasLocationSet: (state) => {
-    return !!state.currentLocation.lat
+    return !!state.currentLocation.lat || !!state.currentLocation.long
   },
   nearby: (state) => state.nearby,
 }
@@ -32,6 +32,12 @@ export const mutations = {
 
 export const actions = {
   async fetchCurrentLocation({ commit }, { lat, long }) {
+    commit('setCurrentLocation', {
+      lat,
+      long,
+      city: null,
+    })
+
     const location = await this.$axios.$post(
       'https://opencagedata.syropia.workers.dev',
       {
@@ -48,7 +54,9 @@ export const actions = {
       city,
     })
   },
-  async fetchNearby({ commit }, { lat, long, query = '' }) {
+  async fetchNearby({ commit, getters }, { query = '' }) {
+    const { lat, long } = getters.currentLocation
+
     const nearby = await this.$axios.$post(
       'https://foursquareplaces.syropia.workers.dev',
       {
