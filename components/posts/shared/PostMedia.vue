@@ -76,7 +76,7 @@
           width="500"
           crop="scale"
           loading="lazy"
-          :poster="`http://res.cloudinary.com/${$config.cloudinaryCloudName}/video/upload/v1/${media[0].path}.jpeg`"
+          :poster="`https://res.cloudinary.com/${$config.cloudinaryCloudName}/video/upload/v1/${media[0].path}.jpeg`"
           controls
         />
       </transition>
