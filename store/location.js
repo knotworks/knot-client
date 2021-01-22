@@ -46,13 +46,15 @@ export const actions = {
       }
     )
     const { components } = location.results[0]
-    const city = components.city || components.town || components.suburb
 
-    commit('setCurrentLocation', {
-      lat,
-      long,
-      city,
-    })
+    if (components) {
+      const city = components.city || components.town || components.suburb
+      commit('setCurrentLocation', {
+        lat,
+        long,
+        city,
+      })
+    }
   },
   async fetchNearby({ commit, getters }, { query = '' }) {
     const { lat, long } = getters.currentLocation
