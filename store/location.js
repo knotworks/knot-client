@@ -39,7 +39,7 @@ export const actions = {
     })
 
     const location = await this.$axios.$post(
-      'https://opencagedata.syropia.workers.dev',
+      'https://knot.syropia.workers.dev/current-location',
       {
         lat,
         long,
@@ -58,7 +58,7 @@ export const actions = {
   },
   async fetchNearby({ commit }, { lat, long, query = '' }) {
     const nearby = await this.$axios.$post(
-      'https://foursquareplaces.syropia.workers.dev',
+      'https://knot.syropia.workers.dev/nearby',
       {
         lat,
         long,

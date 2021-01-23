@@ -3,7 +3,7 @@
     <slot
       :title="res.title"
       :description="res.description"
-      :image="res.image"
+      :image="res.image.replace('http://', 'https://')"
       :isLoading="isLoading"
       :hasError="hasError"
     />
@@ -35,7 +35,7 @@ export default {
       try {
         const expiration = new Date().getTime() + 5 * 24 * 60 * 60 * 1000
         this.res = await this.$client.post(
-          'https://linkpreview.syropia.workers.dev',
+          'https://knot.syropia.workers.dev/link-preview',
           { url: this.url }
         )
 

@@ -1,0 +1,6 @@
+name = "knot"
+type = "webpack"
+account_id = "02eb9c5d24cbea6bfbf6c2fe0bb7a075"
+workers_dev = true
+route = ""
+zone_id = ""
