@@ -50,38 +50,40 @@
       class="relative w-full h-0 bg-gray-200"
       :style="{ paddingBottom: intrinsicRatio(media[0]) }"
     >
-      <transition name="fade">
-        <div
-          v-if="media[0].type === 'image'"
-          class="absolute top-0 left-0 w-full h-full"
-          @click="openPhoto(media[0], $event)"
-        >
-          <CldImage
-            :public-id="media[0].path"
-            responsive="width"
+      <client-only>
+        <transition name="fade">
+          <div
+            v-if="media[0].type === 'image'"
             class="absolute top-0 left-0 w-full h-full"
+            @click="openPhoto(media[0], $event)"
+          >
+            <CldImage
+              :public-id="media[0].path"
+              responsive="width"
+              class="absolute top-0 left-0 w-full h-full"
+              loading="lazy"
+              :secure="true"
+            >
+              <CldTransformation
+                dpr="auto"
+                fetch-format="auto"
+                crop="scale"
+                quality="100"
+              />
+            </CldImage>
+          </div>
+          <CldVideo
+            v-else
+            :public-id="media[0].path"
+            class="absolute top-0 left-0 w-full h-full"
+            width="500"
+            crop="scale"
             loading="lazy"
             :secure="true"
-          >
-            <CldTransformation
-              dpr="auto"
-              fetch-format="auto"
-              crop="scale"
-              quality="100"
-            />
-          </CldImage>
-        </div>
-        <CldVideo
-          v-else
-          :public-id="media[0].path"
-          class="absolute top-0 left-0 w-full h-full"
-          width="500"
-          crop="scale"
-          loading="lazy"
-          :secure="true"
-          controls
-        />
-      </transition>
+            controls
+          />
+        </transition>
+      </client-only>
     </div>
   </div>
 </template>

@@ -100,7 +100,7 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    { src: '~/plugins/cloudinary.js', ssr: true },
+    { src: '~/plugins/cloudinary.js', ssr: false },
     { src: '~/plugins/lazysizes.js', ssr: false },
     { src: '~/plugins/eventBus.js', ssr: true },
   ],
