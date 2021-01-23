@@ -37,6 +37,7 @@
                   class="w-full"
                   loading="lazy"
                   :secure="true"
+                  :poster="`https://res.cloudinary.com/${$config.cloudinaryCloudName}/video/upload/v1/${item.path}.jpeg`"
                   controls
                 />
               </transition>
@@ -80,6 +81,7 @@
             crop="scale"
             loading="lazy"
             :secure="true"
+            :poster="`https://res.cloudinary.com/${$config.cloudinaryCloudName}/video/upload/v1/${media[0].path}.jpeg`"
             controls
           />
         </transition>
