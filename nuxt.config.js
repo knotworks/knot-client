@@ -173,7 +173,7 @@ export default {
     cloudName: process.env.CLOUDINARY_CLOUD_NAME,
     apiKey: process.env.CLOUDINARY_API_KEY,
     apiSecret: process.env.CLOUDINARY_API_SECRET,
-    useComponent: true,
+    useComponent: false,
     secure: true,
   },
 
@@ -194,19 +194,5 @@ export default {
         })
       }
     },
-  },
-
-  server: {
-    port: 3000,
-    host: '127.0.0.1',
-    https:
-      process.env.NODE_ENV !== 'production'
-        ? {
-            key: fs.readFileSync(
-              path.resolve(__dirname, 'app.knot.test-key.pem')
-            ),
-            cert: fs.readFileSync(path.resolve(__dirname, 'app.knot.test.pem')),
-          }
-        : false,
   },
 }

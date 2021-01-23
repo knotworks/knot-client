@@ -3,7 +3,12 @@
     class="relative flex items-center justify-center overflow-hidden bg-gray-200"
     :style="{ width: `${size}px`, height: `${size}px` }"
   >
-    <CldImage v-if="user.avatar" :public-id="user.avatar" class="avatar">
+    <CldImage
+      v-if="user.avatar"
+      :public-id="user.avatar"
+      :secure="true"
+      class="avatar"
+    >
       <!-- eslint-disable -->
       <CldTransformation
         :width="size * 2"
