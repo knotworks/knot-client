@@ -56,9 +56,7 @@ export const actions = {
       })
     }
   },
-  async fetchNearby({ commit, getters }, { query = '' }) {
-    const { lat, long } = getters.currentLocation
-
+  async fetchNearby({ commit }, { lat, long, query = '' }) {
     const nearby = await this.$axios.$post(
       'https://foursquareplaces.syropia.workers.dev',
       {

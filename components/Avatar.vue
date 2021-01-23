@@ -4,12 +4,7 @@
     :style="{ width: `${size}px`, height: `${size}px` }"
   >
     <client-only>
-      <CldImage
-        v-if="user.avatar"
-        :public-id="user.avatar"
-        :secure="true"
-        class="avatar"
-      >
+      <CldImage v-if="user.avatar" :public-id="user.avatar" class="avatar">
         <!-- eslint-disable -->
         <CldTransformation
           :width="size * 2"

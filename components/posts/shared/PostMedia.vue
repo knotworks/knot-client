@@ -24,7 +24,6 @@
                     fetch-format="auto"
                     quality="auto"
                     loading="lazy"
-                    :secure="true"
                   >
                     <CldPlaceholder />
                   </CldImage>
@@ -36,7 +35,6 @@
                   crop="scale"
                   class="w-full"
                   loading="lazy"
-                  :secure="true"
                   :poster="`https://res.cloudinary.com/${$config.cloudinaryCloudName}/video/upload/v1/${item.path}.jpeg`"
                   controls
                 />
@@ -63,7 +61,6 @@
               responsive="width"
               class="absolute top-0 left-0 w-full h-full"
               loading="lazy"
-              :secure="true"
             >
               <CldTransformation
                 dpr="auto"
@@ -80,7 +77,6 @@
             width="500"
             crop="scale"
             loading="lazy"
-            :secure="true"
             :poster="`https://res.cloudinary.com/${$config.cloudinaryCloudName}/video/upload/v1/${media[0].path}.jpeg`"
             controls
           />
