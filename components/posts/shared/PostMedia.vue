@@ -7,7 +7,7 @@
             v-for="item in media"
             :key="item.id"
             class="relative w-full h-0 min-w-full bg-gray-100"
-            :style="{ paddingBottom: baseRatio }"
+            :style="{ paddingBottom: `${baseRatio}%` }"
           >
             <div
               class="absolute top-0 left-0 flex items-center justify-center w-full h-full"
@@ -47,7 +47,7 @@
     <div
       v-else
       class="relative w-full h-0 bg-gray-200"
-      :style="{ paddingBottom: intrinsicRatio(media[0]) }"
+      :style="{ paddingBottom: `${intrinsicRatio(media[0])}%` }"
     >
       <client-only>
         <transition name="fade">
@@ -99,16 +99,14 @@ export default {
       return this.$config.cloudinaryCloudName
     },
     baseRatio() {
-      const media = [...this.media].sort((a, b) => {
-        return b.height - a.height
-      })[0]
-
-      return this.intrinsicRatio(media)
+      return [...this.media]
+        .map((media) => this.intrinsicRatio(media))
+        .sort((a, b) => b - a)[0]
     },
   },
   methods: {
     intrinsicRatio(media) {
-      return `${(media.height / media.width) * 100}%`
+      return (media.height / media.width) * 100
     },
     responsiveSetting(media) {
       return media.width >= media.height ? 'width' : 'height'
