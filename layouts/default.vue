@@ -44,10 +44,10 @@ export default {
     fetchLocation() {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          const { latitude: lat, longitude: long } = position.coords
+          const { latitude: lat, longitude: lon } = position.coords
 
-          if (lat && long) {
-            this.fetchCurrentLocation({ lat, long })
+          if (lat && lon) {
+            this.fetchCurrentLocation({ lat, lon })
           }
         },
         (error) => {

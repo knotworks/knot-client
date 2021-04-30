@@ -129,7 +129,7 @@ export default {
 
       try {
         signature = await this.$axios.$post(
-          '/api/generate-cloudinary-signature',
+          '/api/services/generate-cloudinary-signature',
           options
         )
       } catch {
@@ -168,7 +168,7 @@ export default {
       this.isAddingLocation = false
       this.post.location = {
         lat: +parseFloat(place.location.lat).toFixed(6),
-        long: +parseFloat(place.location.lng).toFixed(6),
+        lon: +parseFloat(place.location.lng).toFixed(6),
         name: place.name,
         city: place.location.city,
       }
