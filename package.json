@@ -29,7 +29,7 @@
     "date-fns": "^2.9.0",
     "embla-carousel": "^4.1.2",
     "lazysizes": "^5.2.0",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "markdown-it": "^11.0.0",
     "nuxt": "^2.14.5",
     "object-to-formdata": "^4.1.0",
