@@ -34,11 +34,9 @@ export default {
     } else {
       try {
         const expiration = new Date().getTime() + 5 * 24 * 60 * 60 * 1000
-        this.res = await this.$client.post(
-          'https://knot.syropia.workers.dev/link-preview',
-          { url: this.url }
-        )
-
+        this.res = await this.$axios.$post('/api/services/link-meta', {
+          url: this.url,
+        })
         this.$warehouse.set(this.url, this.res, expiration)
       } catch (e) {
         this.hasError = true

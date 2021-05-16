@@ -79,7 +79,9 @@ export default {
   loading: false,
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
-  components: true,
+  components: {
+    dirs: ['~/components', '~/components/new-post', '~/components/posts'],
+  },
 
   /*
    ** Global CSS
@@ -175,6 +177,10 @@ export default {
     apiSecret: process.env.CLOUDINARY_API_SECRET,
     useComponent: false,
     secure: true,
+  },
+
+  tailwindcss: {
+    jit: true,
   },
 
   /*

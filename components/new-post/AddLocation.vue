@@ -58,8 +58,8 @@ export default {
   },
   created() {
     this.searchLocation = debounce(async () => {
-      const { lat, long } = this.currentLocation
-      await this.fetchNearby({ lat, long, query: this.query })
+      const { lat, lon } = this.currentLocation
+      await this.fetchNearby({ lat, lon, query: this.query })
       this.isLoading = false
     }, 500)
   },
@@ -68,8 +68,8 @@ export default {
     if (!this.hasLocationSet) {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
-          const { latitude: lat, longitude: long } = position.coords
-          await this.fetchNearby({ lat, long })
+          const { latitude: lat, longitude: lon } = position.coords
+          await this.fetchNearby({ lat, lon })
           this.isLoading = false
         },
         null,
@@ -78,8 +78,8 @@ export default {
         }
       )
     } else {
-      const { lat, long } = this.currentLocation
-      await this.fetchNearby({ lat, long })
+      const { lat, lon } = this.currentLocation
+      await this.fetchNearby({ lat, lon })
       this.isLoading = false
     }
   },
