@@ -139,11 +139,6 @@ export default {
       'nuxt-bugsnag',
       {
         apiKey: process.env.BUGSNAG_API_KEY,
-        reporterOptions: {
-          releaseStage: process.env.NODE_ENV,
-          autoAssignRelease: true,
-        },
-        publishRelease: true,
       },
     ],
   ],
