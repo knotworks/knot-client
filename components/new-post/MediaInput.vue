@@ -13,7 +13,22 @@
       <div
         v-for="(file, i) in files"
         :key="file.uuid"
-        class="relative flex items-center justify-center w-16 h-16 mb-4 mr-4 text-4xl text-gray-700 rounded-sm shadow-sm cursor-pointer bg-gray-50 media-input-container"
+        class="
+          relative
+          flex
+          items-center
+          justify-center
+          w-16
+          h-16
+          mb-4
+          mr-4
+          text-4xl text-gray-700
+          rounded-sm
+          shadow-sm
+          cursor-pointer
+          bg-gray-50
+          media-input-container
+        "
         :class="{ 'border border-gray-300': !file.thumb }"
       >
         <img
@@ -37,7 +52,22 @@
         />
         <button
           v-show="file.data"
-          class="absolute top-0 right-0 inline-flex items-center justify-center w-6 h-6 -mt-2 -mr-3 text-sm text-white bg-red-500 rounded-full focus-none"
+          class="
+            absolute
+            top-0
+            right-0
+            inline-flex
+            items-center
+            justify-center
+            w-6
+            h-6
+            -mt-2
+            -mr-3
+            text-sm text-white
+            bg-red-500
+            rounded-full
+            focus-none
+          "
           type="button"
           aria-label="Close"
           @click="removeFile(i)"

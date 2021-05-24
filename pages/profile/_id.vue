@@ -18,7 +18,18 @@
         </p>
         <div v-if="isUserProfile">
           <button
-            class="px-3 py-1 text-xs font-bold tracking-wider text-white uppercase bg-red-600 rounded-full shadow-sm"
+            class="
+              px-3
+              py-1
+              text-xs
+              font-bold
+              tracking-wider
+              text-white
+              uppercase
+              bg-red-600
+              rounded-full
+              shadow-sm
+            "
             @click="isEditingProfile = true"
           >
             Edit Profile
@@ -61,10 +72,8 @@ export default {
   methods: {
     ...mapActions('posts', ['fetchProfile']),
     loadNextPage() {
-      const {
-        current_page: currentPage,
-        last_page: lastPage,
-      } = this.currentProfile
+      const { current_page: currentPage, last_page: lastPage } =
+        this.currentProfile
       if (currentPage < lastPage) {
         this.fetchProfile({ id: this.$route.params.id, page: currentPage + 1 })
       }

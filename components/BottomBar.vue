@@ -2,7 +2,15 @@
   <div class="px-2 bg-gray-100 border-t border-gray-200 bottom-bar">
     <NuxtLink
       to="/"
-      class="inline-flex items-center justify-center w-full h-8 text-gray-400 cursor-pointer"
+      class="
+        inline-flex
+        items-center
+        justify-center
+        w-full
+        h-8
+        text-gray-400
+        cursor-pointer
+      "
       active-class="text-red-500"
       aria-label="Timeline"
       exact
@@ -11,7 +19,15 @@
     </NuxtLink>
     <NuxtLink
       to="/notifications"
-      class="inline-flex items-center justify-center w-full h-8 text-gray-400 cursor-pointer"
+      class="
+        inline-flex
+        items-center
+        justify-center
+        w-full
+        h-8
+        text-gray-400
+        cursor-pointer
+      "
       active-class="text-red-500"
       aria-label="Notifications"
       exact
@@ -20,7 +36,17 @@
     </NuxtLink>
     <div class="flex justify-center w-full">
       <button
-        class="inline-flex items-center justify-center w-8 h-8 bg-red-600 rounded-full cursor-pointer btn-add-post"
+        class="
+          inline-flex
+          items-center
+          justify-center
+          w-8
+          h-8
+          bg-red-600
+          rounded-full
+          cursor-pointer
+          btn-add-post
+        "
         aria-label="Add Post"
         @click="$emit('newPost')"
       >
@@ -30,7 +56,15 @@
     <NuxtLink
       v-if="$auth.user"
       :to="`/profile/${$auth.user.id}`"
-      class="inline-flex items-center justify-center w-full h-8 text-gray-400 cursor-pointer"
+      class="
+        inline-flex
+        items-center
+        justify-center
+        w-full
+        h-8
+        text-gray-400
+        cursor-pointer
+      "
       active-class="text-red-500"
       aria-label="Profile"
       exact
@@ -39,7 +73,15 @@
     </NuxtLink>
     <NuxtLink
       to="/friends"
-      class="inline-flex items-center justify-center w-full h-8 text-gray-400 cursor-pointer"
+      class="
+        inline-flex
+        items-center
+        justify-center
+        w-full
+        h-8
+        text-gray-400
+        cursor-pointer
+      "
       active-class="text-red-500"
       aria-label="Friends"
       exact
@@ -49,7 +91,21 @@
         <transition name="fade">
           <div
             v-if="friendRequestCount"
-            class="absolute top-0 flex items-center justify-center w-4 h-4 font-semibold text-center text-white bg-red-600 rounded-full text-xxs right-4"
+            class="
+              absolute
+              top-0
+              flex
+              items-center
+              justify-center
+              w-4
+              h-4
+              font-semibold
+              text-center text-white
+              bg-red-600
+              rounded-full
+              text-xxs
+              right-4
+            "
           >
             {{ friendRequestCount }}
           </div>

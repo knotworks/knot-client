@@ -10,7 +10,16 @@
             :style="{ paddingBottom: `${baseRatio}%` }"
           >
             <div
-              class="absolute top-0 left-0 flex items-center justify-center w-full h-full"
+              class="
+                absolute
+                top-0
+                left-0
+                flex
+                items-center
+                justify-center
+                w-full
+                h-full
+              "
             >
               <transition name="fade">
                 <div

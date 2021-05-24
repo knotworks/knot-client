@@ -16,13 +16,39 @@
 
       <input
         v-model="credentials.email"
-        class="w-full h-12 px-3 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary-600"
+        class="
+          w-full
+          h-12
+          px-3
+          text-gray-700
+          transition-colors
+          duration-150
+          ease-linear
+          border-2 border-gray-200
+          rounded
+          outline-none
+          appearance-none
+          focus:border-primary-600
+        "
         type="email"
         placeholder="Your Email"
       />
       <input
         v-model="credentials.password"
-        class="w-full h-12 px-3 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary-600"
+        class="
+          w-full
+          h-12
+          px-3
+          text-gray-700
+          transition-colors
+          duration-150
+          ease-linear
+          border-2 border-gray-200
+          rounded
+          outline-none
+          appearance-none
+          focus:border-primary-600
+        "
         type="password"
         placeholder="Enter a password"
       />
@@ -36,7 +62,21 @@
       </div>
 
       <button
-        class="block w-full py-3 font-bold tracking-widest text-white uppercase bg-red-600 rounded shadow-sm cursor-pointer focus:outline-none focus:shadow-outline-red"
+        class="
+          block
+          w-full
+          py-3
+          font-bold
+          tracking-widest
+          text-white
+          uppercase
+          bg-red-600
+          rounded
+          shadow-sm
+          cursor-pointer
+          focus:outline-none
+          focus:shadow-outline-red
+        "
         type="submit"
         :disabled="loading"
       >

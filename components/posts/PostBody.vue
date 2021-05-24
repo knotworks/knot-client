@@ -1,6 +1,6 @@
 <template>
   <div class="p-5 text-sm leading-normal text-gray-800">
-    <span class="post-body" v-html="body" />
+    <span class="break-words post-body" v-html="body" />
     <ul v-if="links" class="mt-4 list-reset">
       <li
         v-for="(link, i) in links"

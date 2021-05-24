@@ -13,7 +13,17 @@
           v-show="!commentEmpty"
           :disabled="postingComment"
           type="submit"
-          class="px-2 py-1 text-xs font-medium tracking-wide text-white uppercase bg-red-600 rounded-full"
+          class="
+            px-2
+            py-1
+            text-xs
+            font-medium
+            tracking-wide
+            text-white
+            uppercase
+            bg-red-600
+            rounded-full
+          "
         >
           Send
         </button>

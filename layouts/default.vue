@@ -1,6 +1,15 @@
 <template>
   <div
-    class="absolute top-0 left-0 z-10 w-screen h-screen bg-gray-100 layout-default"
+    class="
+      absolute
+      top-0
+      left-0
+      z-10
+      w-screen
+      h-screen
+      bg-gray-100
+      layout-default
+    "
   >
     <PhotoSwipe />
     <transition name="slide-up">

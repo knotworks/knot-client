@@ -15,19 +15,58 @@
         >
           <input
             v-model="user.email"
-            class="w-full h-12 px-3 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary-600"
+            class="
+              w-full
+              h-12
+              px-3
+              text-gray-700
+              transition-colors
+              duration-150
+              ease-linear
+              border-2 border-gray-200
+              rounded
+              outline-none
+              appearance-none
+              focus:border-primary-600
+            "
             type="email"
             placeholder="Email"
           />
           <input
             v-model="user.first_name"
-            class="w-full h-12 px-3 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary-600"
+            class="
+              w-full
+              h-12
+              px-3
+              text-gray-700
+              transition-colors
+              duration-150
+              ease-linear
+              border-2 border-gray-200
+              rounded
+              outline-none
+              appearance-none
+              focus:border-primary-600
+            "
             type="text"
             placeholder="First Name"
           />
           <input
             v-model="user.last_name"
-            class="w-full h-12 px-3 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary-600"
+            class="
+              w-full
+              h-12
+              px-3
+              text-gray-700
+              transition-colors
+              duration-150
+              ease-linear
+              border-2 border-gray-200
+              rounded
+              outline-none
+              appearance-none
+              focus:border-primary-600
+            "
             type="text"
             placeholder="Last Name"
           />
@@ -36,19 +75,58 @@
             <div class="flex flex-col mt-2 space-y-2">
               <input
                 v-model="user.current_password"
-                class="w-full h-12 px-3 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary-600"
+                class="
+                  w-full
+                  h-12
+                  px-3
+                  text-gray-700
+                  transition-colors
+                  duration-150
+                  ease-linear
+                  border-2 border-gray-200
+                  rounded
+                  outline-none
+                  appearance-none
+                  focus:border-primary-600
+                "
                 type="password"
                 placeholder="Current Password"
               />
               <input
                 v-model="user.password"
-                class="w-full h-12 px-3 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary-600"
+                class="
+                  w-full
+                  h-12
+                  px-3
+                  text-gray-700
+                  transition-colors
+                  duration-150
+                  ease-linear
+                  border-2 border-gray-200
+                  rounded
+                  outline-none
+                  appearance-none
+                  focus:border-primary-600
+                "
                 type="password"
                 placeholder="New Password"
               />
               <input
                 v-model="user.password_confirmation"
-                class="w-full h-12 px-3 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary-600"
+                class="
+                  w-full
+                  h-12
+                  px-3
+                  text-gray-700
+                  transition-colors
+                  duration-150
+                  ease-linear
+                  border-2 border-gray-200
+                  rounded
+                  outline-none
+                  appearance-none
+                  focus:border-primary-600
+                "
                 type="password"
                 placeholder="Confirm New Password"
               />
@@ -56,7 +134,22 @@
           </div>
           <div>
             <button
-              class="block w-full py-3 mt-4 font-bold tracking-widest text-white uppercase rounded shadow-sm cursor-pointer bg-primary-600 focus:outline-none focus:shadow-outline-red"
+              class="
+                block
+                w-full
+                py-3
+                mt-4
+                font-bold
+                tracking-widest
+                text-white
+                uppercase
+                rounded
+                shadow-sm
+                cursor-pointer
+                bg-primary-600
+                focus:outline-none
+                focus:shadow-outline-red
+              "
               type="submit"
               :disabled="isLoading"
             >

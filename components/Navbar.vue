@@ -1,6 +1,15 @@
 <template>
   <div
-    class="relative flex items-center justify-center px-4 text-center text-white bg-red-600 navbar"
+    class="
+      relative
+      flex
+      items-center
+      justify-center
+      px-4
+      text-center text-white
+      bg-red-600
+      navbar
+    "
   >
     <div class="text-sm leading-none cursor-pointer left-buttons">
       <slot name="left-buttons" />
