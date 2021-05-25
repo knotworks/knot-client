@@ -8,20 +8,16 @@ module.exports = {
     parser: 'babel-eslint',
   },
   extends: [
-    'eslint:recommended',
-    'plugin:vue/recommended',
+    '@nuxtjs',
+    'prettier',
+    'prettier/vue',
     'plugin:prettier/recommended',
+    'plugin:nuxt/recommended',
   ],
-  // required to lint *.vue files
-  plugins: ['vue'],
+  plugins: ['prettier'],
   // add your custom rules here
   rules: {
-    semi: [2, 'never'],
-    'no-console': 'off',
-    'vue/max-attributes-per-line': 'off',
-    'vue/html-self-closing': 'off',
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'vue/no-v-html': 'off',
-    'vue/singleline-html-element-content-newline': 'off',
-    'prettier/prettier': ['error', { semi: false }],
   },
 }

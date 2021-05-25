@@ -1,17 +1,6 @@
 <template>
   <ul
-    class="
-      absolute
-      top-0
-      right-0
-      flex
-      items-center
-      h-8
-      px-1
-      mr-10
-      reactions
-      list-reset
-    "
+    class="absolute top-0 right-0 flex items-center h-8 px-1 mr-10 reactions list-reset"
   >
     <li
       v-for="(path, key) in reactions"

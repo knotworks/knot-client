@@ -20,22 +20,7 @@
       ></div>
     </transition>
     <div
-      class="
-        absolute
-        z-10
-        inline-block
-        px-2
-        py-0
-        font-bold
-        tracking-wide
-        text-gray-800
-        uppercase
-        bg-white
-        rounded-full
-        shadow-sm
-        text-xxs
-        -bottom-1.5
-      "
+      class="absolute z-10 inline-block px-2 py-0 font-bold tracking-wide text-gray-800 uppercase bg-white rounded-full shadow-sm text-xxs -bottom-1.5"
     >
       {{ isLoading ? 'Loading...' : 'Edit' }}
     </div>
@@ -88,7 +73,7 @@ export default {
         }
       } else {
         this.isLoading = false
-        Promise.reject('Unable to generate signature for upload.')
+        Promise.reject(new Error('Unable to generate signature for upload.'))
       }
     },
   },

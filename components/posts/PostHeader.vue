@@ -18,18 +18,7 @@
         />
       </transition>
       <button
-        class="
-          flex
-          items-center
-          justify-center
-          w-8
-          h-8
-          bg-gray-200
-          rounded-full
-          cursor-pointer
-          text-zero
-          focus-none
-        "
+        class="flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full cursor-pointer text-zero focus-none"
         type="button"
         @click="showReactions = !showReactions"
       >

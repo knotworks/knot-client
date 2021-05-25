@@ -19,7 +19,7 @@ export default {
       this.$fetch()
     }
   },
-  async mounted() {
+  mounted() {
     this.$bus.$on('POST_CREATED', async () => {
       await this.fetchTimeline()
     })

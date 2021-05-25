@@ -5,14 +5,7 @@
     <div v-if="friendships.outgoing.length">
       <h3 class="text-lg font-semibold text-gray-900">Sent Requests</h3>
       <ul
-        class="
-          mt-1
-          overflow-hidden
-          bg-white
-          divide-y divide-gray-200
-          rounded-lg
-          shadow-sm
-        "
+        class="mt-1 overflow-hidden bg-white divide-y divide-gray-200 rounded-lg shadow-sm"
       >
         <li
           v-for="sent in friendships.outgoing"
@@ -24,16 +17,7 @@
             {{ sent.recipient.full_name }}
           </div>
           <div
-            class="
-              px-2
-              py-1
-              ml-auto
-              text-xs
-              font-medium
-              text-yellow-800
-              bg-yellow-100
-              rounded-full
-            "
+            class="px-2 py-1 ml-auto text-xs font-medium text-yellow-800 bg-yellow-100 rounded-full"
           >
             Pending
           </div>
@@ -43,14 +27,7 @@
     <div v-if="friendships.requests.length">
       <h3 class="text-lg font-semibold text-gray-900">Friend Requests</h3>
       <ul
-        class="
-          mt-2
-          overflow-hidden
-          bg-white
-          divide-y divide-gray-200
-          rounded-lg
-          shadow-sm
-        "
+        class="mt-2 overflow-hidden bg-white divide-y divide-gray-200 rounded-lg shadow-sm"
       >
         <li
           v-for="req in friendships.requests"
@@ -81,26 +58,12 @@
     <div v-if="friendships.friends.length">
       <h3 class="text-lg font-semibold text-gray-900">Friends</h3>
       <ul
-        class="
-          mt-2
-          overflow-hidden
-          bg-white
-          divide-y divide-gray-200
-          rounded-lg
-          shadow-sm
-        "
+        class="mt-2 overflow-hidden bg-white divide-y divide-gray-200 rounded-lg shadow-sm"
       >
         <li v-for="friend in friendships.friends" :key="friend.id">
           <nuxt-link
             :to="`/profile/${friend.id}`"
-            class="
-              flex
-              items-center
-              p-4
-              no-underline
-              flex-no-shrink
-              text-grey-darkest
-            "
+            class="flex items-center p-4 no-underline flex-no-shrink text-grey-darkest"
           >
             <Avatar :user="friend" class="mr-2 rounded-full" />
             <div class="font-medium">
@@ -113,14 +76,7 @@
     <div v-if="friendships.suggested.length">
       <h3 class="text-lg font-semibold text-gray-900">Suggested</h3>
       <ul
-        class="
-          mt-1
-          overflow-hidden
-          bg-white
-          divide-y divide-gray-200
-          rounded-lg
-          shadow-sm
-        "
+        class="mt-1 overflow-hidden bg-white divide-y divide-gray-200 rounded-lg shadow-sm"
       >
         <li
           v-for="user in friendships.suggested"

@@ -23,7 +23,7 @@
     "@nuxtjs/pwa": "^3.0.2",
     "@tailwindcss/forms": "^0.2.1",
     "blueimp-load-image": "^5.14.0",
-    "cloudinary-vue": "^1.1.2",
+    "cloudinary-vue": "1.1.2",
     "core-js": "^3.6.5",
     "current-script-polyfill": "^1.0.0",
     "date-fns": "^2.9.0",
@@ -49,15 +49,18 @@
     "@nuxtjs/tailwindcss": "^4.0.1",
     "autoprefixer": "^9",
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.8.1",
-    "eslint-config-prettier": "^6.11.0",
+    "eslint": "^7.10.0",
+    "eslint-config-prettier": "^6.12.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-nuxt": "^1.0.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-vue": "^6.0.0",
     "node-sass": "^4.13.1",
     "postcss": "^8.2.8",
-    "prettier": "^2.1.1",
+    "prettier": "2.1.1",
     "sass-loader": "^10.1.1"
+  },
+  "resolutions": {
+    "**/prettier": "2.2.1",
+    "**/cloudinary-vue": "1.1.2"
   }
 }

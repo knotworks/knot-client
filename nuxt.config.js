@@ -1,5 +1,7 @@
+/* eslint-disable */
 import path from 'path'
 import fs from 'fs'
+/* eslint-enable */
 
 require('dotenv').config()
 
@@ -41,11 +43,13 @@ export default {
       {
         rel: 'preload',
         as: 'style',
-        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap',
+        href:
+          'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap',
       },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap',
+        href:
+          'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap',
         media: 'print',
         onload: 'this.media="all"',
       },

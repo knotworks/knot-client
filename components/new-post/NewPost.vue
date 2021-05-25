@@ -21,16 +21,7 @@
           {{ friendsButtonLabel }}
         </button>
         <button
-          class="
-            w-full
-            px-3
-            py-3
-            mt-4
-            text-gray-700
-            truncate
-            bg-gray-300
-            rounded-sm
-          "
+          class="w-full px-3 py-3 mt-4 text-gray-700 truncate bg-gray-300 rounded-sm"
           type="button"
           @click="isAddingLocation = !isAddingLocation"
         >
@@ -38,16 +29,7 @@
         </button>
         <button
           type="submit"
-          class="
-            w-full
-            px-3
-            py-3
-            mt-4
-            text-white
-            bg-red-600
-            rounded-sm
-            shadow-md
-          "
+          class="w-full px-3 py-3 mt-4 text-white bg-red-600 rounded-sm shadow-md"
           :disabled="isPosting"
         >
           {{ isPosting ? 'Posting...' : 'Post' }}
@@ -143,7 +125,7 @@ export default {
         timestamp: Date.now(),
         folder: `${this.$config.appEnv}/media`,
       }
-      let signature = undefined
+      let signature
 
       try {
         signature = await this.$axios.$post(
@@ -151,7 +133,7 @@ export default {
           options
         )
       } catch {
-        Promise.reject('Unable to generate signature for upload.')
+        Promise.reject(new Error('Unable to generate signature for upload.'))
       }
 
       if (signature) {

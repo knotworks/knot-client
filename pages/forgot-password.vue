@@ -24,39 +24,12 @@
 
       <input
         v-model="email"
-        class="
-          w-full
-          h-12
-          px-3
-          text-gray-700
-          transition-colors
-          duration-150
-          ease-linear
-          border-2 border-gray-200
-          rounded
-          outline-none
-          appearance-none
-          focus:border-primary-600
-        "
+        class="w-full h-12 px-3 text-gray-700 transition-colors duration-150 ease-linear border-2 border-gray-200 rounded outline-none appearance-none focus:border-primary-600"
         type="email"
         placeholder="Your Email"
       />
       <button
-        class="
-          block
-          w-full
-          py-3
-          font-bold
-          tracking-widest
-          text-white
-          uppercase
-          rounded
-          shadow-sm
-          cursor-pointer
-          bg-primary-600
-          focus:outline-none
-          focus:shadow-outline-red
-        "
+        class="block w-full py-3 font-bold tracking-widest text-white uppercase rounded shadow-sm cursor-pointer bg-primary-600 focus:outline-none focus:shadow-outline-red"
         type="submit"
         :disabled="isLoading || !email.trim()"
       >

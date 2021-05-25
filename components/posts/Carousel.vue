@@ -11,16 +11,7 @@
           v-for="(__, index) in carousel.slideNodes()"
           :key="index"
           role="button"
-          class="
-            w-2
-            h-2
-            transition-colors
-            duration-300
-            ease-in-out
-            bg-gray-300
-            rounded-full
-            cursor-pointer
-          "
+          class="w-2 h-2 transition-colors duration-300 ease-in-out bg-gray-300 rounded-full cursor-pointer"
           :class="{
             'bg-gray-500': currentSlide === index,
           }"

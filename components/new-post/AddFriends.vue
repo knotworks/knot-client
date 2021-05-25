@@ -11,14 +11,7 @@
       <li
         v-for="friend in friendships.friends"
         :key="friend.id"
-        class="
-          flex
-          items-center
-          h-16
-          px-4
-          border-b border-gray-300
-          cursor-pointer
-        "
+        class="flex items-center h-16 px-4 border-b border-gray-300 cursor-pointer"
         @click="toggleFriend(friend)"
       >
         <Avatar :user="friend" />

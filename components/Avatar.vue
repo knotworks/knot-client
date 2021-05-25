@@ -1,13 +1,6 @@
 <template>
   <div
-    class="
-      relative
-      flex
-      items-center
-      justify-center
-      overflow-hidden
-      bg-gray-200
-    "
+    class="relative flex items-center justify-center overflow-hidden bg-gray-200"
     :style="{ width: `${size}px`, height: `${size}px` }"
   >
     <client-only>
