@@ -2975,7 +2975,7 @@ cloudinary-video-player@^1.1.1:
     webfontloader "^1.6.28"
     wolfy87-eventemitter "^5.1.0"
 
-cloudinary-vue@1.1.2, cloudinary-vue@^1.1.2:
+cloudinary-vue@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/cloudinary-vue/-/cloudinary-vue-1.1.2.tgz#6743f5a01635b88777e91884c7fe853b8a90ba9a"
   integrity sha512-f/53TYYj1mGiD7YVlEo0pdhgEpiJPq2Bm3xHJJn7V7XjzVRV+FJ+DQACb0fjqWiS8ZGekWJihTxU/vxyukJNag==
@@ -2984,6 +2984,13 @@ cloudinary-vue@1.1.2, cloudinary-vue@^1.1.2:
     cloudinary-video-player "^1.1.1"
     core-js "2.6.9"
     current-script-polyfill "1.0.0"
+
+cloudinary-vue@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/cloudinary-vue/-/cloudinary-vue-1.2.2.tgz#8484c82b1a582b6370dfcf60b4e52c4bc0e91c38"
+  integrity sha512-/8BWSj9H75zip7h+9nqyzJsqjc1PUHflubuRiHuNn7IUjau1Nq+KD05vyg0xm6Hj64eLhh0QL0SMRlU4xq7eAA==
+  dependencies:
+    cloudinary-core "^2.10.3"
 
 cloudinary@^1.23.0:
   version "1.25.1"
@@ -7230,7 +7237,7 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-nuxt@^2.14.5:
+nuxt@^2.15.2:
   version "2.15.6"
   resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-2.15.6.tgz#628ff86d57c1d4671802777635ce7fd2c24f9091"
   integrity sha512-smhzRJPdqg+coUfZwMyuUGKULbIkdawrFcypya15ByKAceWIhLjkOls64dnH574wpZQxA8bugFjGn3ih26eSFg==
