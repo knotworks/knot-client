@@ -53,7 +53,7 @@ export default {
         upload_preset: 'avatars',
       }
       const signature = await this.$axios.$post(
-        '/api/generate-cloudinary-signature',
+        '/api/services/generate-cloudinary-signature',
         options
       )
 
