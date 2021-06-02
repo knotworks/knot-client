@@ -181,10 +181,6 @@ export default {
     secure: true,
   },
 
-  tailwindcss: {
-    jit: true,
-  },
-
   /*
    ** Build configuration
    */

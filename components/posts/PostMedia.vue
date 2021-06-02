@@ -12,34 +12,32 @@
             <div
               class="absolute top-0 left-0 flex items-center justify-center w-full h-full"
             >
-              <transition name="fade">
-                <div
-                  v-if="item.type === 'image'"
-                  class="w-full h-auto"
-                  @click="openPhoto(item, $event)"
-                >
-                  <CldImage
-                    :public-id="item.path"
-                    responsive
-                    fetch-format="auto"
-                    quality="auto"
-                    loading="lazy"
-                    dpr="auto"
-                  >
-                    <CldPlaceholder />
-                  </CldImage>
-                </div>
-                <CldVideo
-                  v-else
+              <div
+                v-if="item.type === 'image'"
+                class="w-full h-auto"
+                @click="openPhoto(item, $event)"
+              >
+                <CldImage
                   :public-id="item.path"
-                  width="500"
-                  crop="scale"
-                  class="w-full"
+                  responsive
+                  fetch-format="auto"
+                  quality="auto"
                   loading="lazy"
-                  :poster="`https://res.cloudinary.com/${$config.cloudinaryCloudName}/video/upload/v1/${item.path}.jpeg`"
-                  controls
-                />
-              </transition>
+                  dpr="auto"
+                >
+                  <CldPlaceholder />
+                </CldImage>
+              </div>
+              <CldVideo
+                v-else
+                :public-id="item.path"
+                width="500"
+                crop="scale"
+                class="w-full"
+                loading="lazy"
+                :poster="`https://res.cloudinary.com/${$config.cloudinaryCloudName}/video/upload/v1/${item.path}.jpeg`"
+                controls
+              />
             </div>
           </div>
         </Carousel>
@@ -50,39 +48,35 @@
       class="relative w-full h-0 bg-gray-200"
       :style="{ paddingBottom: `${intrinsicRatio(media[0])}%` }"
     >
-      <client-only>
-        <transition name="fade">
-          <div
-            v-if="media[0].type === 'image'"
-            class="absolute top-0 left-0 w-full h-full"
-            @click="openPhoto(media[0], $event)"
-          >
-            <CldImage
-              :public-id="media[0].path"
-              responsive="width"
-              class="absolute top-0 left-0 w-full h-full"
-              loading="lazy"
-            >
-              <CldTransformation
-                dpr="auto"
-                fetch-format="auto"
-                crop="scale"
-                quality="100"
-              />
-            </CldImage>
-          </div>
-          <CldVideo
-            v-else
-            :public-id="media[0].path"
-            class="absolute top-0 left-0 w-full h-full"
-            width="500"
+      <div
+        v-if="media[0].type === 'image'"
+        class="absolute top-0 left-0 w-full h-full"
+        @click="openPhoto(media[0], $event)"
+      >
+        <CldImage
+          :public-id="media[0].path"
+          responsive="width"
+          class="absolute top-0 left-0 w-full h-full transition-opacity"
+          loading="lazy"
+        >
+          <CldTransformation
+            dpr="auto"
+            fetch-format="auto"
             crop="scale"
-            loading="lazy"
-            :poster="`https://res.cloudinary.com/${$config.cloudinaryCloudName}/video/upload/v1/${media[0].path}.jpeg`"
-            controls
+            quality="100"
           />
-        </transition>
-      </client-only>
+        </CldImage>
+      </div>
+      <CldVideo
+        v-else
+        :public-id="media[0].path"
+        class="absolute top-0 left-0 w-full h-full"
+        width="500"
+        crop="scale"
+        loading="lazy"
+        :poster="`https://res.cloudinary.com/${$config.cloudinaryCloudName}/video/upload/v1/${media[0].path}.jpeg`"
+        controls
+      />
     </div>
   </div>
 </template>
@@ -137,3 +131,12 @@ export default {
   },
 }
 </script>
+
+<style>
+.cld-image {
+  opacity: 0;
+}
+.cld-image.cld-image-loaded {
+  opacity: 1;
+}
+</style>
