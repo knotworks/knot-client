@@ -56,7 +56,7 @@
         <CldImage
           :public-id="media[0].path"
           responsive="width"
-          class="absolute top-0 left-0 w-full h-full transition-opacity"
+          class="absolute top-0 left-0 w-full h-full"
           loading="lazy"
         >
           <CldTransformation
@@ -131,12 +131,3 @@ export default {
   },
 }
 </script>
-
-<style>
-.cld-image {
-  opacity: 0;
-}
-.cld-image.cld-image-loaded {
-  opacity: 1;
-}
-</style>
