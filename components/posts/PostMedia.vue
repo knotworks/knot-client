@@ -48,35 +48,37 @@
       class="relative w-full h-0 bg-gray-200"
       :style="{ paddingBottom: `${intrinsicRatio(media[0])}%` }"
     >
-      <div
-        v-if="media[0].type === 'image'"
-        class="absolute top-0 left-0 w-full h-full"
-        @click="openPhoto(media[0], $event)"
-      >
-        <CldImage
-          :public-id="media[0].path"
-          responsive="width"
+      <client-only>
+        <div
+          v-if="media[0].type === 'image'"
           class="absolute top-0 left-0 w-full h-full"
-          loading="lazy"
+          @click="openPhoto(media[0], $event)"
         >
-          <CldTransformation
-            dpr="auto"
-            fetch-format="auto"
-            crop="scale"
-            quality="100"
-          />
-        </CldImage>
-      </div>
-      <CldVideo
-        v-else
-        :public-id="media[0].path"
-        class="absolute top-0 left-0 w-full h-full"
-        width="500"
-        crop="scale"
-        loading="lazy"
-        :poster="`https://res.cloudinary.com/${$config.cloudinaryCloudName}/video/upload/v1/${media[0].path}.jpeg`"
-        controls
-      />
+          <CldImage
+            :public-id="media[0].path"
+            responsive="width"
+            class="absolute top-0 left-0 w-full h-full transition-opacity"
+            loading="lazy"
+          >
+            <CldTransformation
+              dpr="auto"
+              fetch-format="auto"
+              crop="scale"
+              quality="100"
+            />
+          </CldImage>
+        </div>
+        <CldVideo
+          v-else
+          :public-id="media[0].path"
+          class="absolute top-0 left-0 w-full h-full"
+          width="500"
+          crop="scale"
+          loading="lazy"
+          :poster="`https://res.cloudinary.com/${$config.cloudinaryCloudName}/video/upload/v1/${media[0].path}.jpeg`"
+          controls
+        />
+      </client-only>
     </div>
   </div>
 </template>
@@ -131,3 +133,12 @@ export default {
   },
 }
 </script>
+
+<style>
+.cld-image {
+  opacity: 0;
+}
+.cld-image.cld-image-loaded {
+  opacity: 1;
+}
+</style>
