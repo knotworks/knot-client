@@ -1,6 +1,6 @@
 <template>
   <ul
-    class="absolute top-0 right-0 flex justify-center w-8 py-1 mt-10 rounded-full flex-column post-actions bg-black/50"
+    class="absolute top-0 right-0 z-10 flex justify-center w-8 py-1 mt-10 rounded-full flex-column post-actions bg-black/50"
   >
     <li class="inline-flex items-center justify-center">
       <button

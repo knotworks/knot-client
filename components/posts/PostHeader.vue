@@ -28,11 +28,7 @@
             src="~assets/images/icons/heart.svg"
             class="h-4"
           />
-          <img
-            v-show="showReactions"
-            src="~assets/images/icons/close.svg"
-            class="h-6"
-          />
+          <CloseIcon v-show="showReactions" class="w-6 h-6 text-gray-500" />
         </button>
       </div>
       <div v-if="post.user_id === $auth.user.id" class="relative">
@@ -59,11 +55,7 @@
               d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"
             />
           </svg>
-          <img
-            v-show="showPostActions"
-            src="~assets/images/icons/close.svg"
-            class="h-6"
-          />
+          <CloseIcon v-show="showPostActions" class="w-6 h-6 text-gray-500" />
         </button>
       </div>
     </div>
@@ -71,7 +63,11 @@
 </template>
 
 <script>
+import CloseIcon from '~/assets/images/icons/close.svg?inline'
 export default {
+  components: {
+    CloseIcon,
+  },
   props: {
     post: {
       type: Object,
