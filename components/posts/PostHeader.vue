@@ -9,30 +9,63 @@
       </h1>
       <LiveDate :date="post.created_at" class="mt-1 text-xs text-gray-500" />
     </div>
-    <div class="relative ml-auto">
-      <transition name="reactions">
-        <AddReaction
-          v-show="showReactions"
-          :post-id="post.id"
-          @hide="showReactions = false"
-        />
-      </transition>
-      <button
-        class="flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full cursor-pointer text-zero focus-none"
-        type="button"
-        @click="showReactions = !showReactions"
-      >
-        <img
-          v-show="!showReactions"
-          src="~assets/images/icons/heart.svg"
-          class="h-4"
-        />
-        <img
-          v-show="showReactions"
-          src="~assets/images/icons/close.svg"
-          class="h-6"
-        />
-      </button>
+    <div class="flex items-center ml-auto space-x-2">
+      <div class="relative">
+        <transition name="reactions">
+          <AddReaction
+            v-show="showReactions"
+            :post-id="post.id"
+            @hide="showReactions = false"
+          />
+        </transition>
+        <button
+          class="flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full cursor-pointer text-zero focus-none"
+          type="button"
+          @click="showReactions = !showReactions"
+        >
+          <img
+            v-show="!showReactions"
+            src="~assets/images/icons/heart.svg"
+            class="h-4"
+          />
+          <img
+            v-show="showReactions"
+            src="~assets/images/icons/close.svg"
+            class="h-6"
+          />
+        </button>
+      </div>
+      <div v-if="post.user_id === $auth.user.id" class="relative">
+        <transition name="post-actions">
+          <PostActions
+            v-show="showPostActions"
+            :post-id="post.id"
+            @hide="showPostActions = false"
+          />
+        </transition>
+        <button
+          class="flex items-center justify-center w-8 h-8 text-gray-500 bg-gray-200 rounded-full cursor-pointer text-zero focus-none"
+          type="button"
+          @click="showPostActions = !showPostActions"
+        >
+          <svg
+            v-show="!showPostActions"
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"
+            />
+          </svg>
+          <img
+            v-show="showPostActions"
+            src="~assets/images/icons/close.svg"
+            class="h-6"
+          />
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -48,9 +81,8 @@ export default {
   data() {
     return {
       showReactions: false,
+      showPostActions: false,
     }
   },
 }
 </script>
-
-<style></style>

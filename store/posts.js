@@ -81,6 +81,17 @@ export const mutations = {
       }
     )
   },
+  deletePost(state, { id }) {
+    state.timeline.data = state.timeline.data.filter((post) => {
+      return post.id !== id
+    })
+
+    state.currentProfile.posts.data = state.currentProfile.posts.data.filter(
+      (post) => {
+        return post.id !== id
+      }
+    )
+  },
 }
 
 export const actions = {
@@ -114,5 +125,10 @@ export const actions = {
       id: commentData.id,
       comment,
     })
+  },
+  async deletePost({ commit }, { id }) {
+    await this.$axios.$delete(`/api/posts/${id}`)
+
+    commit('deletePost', { id })
   },
 }

@@ -1,11 +1,11 @@
 <template>
   <ul
-    class="absolute top-0 right-0 flex items-center h-8 px-1 mr-10 reactions list-reset"
+    class="absolute top-0 right-0 flex items-center h-8 px-1 mr-10 space-x-3 rounded-full reactions list-reset bg-black/50"
   >
     <li
       v-for="(path, key) in reactions"
       :key="key"
-      class="w-6 h-6 ml-3 cursor-pointer reaction"
+      class="w-6 h-6 cursor-pointer reaction"
       @click="doAddReaction(key)"
     >
       <img :src="path" />
@@ -50,8 +50,6 @@ export default {
 
 <style lang="scss">
 .reactions {
-  background: rgba(#000, 0.5);
-  border-radius: 34px;
   &-enter-active,
   &-leave-active {
     transition: opacity 175ms cubic-bezier(0.42, 0, 0.58, 1),
@@ -61,11 +59,6 @@ export default {
   &-leave-to {
     transform: translateX(30px);
     opacity: 0;
-  }
-  .reaction {
-    &:first-child {
-      margin-left: 0;
-    }
   }
 }
 </style>
