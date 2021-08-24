@@ -31,7 +31,7 @@
           <CloseIcon v-show="showReactions" class="w-6 h-6 text-gray-500" />
         </button>
       </div>
-      <div v-if="post.user_id === $auth.user.id" class="relative">
+      <div v-if="canModifyOrDeletePost" class="relative">
         <transition name="post-actions">
           <PostActions
             v-show="showPostActions"
@@ -79,6 +79,13 @@ export default {
       showReactions: false,
       showPostActions: false,
     }
+  },
+  computed: {
+    canModifyOrDeletePost() {
+      return (
+        this.$auth.user.is_admin || this.post.user_id === this.$auth.user.id
+      )
+    },
   },
 }
 </script>
