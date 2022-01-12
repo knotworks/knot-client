@@ -30,7 +30,7 @@
     "embla-carousel": "^4.1.2",
     "lazysizes": "^5.2.0",
     "lodash": "^4.17.20",
-    "markdown-it": "^11.0.0",
+    "markdown-it": "^12.3.2",
     "nuxt": "^2.15.2",
     "object-to-formdata": "^4.1.0",
     "patch-package": "^6.2.2",
