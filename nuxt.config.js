@@ -158,6 +158,11 @@ export default {
       sanctum: {
         provider: 'laravel/sanctum',
         url: process.env.BASE_URL,
+        endpoints: {
+          user: {
+            url: process.env.BASE_URL + '/user',
+          },
+        },
       },
     },
     cookie: {
