@@ -129,7 +129,7 @@ export default {
 
       try {
         signature = await this.$axios.$post(
-          '/api/services/generate-cloudinary-signature',
+          '/services/generate-cloudinary-signature',
           options
         )
       } catch {

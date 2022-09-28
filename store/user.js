@@ -53,45 +53,39 @@ export const actions = {
     })
   },
   async fetchFriendships({ commit }) {
-    const friendships = await this.$axios.$get('/api/friendships')
+    const friendships = await this.$axios.$get('/friendships')
     commit('setFriendships', friendships)
   },
   async requestFriendship({ commit }, userId) {
-    const friendships = await this.$axios.$post(
-      `/api/friendships/add/${userId}`
-    )
+    const friendships = await this.$axios.$post(`/friendships/add/${userId}`)
     commit('setFriendships', friendships)
   },
   async acceptFriendship({ commit }, senderId) {
     const friendships = await this.$axios.$post(
-      `/api/friendships/accept/${senderId}`
+      `/friendships/accept/${senderId}`
     )
     commit('setFriendships', friendships)
   },
   async denyFriendship({ commit }, senderId) {
-    const friendships = await this.$axios.$post(
-      `/api/friendships/deny/${senderId}`
-    )
+    const friendships = await this.$axios.$post(`/friendships/deny/${senderId}`)
     commit('setFriendships', friendships)
   },
   async requestPasswordReset(__, email) {
     await this.$axios.$post('/forgot-password', email)
   },
   async updateAvatar({ rootGetters, commit }, avatarPath) {
-    const user = await this.$axios.$put('/api/profile/avatar', {
+    const user = await this.$axios.$put('/profile/avatar', {
       avatar: avatarPath,
     })
 
     updateCurrentUser(user, { rootGetters, commit, $auth: this.$auth })
   },
   async updateProfile({ rootGetters, commit }, profile) {
-    const user = await this.$axios.$put('/api/profile/update', profile)
+    const user = await this.$axios.$put('/profile/update', profile)
     updateCurrentUser(user, { rootGetters, commit, $auth: this.$auth })
   },
   async fetchNotifications({ commit }, page = 1) {
-    const notifications = await this.$axios.$get(
-      `/api/notifications?page=${page}`
-    )
+    const notifications = await this.$axios.$get(`/notifications?page=${page}`)
 
     commit('setNotifications', notifications)
   },

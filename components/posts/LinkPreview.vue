@@ -34,7 +34,7 @@ export default {
     } else {
       try {
         const expiration = new Date().getTime() + 5 * 24 * 60 * 60 * 1000
-        this.res = await this.$axios.$post('/api/services/link-meta', {
+        this.res = await this.$axios.$post('/services/link-meta', {
           url: this.url,
         })
         this.$warehouse.set(this.url, this.res, expiration)
