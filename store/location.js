@@ -38,7 +38,7 @@ export const actions = {
       city: null,
     })
 
-    const location = await this.$axios.$post('/services/current-location', {
+    const location = await this.$axios.$post('/api/services/current-location', {
       lat,
       lon,
     })
@@ -54,7 +54,7 @@ export const actions = {
     }
   },
   async fetchNearby({ commit }, { lat, lon, query = '' }) {
-    const nearby = await this.$axios.$post('/services/nearby', {
+    const nearby = await this.$axios.$post('/api/services/nearby', {
       lat,
       lon,
       query,

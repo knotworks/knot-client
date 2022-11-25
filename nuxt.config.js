@@ -160,7 +160,10 @@ export default {
         url: process.env.BASE_URL,
         endpoints: {
           user: {
-            url: process.env.BASE_URL + '/user',
+            url: '/api/user',
+          },
+          csrf: {
+            url: '/api/sanctum/csrf-cookie',
           },
         },
       },

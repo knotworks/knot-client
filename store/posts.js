@@ -96,19 +96,19 @@ export const mutations = {
 
 export const actions = {
   async fetchTimeline({ commit }, page = 1) {
-    const posts = await this.$axios.$get(`/timeline?page=${page}`)
+    const posts = await this.$axios.$get(`/api/timeline?page=${page}`)
     commit('setTimeline', posts)
   },
   async fetchProfile({ commit }, { id, page = 1 }) {
-    const res = await this.$axios.$get(`/profile/${id}?page=${page}`)
+    const res = await this.$axios.$get(`/api/profile/${id}?page=${page}`)
     commit('setCurrentProfile', res)
   },
   async newPost(__, post) {
-    await this.$axios.$post('/posts', post)
+    await this.$axios.$post('/api/posts', post)
   },
   async addReaction({ commit }, { id, reaction }) {
     const { reactions } = await this.$axios.$post(
-      `/posts/${id}/reactions`,
+      `/api/posts/${id}/reactions`,
       reaction
     )
     commit('addReaction', {
@@ -118,7 +118,7 @@ export const actions = {
   },
   async addComment({ commit }, commentData) {
     const comment = await this.$axios.$post(
-      `/posts/${commentData.id}/comments`,
+      `/api/posts/${commentData.id}/comments`,
       commentData
     )
     commit('addComment', {
@@ -127,7 +127,7 @@ export const actions = {
     })
   },
   async deletePost({ commit }, { id }) {
-    await this.$axios.$delete(`/posts/${id}`)
+    await this.$axios.$delete(`/api/posts/${id}`)
 
     commit('deletePost', { id })
   },

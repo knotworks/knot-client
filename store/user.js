@@ -45,7 +45,7 @@ export const mutations = {
 
 export const actions = {
   register(__, userData) {
-    return this.$axios.$post('/register', userData)
+    return this.$axios.$post('/api/register', userData)
   },
   async login(__, credentials) {
     await this.$auth.loginWith('sanctum', {
@@ -53,39 +53,45 @@ export const actions = {
     })
   },
   async fetchFriendships({ commit }) {
-    const friendships = await this.$axios.$get('/friendships')
+    const friendships = await this.$axios.$get('/api/friendships')
     commit('setFriendships', friendships)
   },
   async requestFriendship({ commit }, userId) {
-    const friendships = await this.$axios.$post(`/friendships/add/${userId}`)
+    const friendships = await this.$axios.$post(
+      `/api/friendships/add/${userId}`
+    )
     commit('setFriendships', friendships)
   },
   async acceptFriendship({ commit }, senderId) {
     const friendships = await this.$axios.$post(
-      `/friendships/accept/${senderId}`
+      `/api/friendships/accept/${senderId}`
     )
     commit('setFriendships', friendships)
   },
   async denyFriendship({ commit }, senderId) {
-    const friendships = await this.$axios.$post(`/friendships/deny/${senderId}`)
+    const friendships = await this.$axios.$post(
+      `/api/friendships/deny/${senderId}`
+    )
     commit('setFriendships', friendships)
   },
   async requestPasswordReset(__, email) {
-    await this.$axios.$post('/forgot-password', email)
+    await this.$axios.$post('/api/forgot-password', email)
   },
   async updateAvatar({ rootGetters, commit }, avatarPath) {
-    const user = await this.$axios.$put('/profile/avatar', {
+    const user = await this.$axios.$put('/api/profile/avatar', {
       avatar: avatarPath,
     })
 
     updateCurrentUser(user, { rootGetters, commit, $auth: this.$auth })
   },
   async updateProfile({ rootGetters, commit }, profile) {
-    const user = await this.$axios.$put('/profile/update', profile)
+    const user = await this.$axios.$put('/api/profile/update', profile)
     updateCurrentUser(user, { rootGetters, commit, $auth: this.$auth })
   },
   async fetchNotifications({ commit }, page = 1) {
-    const notifications = await this.$axios.$get(`/notifications?page=${page}`)
+    const notifications = await this.$axios.$get(
+      `/api/notifications?page=${page}`
+    )
 
     commit('setNotifications', notifications)
   },
